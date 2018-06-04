@@ -1,4 +1,4 @@
-#include "WolframLibrary.h"
+#include "test.h"
 
 namespace MathLibrary
 {
@@ -8,34 +8,34 @@ namespace MathLibrary
     }
 }
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-
-DLLEXPORT mint WolframLibrary_getVersion ()
+mint
+WolframLibrary_getVersion()
 {
     return WolframLibraryVersion;
 }
 
-DLLEXPORT int WolframLibrary_initialize ( WolframLibraryData libData)
+DLLEXPORT
+int
+WolframLibrary_initialize(WolframLibraryData libData)
 {
     return 0;
 }
 
-DLLEXPORT void WolframLibrary_uninitialize (WolframLibraryData libData)
+void
+WolframLibrary_uninitialize(WolframLibraryData libData)
 {
     return;
 }
 
-DLLEXPORT int constantzero (WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+int
+constantzero(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
-    MArgument_setInteger (Res, 0);
+    MArgument_setInteger(Res, 0);
     return LIBRARY_NO_ERROR;
 }
 
-DLLEXPORT int hello (WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+int
+hello(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     mint I0;
     mint I1;
@@ -46,7 +46,3 @@ DLLEXPORT int hello (WolframLibraryData libData, mint Argc, MArgument *Args, MAr
     MArgument_setInteger (Res, I2);
     return LIBRARY_NO_ERROR;
 }
-
-#ifdef __cplusplus
-}
-#endif
