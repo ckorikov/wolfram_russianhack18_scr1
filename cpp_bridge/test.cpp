@@ -2,11 +2,20 @@
 
 namespace MathLibrary
 {
-    mint add(mint a, mint b)
-    {
-        return a - b;
-    }
+    class Math {
+        int x = 0;
+        
+        public:
+        mint
+        add(mint a, mint b)
+        {
+            ++x;
+            return a + b + x;
+        }
+    };
 }
+
+static MathLibrary::Math gm;
 
 mint
 WolframLibrary_getVersion()
@@ -42,7 +51,7 @@ hello(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
     mint I2;
     I0 = MArgument_getInteger (Args[0]);
     I1 = MArgument_getInteger (Args[1]);
-    I2 = MathLibrary::add(I0, I1);
+    I2 = gm.add(I0, I1);
     MArgument_setInteger (Res, I2);
     return LIBRARY_NO_ERROR;
 }
