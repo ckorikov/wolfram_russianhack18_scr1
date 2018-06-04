@@ -20,6 +20,11 @@ DLLEXPORT
 int
 hello(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
 
+DLLEXPORT
+int
+reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
+
+
 #ifdef __cplusplus
 }
 #endif

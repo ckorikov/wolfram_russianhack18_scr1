@@ -1,21 +1,7 @@
 #include "test.h"
+#include "scr1_wrapper.h"
 
-namespace MathLibrary
-{
-    class Math {
-        int x = 0;
-        
-        public:
-        mint
-        add(mint a, mint b)
-        {
-            ++x;
-            return a + b + x;
-        }
-    };
-}
-
-static MathLibrary::Math gm;
+static SCR1::processor* p_proc;
 
 mint
 WolframLibrary_getVersion()
@@ -27,12 +13,14 @@ DLLEXPORT
 int
 WolframLibrary_initialize(WolframLibraryData libData)
 {
+    p_proc = new SCR1::processor;
     return 0;
 }
 
 void
 WolframLibrary_uninitialize(WolframLibraryData libData)
 {
+    delete p_proc;
     return;
 }
 
@@ -51,7 +39,18 @@ hello(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
     mint I2;
     I0 = MArgument_getInteger (Args[0]);
     I1 = MArgument_getInteger (Args[1]);
-    I2 = gm.add(I0, I1);
+    // p_proc->step();
+    I2 = 0;
     MArgument_setInteger (Res, I2);
+    return LIBRARY_NO_ERROR;
+}
+
+int
+reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    mint I0;
+    I0 = 0;
+    p_proc->reset();
+    MArgument_setInteger (Res, I0);
     return LIBRARY_NO_ERROR;
 }
