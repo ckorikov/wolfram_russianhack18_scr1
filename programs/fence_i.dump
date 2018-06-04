@@ -1,0 +1,175 @@
+
+/media/sf_virtualbox_shared/scr1_opensource/build/fence_i.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+00000000 <SIM_EXIT-0xf4>:
+	...
+
+000000f4 <SIM_EXIT>:
+  f4:	00000013          	nop
+
+000000f8 <SIM_STOP>:
+  f8:	0000006f          	j	f8 <SIM_STOP>
+  fc:	ffff                	0xffff
+  fe:	ffff                	0xffff
+	...
+
+000001c0 <trap_vector>:
+ 1c0:	34202f73          	csrr	t5,mcause
+ 1c4:	4fa1                	li	t6,8
+ 1c6:	03ff0563          	beq	t5,t6,1f0 <_report>
+ 1ca:	4fa5                	li	t6,9
+ 1cc:	03ff0263          	beq	t5,t6,1f0 <_report>
+ 1d0:	4fad                	li	t6,11
+ 1d2:	01ff0f63          	beq	t5,t6,1f0 <_report>
+ 1d6:	00000f17          	auipc	t5,0x0
+ 1da:	e2af0f13          	addi	t5,t5,-470 # 0 <CL_SIZE-0x20>
+ 1de:	000f0363          	beqz	t5,1e4 <trap_vector+0x24>
+ 1e2:	8f02                	jr	t5
+ 1e4:	34202f73          	csrr	t5,mcause
+ 1e8:	000f5363          	bgez	t5,1ee <handle_exception>
+ 1ec:	a009                	j	1ee <handle_exception>
+
+000001ee <handle_exception>:
+ 1ee:	4505                	li	a0,1
+
+000001f0 <_report>:
+ 1f0:	1900006f          	j	380 <sc_exit>
+ 1f4:	00000013          	nop
+ 1f8:	00000013          	nop
+ 1fc:	00000013          	nop
+
+00000200 <_start>:
+ 200:	f1402573          	csrr	a0,mhartid
+ 204:	e101                	bnez	a0,204 <_start+0x4>
+ 206:	4e01                	li	t3,0
+ 208:	00000297          	auipc	t0,0x0
+ 20c:	fb828293          	addi	t0,t0,-72 # 1c0 <trap_vector>
+ 210:	30529073          	csrw	mtvec,t0
+ 214:	4505                	li	a0,1
+ 216:	057e                	slli	a0,a0,0x1f
+ 218:	00054863          	bltz	a0,228 <_start+0x28>
+ 21c:	0ff0000f          	fence
+ 220:	85f2                	mv	a1,t3
+ 222:	4501                	li	a0,0
+ 224:	00000073          	ecall
+ 228:	00000297          	auipc	t0,0x0
+ 22c:	dd828293          	addi	t0,t0,-552 # 0 <CL_SIZE-0x20>
+ 230:	00028e63          	beqz	t0,24c <_start+0x4c>
+ 234:	10529073          	csrw	stvec,t0
+ 238:	0000b2b7          	lui	t0,0xb
+ 23c:	10928293          	addi	t0,t0,265 # b109 <_gp+0xa4c1>
+ 240:	30229073          	csrw	medeleg,t0
+ 244:	30202373          	csrr	t1,medeleg
+ 248:	fa6293e3          	bne	t0,t1,1ee <handle_exception>
+ 24c:	30005073          	csrwi	mstatus,0
+ 250:	00000297          	auipc	t0,0x0
+ 254:	07028293          	addi	t0,t0,112 # 2c0 <_run_test>
+ 258:	34129073          	csrw	mepc,t0
+ 25c:	f1402573          	csrr	a0,mhartid
+ 260:	30200073          	mret
+	...
+
+Disassembly of section .text:
+
+000002c0 <_run_test>:
+ 2c0:	06f00693          	li	a3,111
+ 2c4:	00000517          	auipc	a0,0x0
+ 2c8:	0fc51503          	lh	a0,252(a0) # 3c0 <begin_signature>
+ 2cc:	00000597          	auipc	a1,0x0
+ 2d0:	0f659583          	lh	a1,246(a1) # 3c2 <begin_signature+0x2>
+ 2d4:	00000013          	nop
+ 2d8:	00000013          	nop
+ 2dc:	00000013          	nop
+ 2e0:	00000013          	nop
+ 2e4:	00000013          	nop
+ 2e8:	00000013          	nop
+ 2ec:	00000013          	nop
+ 2f0:	00000013          	nop
+ 2f4:	00000013          	nop
+ 2f8:	00000013          	nop
+ 2fc:	00000013          	nop
+ 300:	00000297          	auipc	t0,0x0
+ 304:	00a29a23          	sh	a0,20(t0) # 314 <_run_test+0x54>
+ 308:	00000297          	auipc	t0,0x0
+ 30c:	00b29723          	sh	a1,14(t0) # 316 <_run_test+0x56>
+ 310:	0000100f          	fence.i
+ 314:	0de68693          	addi	a3,a3,222
+
+00000318 <test_2>:
+ 318:	0001                	nop
+ 31a:	1bc00e93          	li	t4,444
+ 31e:	4e09                	li	t3,2
+ 320:	03d69a63          	bne	a3,t4,354 <fail>
+ 324:	06400713          	li	a4,100
+ 328:	177d                	addi	a4,a4,-1
+ 32a:	ff7d                	bnez	a4,328 <test_2+0x10>
+ 32c:	00000297          	auipc	t0,0x0
+ 330:	00a29a23          	sh	a0,20(t0) # 340 <test_2+0x28>
+ 334:	00000297          	auipc	t0,0x0
+ 338:	00b29723          	sh	a1,14(t0) # 342 <test_2+0x2a>
+ 33c:	0000100f          	fence.i
+ 340:	22b68693          	addi	a3,a3,555
+
+00000344 <test_3>:
+ 344:	0001                	nop
+ 346:	30900e93          	li	t4,777
+ 34a:	4e0d                	li	t3,3
+ 34c:	01d69463          	bne	a3,t4,354 <fail>
+ 350:	01c01863          	bne	zero,t3,360 <pass>
+
+00000354 <fail>:
+ 354:	0ff0000f          	fence
+ 358:	85f2                	mv	a1,t3
+ 35a:	4505                	li	a0,1
+ 35c:	00000073          	ecall
+
+00000360 <pass>:
+ 360:	0ff0000f          	fence
+ 364:	85f2                	mv	a1,t3
+ 366:	4501                	li	a0,0
+ 368:	00000073          	ecall
+
+0000036c <ecall>:
+ 36c:	00000073          	ecall
+	...
+
+00000380 <sc_exit>:
+ 380:	d75ff06f          	j	f4 <SIM_EXIT>
+ 384:	00000013          	nop
+ 388:	00000013          	nop
+ 38c:	00000013          	nop
+ 390:	00000013          	nop
+ 394:	00000013          	nop
+ 398:	00000013          	nop
+ 39c:	00000013          	nop
+	...
+
+Disassembly of section .data:
+
+000003c0 <begin_signature>:
+ 3c0:	14d68693          	addi	a3,a3,333
+	...
+
+000003d0 <end_signature>:
+	...
+
+Disassembly of section .tohost:
+
+00000400 <tohost>:
+	...
+
+00000440 <fromhost>:
+	...
+
+Disassembly of section .sdata:
+
+00000448 <_gp-0x800>:
+	...
+
+Disassembly of section .stack:
+
+0000fc00 <.stack>:
+	...

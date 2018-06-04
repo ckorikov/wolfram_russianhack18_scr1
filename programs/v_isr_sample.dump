@@ -1,0 +1,233 @@
+
+/media/sf_virtualbox_shared/scr1_opensource/build/v_isr_sample.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+00000000 <SIM_EXIT-0xf4>:
+	...
+
+000000f4 <SIM_EXIT>:
+  f4:	00000013          	nop
+
+000000f8 <SIM_STOP>:
+  f8:	0000006f          	j	f8 <SIM_STOP>
+  fc:	ffff                	0xffff
+  fe:	ffff                	0xffff
+
+Disassembly of section .text:
+
+00000100 <user_trap_entry>:
+ 100:	c02027f3          	rdinstret	a5
+ 104:	342025f3          	csrr	a1,mcause
+ 108:	34102673          	csrr	a2,mepc
+ 10c:	343026f3          	csrr	a3,mbadaddr
+ 110:	30002773          	csrr	a4,mstatus
+ 114:	10000513          	li	a0,256
+ 118:	00000297          	auipc	t0,0x0
+ 11c:	28828293          	addi	t0,t0,648 # 3a0 <sc_exit>
+ 120:	00028067          	jr	t0
+ 124:	00000013          	nop
+ 128:	00000013          	nop
+ 12c:	00000013          	nop
+ 130:	00000013          	nop
+ 134:	00000013          	nop
+ 138:	00000013          	nop
+ 13c:	00000013          	nop
+
+00000140 <supervisor_trap_entry>:
+ 140:	c02027f3          	rdinstret	a5
+ 144:	342025f3          	csrr	a1,mcause
+ 148:	34102673          	csrr	a2,mepc
+ 14c:	343026f3          	csrr	a3,mbadaddr
+ 150:	30002773          	csrr	a4,mstatus
+ 154:	14000513          	li	a0,320
+ 158:	00000297          	auipc	t0,0x0
+ 15c:	24828293          	addi	t0,t0,584 # 3a0 <sc_exit>
+ 160:	00028067          	jr	t0
+ 164:	00000013          	nop
+ 168:	00000013          	nop
+ 16c:	00000013          	nop
+ 170:	00000013          	nop
+ 174:	00000013          	nop
+ 178:	00000013          	nop
+ 17c:	00000013          	nop
+
+00000180 <hypervisor_trap_entry>:
+ 180:	c02027f3          	rdinstret	a5
+ 184:	342025f3          	csrr	a1,mcause
+ 188:	34302673          	csrr	a2,mbadaddr
+ 18c:	341026f3          	csrr	a3,mepc
+ 190:	30002773          	csrr	a4,mstatus
+ 194:	18000513          	li	a0,384
+ 198:	00000297          	auipc	t0,0x0
+ 19c:	20828293          	addi	t0,t0,520 # 3a0 <sc_exit>
+ 1a0:	00028067          	jr	t0
+ 1a4:	00000013          	nop
+ 1a8:	00000013          	nop
+ 1ac:	00000013          	nop
+ 1b0:	00000013          	nop
+ 1b4:	00000013          	nop
+ 1b8:	00000013          	nop
+ 1bc:	00000013          	nop
+
+000001c0 <trap_entry>:
+ 1c0:	1a80006f          	j	368 <_trap_fail>
+
+000001c4 <vec_supervisor_soft>:
+ 1c4:	1a40006f          	j	368 <_trap_fail>
+
+000001c8 <vec_reserved1>:
+ 1c8:	1a00006f          	j	368 <_trap_fail>
+
+000001cc <vec_machine_soft>:
+ 1cc:	19c0006f          	j	368 <_trap_fail>
+
+000001d0 <vec_usr_tmr>:
+ 1d0:	1980006f          	j	368 <_trap_fail>
+
+000001d4 <vec_supervisor_tmr>:
+ 1d4:	1940006f          	j	368 <_trap_fail>
+
+000001d8 <vec_reserved2>:
+ 1d8:	1900006f          	j	368 <_trap_fail>
+
+000001dc <vec_machine_tmr>:
+ 1dc:	0e80006f          	j	2c4 <vec_machine_tmr_handler>
+
+000001e0 <vec_usr_ext>:
+ 1e0:	1880006f          	j	368 <_trap_fail>
+
+000001e4 <vec_supervisor_ext>:
+ 1e4:	1840006f          	j	368 <_trap_fail>
+
+000001e8 <vec_reserved3>:
+ 1e8:	1800006f          	j	368 <_trap_fail>
+
+000001ec <vec_machine_ext>:
+ 1ec:	1240006f          	j	310 <vec_machine_ext_handler>
+
+000001f0 <vec_reserved4>:
+ 1f0:	1780006f          	j	368 <_trap_fail>
+ 1f4:	1740006f          	j	368 <_trap_fail>
+ 1f8:	1700006f          	j	368 <_trap_fail>
+ 1fc:	16c0006f          	j	368 <_trap_fail>
+
+00000200 <_start>:
+ 200:	3050e073          	csrsi	mtvec,1
+ 204:	004902b7          	lui	t0,0x490
+ 208:	01028293          	addi	t0,t0,16 # 490010 <_gp+0x48f430>
+ 20c:	fff04313          	not	t1,zero
+ 210:	0062a023          	sw	t1,0(t0)
+ 214:	0062a223          	sw	t1,4(t0)
+ 218:	004902b7          	lui	t0,0x490
+ 21c:	0002a303          	lw	t1,0(t0) # 490000 <_gp+0x48f420>
+ 220:	00100393          	li	t2,1
+ 224:	00736333          	or	t1,t1,t2
+ 228:	0062a023          	sw	t1,0(t0)
+ 22c:	30046073          	csrsi	mstatus,8
+ 230:	08000513          	li	a0,128
+ 234:	30452073          	csrs	mie,a0
+ 238:	00000393          	li	t2,0
+ 23c:	004902b7          	lui	t0,0x490
+ 240:	00828293          	addi	t0,t0,8 # 490008 <_gp+0x48f428>
+ 244:	0002a483          	lw	s1,0(t0)
+ 248:	10048493          	addi	s1,s1,256
+ 24c:	004902b7          	lui	t0,0x490
+ 250:	01028293          	addi	t0,t0,16 # 490010 <_gp+0x48f430>
+ 254:	fff00313          	li	t1,-1
+ 258:	0062a023          	sw	t1,0(t0)
+ 25c:	0002a223          	sw	zero,4(t0)
+ 260:	0092a023          	sw	s1,0(t0)
+ 264:	10500073          	wfi
+ 268:	30401073          	csrw	mie,zero
+ 26c:	f00002b7          	lui	t0,0xf0000
+ 270:	10028293          	addi	t0,t0,256 # f0000100 <_gp+0xeffff520>
+ 274:	00029023          	sh	zero,0(t0)
+ 278:	00900293          	li	t0,9
+ 27c:	bf629073          	csrw	0xbf6,t0
+ 280:	00600293          	li	t0,6
+ 284:	bf729073          	csrw	0xbf7,t0
+ 288:	000012b7          	lui	t0,0x1
+ 28c:	80028293          	addi	t0,t0,-2048 # 800 <STACK_SIZE+0x400>
+ 290:	3042a073          	csrs	mie,t0
+ 294:	f00002b7          	lui	t0,0xf0000
+ 298:	10028293          	addi	t0,t0,256 # f0000100 <_gp+0xeffff520>
+ 29c:	20000313          	li	t1,512
+ 2a0:	00629023          	sh	t1,0(t0)
+ 2a4:	10500073          	wfi
+ 2a8:	00200493          	li	s1,2
+ 2ac:	00000513          	li	a0,0
+ 2b0:	00938463          	beq	t2,s1,2b8 <_start+0xb8>
+ 2b4:	fff00513          	li	a0,-1
+ 2b8:	00000297          	auipc	t0,0x0
+ 2bc:	0e828293          	addi	t0,t0,232 # 3a0 <sc_exit>
+ 2c0:	00028067          	jr	t0
+
+000002c4 <vec_machine_tmr_handler>:
+ 2c4:	342025f3          	csrr	a1,mcause
+ 2c8:	800007b7          	lui	a5,0x80000
+ 2cc:	00778793          	addi	a5,a5,7 # 80000007 <_gp+0x7ffff427>
+ 2d0:	fff00513          	li	a0,-1
+ 2d4:	08f59463          	bne	a1,a5,35c <check_fail>
+ 2d8:	34402373          	csrr	t1,mip
+ 2dc:	08000293          	li	t0,128
+ 2e0:	005372b3          	and	t0,t1,t0
+ 2e4:	06030c63          	beqz	t1,35c <check_fail>
+ 2e8:	004902b7          	lui	t0,0x490
+ 2ec:	01028293          	addi	t0,t0,16 # 490010 <_gp+0x48f430>
+ 2f0:	fff04313          	not	t1,zero
+ 2f4:	0062a023          	sw	t1,0(t0)
+ 2f8:	0062a223          	sw	t1,4(t0)
+ 2fc:	34402373          	csrr	t1,mip
+ 300:	08037313          	andi	t1,t1,128
+ 304:	04031c63          	bnez	t1,35c <check_fail>
+ 308:	00138393          	addi	t2,t2,1
+ 30c:	30200073          	mret
+
+00000310 <vec_machine_ext_handler>:
+ 310:	342025f3          	csrr	a1,mcause
+ 314:	800007b7          	lui	a5,0x80000
+ 318:	00b78793          	addi	a5,a5,11 # 8000000b <_gp+0x7ffff42b>
+ 31c:	fff00513          	li	a0,-1
+ 320:	02f59e63          	bne	a1,a5,35c <check_fail>
+ 324:	34402373          	csrr	t1,mip
+ 328:	000012b7          	lui	t0,0x1
+ 32c:	80028293          	addi	t0,t0,-2048 # 800 <STACK_SIZE+0x400>
+ 330:	005372b3          	and	t0,t1,t0
+ 334:	02030463          	beqz	t1,35c <check_fail>
+ 338:	bf501073          	csrw	0xbf5,zero
+ 33c:	bf401073          	csrw	0xbf4,zero
+ 340:	34402373          	csrr	t1,mip
+ 344:	000012b7          	lui	t0,0x1
+ 348:	80028293          	addi	t0,t0,-2048 # 800 <STACK_SIZE+0x400>
+ 34c:	00537333          	and	t1,t1,t0
+ 350:	00031663          	bnez	t1,35c <check_fail>
+ 354:	00138393          	addi	t2,t2,1
+ 358:	30200073          	mret
+
+0000035c <check_fail>:
+ 35c:	00000297          	auipc	t0,0x0
+ 360:	04428293          	addi	t0,t0,68 # 3a0 <sc_exit>
+ 364:	00028067          	jr	t0
+
+00000368 <_trap_fail>:
+ 368:	fff00513          	li	a0,-1
+ 36c:	ff1ff06f          	j	35c <check_fail>
+	...
+
+000003a0 <sc_exit>:
+ 3a0:	d55ff06f          	j	f4 <SIM_EXIT>
+ 3a4:	00000013          	nop
+ 3a8:	00000013          	nop
+ 3ac:	00000013          	nop
+ 3b0:	00000013          	nop
+ 3b4:	00000013          	nop
+ 3b8:	00000013          	nop
+ 3bc:	00000013          	nop
+	...
+
+Disassembly of section .stack:
+
+0000fc00 <.stack>:
+	...

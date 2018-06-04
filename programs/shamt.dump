@@ -1,0 +1,145 @@
+
+/media/sf_virtualbox_shared/scr1_opensource/build/shamt.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+00000000 <SIM_EXIT-0xf4>:
+	...
+
+000000f4 <SIM_EXIT>:
+  f4:	00000013          	nop
+
+000000f8 <SIM_STOP>:
+  f8:	0000006f          	j	f8 <SIM_STOP>
+  fc:	ffff                	0xffff
+  fe:	ffff                	0xffff
+	...
+
+000001c0 <trap_vector>:
+ 1c0:	34202f73          	csrr	t5,mcause
+ 1c4:	4fa1                	li	t6,8
+ 1c6:	03ff0563          	beq	t5,t6,1f0 <_report>
+ 1ca:	4fa5                	li	t6,9
+ 1cc:	03ff0263          	beq	t5,t6,1f0 <_report>
+ 1d0:	4fad                	li	t6,11
+ 1d2:	01ff0f63          	beq	t5,t6,1f0 <_report>
+ 1d6:	00000f17          	auipc	t5,0x0
+ 1da:	0fef0f13          	addi	t5,t5,254 # 2d4 <mtvec_handler>
+ 1de:	000f0363          	beqz	t5,1e4 <trap_vector+0x24>
+ 1e2:	8f02                	jr	t5
+ 1e4:	34202f73          	csrr	t5,mcause
+ 1e8:	000f5363          	bgez	t5,1ee <handle_exception>
+ 1ec:	a009                	j	1ee <handle_exception>
+
+000001ee <handle_exception>:
+ 1ee:	4505                	li	a0,1
+
+000001f0 <_report>:
+ 1f0:	1100006f          	j	300 <sc_exit>
+ 1f4:	00000013          	nop
+ 1f8:	00000013          	nop
+ 1fc:	00000013          	nop
+
+00000200 <_start>:
+ 200:	f1402573          	csrr	a0,mhartid
+ 204:	e101                	bnez	a0,204 <_start+0x4>
+ 206:	4e01                	li	t3,0
+ 208:	00000297          	auipc	t0,0x0
+ 20c:	fb828293          	addi	t0,t0,-72 # 1c0 <trap_vector>
+ 210:	30529073          	csrw	mtvec,t0
+ 214:	4505                	li	a0,1
+ 216:	057e                	slli	a0,a0,0x1f
+ 218:	00054863          	bltz	a0,228 <_start+0x28>
+ 21c:	0ff0000f          	fence
+ 220:	85f2                	mv	a1,t3
+ 222:	4501                	li	a0,0
+ 224:	00000073          	ecall
+ 228:	00000297          	auipc	t0,0x0
+ 22c:	dd828293          	addi	t0,t0,-552 # 0 <CL_SIZE-0x20>
+ 230:	00028e63          	beqz	t0,24c <_start+0x4c>
+ 234:	10529073          	csrw	stvec,t0
+ 238:	0000b2b7          	lui	t0,0xb
+ 23c:	10928293          	addi	t0,t0,265 # b109 <_gp+0xa581>
+ 240:	30229073          	csrw	medeleg,t0
+ 244:	30202373          	csrr	t1,medeleg
+ 248:	fa6293e3          	bne	t0,t1,1ee <handle_exception>
+ 24c:	30005073          	csrwi	mstatus,0
+ 250:	00002537          	lui	a0,0x2
+ 254:	80050513          	addi	a0,a0,-2048 # 1800 <_gp+0xc78>
+ 258:	30052073          	csrs	mstatus,a0
+ 25c:	00000297          	auipc	t0,0x0
+ 260:	04428293          	addi	t0,t0,68 # 2a0 <_run_test>
+ 264:	34129073          	csrw	mepc,t0
+ 268:	f1402573          	csrr	a0,mhartid
+ 26c:	30200073          	mret
+	...
+
+Disassembly of section .text:
+
+000002a0 <_run_test>:
+ 2a0:	4505                	li	a0,1
+ 2a2:	0542                	slli	a0,a0,0x10
+ 2a4:	6ec1                	lui	t4,0x10
+ 2a6:	4e09                	li	t3,2
+ 2a8:	01d51a63          	bne	a0,t4,2bc <fail>
+
+000002ac <test_3>:
+ 2ac:	02051513          	slli	a0,a0,0x20
+ 2b0:	4e85                	li	t4,1
+ 2b2:	4e0d                	li	t3,3
+ 2b4:	01d01463          	bne	zero,t4,2bc <fail>
+ 2b8:	01c01863          	bne	zero,t3,2c8 <pass>
+
+000002bc <fail>:
+ 2bc:	0ff0000f          	fence
+ 2c0:	85f2                	mv	a1,t3
+ 2c2:	4505                	li	a0,1
+ 2c4:	00000073          	ecall
+
+000002c8 <pass>:
+ 2c8:	0ff0000f          	fence
+ 2cc:	85f2                	mv	a1,t3
+ 2ce:	4501                	li	a0,0
+ 2d0:	00000073          	ecall
+
+000002d4 <mtvec_handler>:
+ 2d4:	4289                	li	t0,2
+ 2d6:	fe5e13e3          	bne	t3,t0,2bc <fail>
+ 2da:	342022f3          	csrr	t0,mcause
+ 2de:	4309                	li	t1,2
+ 2e0:	fc629ee3          	bne	t0,t1,2bc <fail>
+ 2e4:	b7d5                	j	2c8 <pass>
+
+000002e6 <ecall>:
+ 2e6:	00000073          	ecall
+	...
+
+00000300 <sc_exit>:
+ 300:	df5ff06f          	j	f4 <SIM_EXIT>
+ 304:	00000013          	nop
+ 308:	00000013          	nop
+ 30c:	00000013          	nop
+ 310:	00000013          	nop
+ 314:	00000013          	nop
+ 318:	00000013          	nop
+ 31c:	00000013          	nop
+	...
+
+Disassembly of section .tohost:
+
+00000340 <tohost>:
+	...
+
+00000380 <fromhost>:
+	...
+
+Disassembly of section .sdata:
+
+00000388 <_gp-0x800>:
+	...
+
+Disassembly of section .stack:
+
+0000fc00 <.stack>:
+	...
