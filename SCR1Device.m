@@ -16,13 +16,23 @@ DeviceFramework`DeviceClassRegister["SCR1",
 ]
 
 
-open[]:=Print["Open function placeholder"]
+$string="abcde"
 
 
-close[]:=Print["Close function placeholder"]
+$positions=<||>
 
 
-read[]:=Print["Read function placeholder"]
+read[___] := $Failed
+
+
+read[{_, h_}] := 
+ StringTake[$string, {++$positions[h]}] /; $positions[h] < 5
+
+
+open[___] := Module[{h = CreateUUID[]}, $positions[h] = 0; h]
+
+
+close[{_, h_}, ___] := $positions[h] =.
 
 
 End[]
