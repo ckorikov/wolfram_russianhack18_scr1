@@ -16,10 +16,6 @@ namespace SCR1
     processor::processor()
     {
         this->top = new Vscr1_top_tb_axi;
-        std::ofstream out("~/out.txt");
-        std::streambuf *coutbuf = std::cout.rdbuf();
-        std::cout.rdbuf(out.rdbuf());
-        std::cout << "test";
         // Verilated::commandArgs(0, NULL);
     }
 
