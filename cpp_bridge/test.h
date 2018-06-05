@@ -24,6 +24,9 @@ DLLEXPORT
 int
 reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
 
+DLLEXPORT
+int
+run(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
 
 #ifdef __cplusplus
 }

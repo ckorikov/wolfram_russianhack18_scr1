@@ -1,8 +1,6 @@
 #include "scr1_wrapper.h"
 
-#include <iostream>
-#include <fstream>
-#include <string>
+#include <stdio.h>
 
 uint64_t main_time;       // Current simulation time
 
@@ -16,7 +14,6 @@ namespace SCR1
     processor::processor()
     {
         this->top = new Vscr1_top_tb_axi;
-        // Verilated::commandArgs(0, NULL);
     }
 
     processor::~processor()
@@ -25,8 +22,9 @@ namespace SCR1
         delete this->top;
     }
 
-    void processor::reset()
+    void processor::reset(const char * mem)
     {
+        Verilated::commandArgs(1, &mem);
         this->top->rst_n=0;
         this->step();
         this->top->rst_n=1;
@@ -47,6 +45,14 @@ namespace SCR1
                 this->top->eval();
                 main_time++;
             }
+        }
+    }
+
+    void processor::run()
+    {
+        while(!Verilated::gotFinish())
+        {
+            this->step();
         }
     }
 }

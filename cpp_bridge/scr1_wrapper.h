@@ -15,7 +15,8 @@ namespace SCR1
             processor();
             ~processor();
             void step();
-            void reset();
+            void reset(const char * mem);
+            void run();
     };
 }
 

@@ -48,9 +48,24 @@ hello(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 int
 reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
-    mint I0;
-    I0 = 0;
-    p_proc->reset();
-    MArgument_setInteger (Res, I0);
-    return LIBRARY_NO_ERROR;
+    int res = LIBRARY_NO_ERROR;
+    const char *string = MArgument_getUTF8String(Args[0]);;
+    try {
+        p_proc->reset(string);
+    } catch (...) {
+        res = LIBRARY_FUNCTION_ERROR;
+    }
+    return res;
+}
+
+int
+run(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    int res = LIBRARY_NO_ERROR;
+    try {
+        p_proc->run();
+    } catch (...) {
+        res = LIBRARY_FUNCTION_ERROR;
+    }
+    return res;
 }
