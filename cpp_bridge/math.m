@@ -29,3 +29,4 @@ libhello = CreateLibrary[
 reset = LibraryFunctionLoad[libhello, "reset", {String}, Integer];
 reset["+mem=/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/\
 cpp_bridge/dhrystone.bin"]
+run = LibraryFunctionLoad[libhello, "run", {}, Integer];
