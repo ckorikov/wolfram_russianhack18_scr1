@@ -52,6 +52,10 @@ DLLEXPORT
 int
 get_register_list(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
 
+DLLEXPORT
+int
+get_branch_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
+
 #ifdef __cplusplus
 }
 #endif

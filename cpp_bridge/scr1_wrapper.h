@@ -21,6 +21,10 @@ namespace SCR1
             bool is_finished();
             int next_pc();
             int get_register(int num);
+            int get_jump_state();
+            int get_branch_taken_state();
+            int get_branch_not_taken_state();
+            int get_jb_addr_state();
     };
 }
 

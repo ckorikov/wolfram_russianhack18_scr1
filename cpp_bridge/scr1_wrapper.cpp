@@ -120,4 +120,24 @@ namespace SCR1
             default: return 0;
         }
     }
+
+    int processor::get_jump_state()
+    {
+        return this->top->jump;
+    }
+
+    int processor::get_branch_taken_state()
+    {
+        return this->top->branch_taken;
+    }
+
+    int processor::get_branch_not_taken_state()
+    {
+        return this->top->branch_not_taken;
+    }
+
+    int processor::get_jb_addr_state()
+    {
+        return this->top->jb_addr;
+    }
 }
