@@ -20,6 +20,7 @@ namespace SCR1
             void run();
             bool is_finished();
             int next_pc();
+            int get_register(int num);
     };
 }
 

@@ -33,3 +33,4 @@ run = LibraryFunctionLoad[libhello, "run", {}, Integer];
 isFinished = LibraryFunctionLoad[libhello, "is_finished", {}, Boolean];
 pc = LibraryFunctionLoad[libhello, "get_pc", {}, Integer];
 nextpc = LibraryFunctionLoad[libhello, "next_pc", {}, Integer];
+getregister = LibraryFunctionLoad[libhello, "get_register", {Integer}, Integer];

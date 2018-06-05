@@ -44,6 +44,10 @@ DLLEXPORT
 int
 next_pc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
 
+DLLEXPORT
+int
+get_register(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
+
 #ifdef __cplusplus
 }
 #endif
