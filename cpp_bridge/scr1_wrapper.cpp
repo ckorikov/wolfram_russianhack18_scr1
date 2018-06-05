@@ -32,20 +32,29 @@ namespace SCR1
 
     void processor::step()
     {
-        for (size_t i = 0; i < 19; i++)
+        this->top->clk = 1;
+        for (size_t i = 0; i < 10; i++)
         {
             if(!Verilated::gotFinish())
             {
-                if ((main_time % 10) == 1) {
-                    this->top->clk = 1;
-                }
-                if ((main_time % 10) == 6) {
-                    this->top->clk = 0;
-                }
                 this->top->eval();
                 main_time++;
+            } else {
+                break;
             }
         }
+        this->top->clk = 0;
+        for (size_t i = 0; i < 10; i++)
+        {
+            if(!Verilated::gotFinish())
+            {
+                this->top->eval();
+                main_time++;
+            } else {
+                break;
+            }
+        }
+
     }
 
     void processor::run()
@@ -139,5 +148,25 @@ namespace SCR1
     int processor::get_jb_addr_state()
     {
         return this->top->jb_addr;
+    }
+
+    int processor::read_mem(int address)
+    {
+        if (address >= 0 && address <= MAX_ADDR)
+        {
+            return this->top->scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[address];
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    void processor::write_mem(int address, int data)
+    {
+        if (address >= 0 && address <= MAX_ADDR)
+        {
+            this->top->scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[address] = data;
+        }
     }
 }

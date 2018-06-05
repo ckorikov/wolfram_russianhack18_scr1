@@ -4,6 +4,8 @@
 #include <verilated.h>                      // Defines common routines
 #include "Vscr1_top_tb_axi.h"               // From Verilating "top.v"
 
+#define MAX_ADDR 32768
+
 double sc_time_stamp ();
 extern uint64_t main_time;
 
@@ -25,6 +27,8 @@ namespace SCR1
             int get_branch_taken_state();
             int get_branch_not_taken_state();
             int get_jb_addr_state();
+            int read_mem(int address);
+            void write_mem(int address, int data);
     };
 }
 

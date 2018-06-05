@@ -87,7 +87,7 @@ is_finished(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Re
 {
     int res = LIBRARY_NO_ERROR;
     mbool state = p_proc->is_finished();
-    libData->Message("is_finished");
+    // libData->Message("is_finished");
     MArgument_setBoolean(Res, state);
     return res;
 }
@@ -153,6 +153,26 @@ get_branch_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgume
     out_cpointer[2] = p_proc->get_branch_taken_state();
     out_cpointer[3] = p_proc->get_branch_not_taken_state();
     out_cpointer[4] = p_proc->get_jb_addr_state();
+
+    MArgument_setMTensor(Res, out_MT);
+    return res;
+}
+
+int
+read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    int res = LIBRARY_NO_ERROR;
+    int addr = MArgument_getInteger (Args[0]);
+    int length = MArgument_getInteger (Args[1]);
+    MTensor out_MT;
+    const mint out_dim[]={length};
+    mint out_rank=1;
+    int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
+    mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
+
+    for (size_t i = 0; i < length; i++) {
+        out_cpointer[i]=p_proc->read_mem(addr+i);
+    }
 
     MArgument_setMTensor(Res, out_MT);
     return res;

@@ -20,3 +20,4 @@ nextpc = LibraryFunctionLoad[libhello, "next_pc", {}, Integer];
 getregister = LibraryFunctionLoad[libhello, "get_register", {Integer}, Integer];
 reglist = LibraryFunctionLoad[libhello, "get_register_list", {},{ Integer,1}];
 branchstate = LibraryFunctionLoad[libhello, "get_branch_state", {},{ Integer,1}];
+readmem = LibraryFunctionLoad[libhello, "read_memory", {Integer,Integer},{ Integer,1}];
