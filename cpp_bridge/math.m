@@ -9,8 +9,7 @@ libhello = CreateLibrary[
   "hello",
   (*"Debug"\[Rule]True,*)
    Language -> "C++",
-  "IncludeDirectories" -> \
-{"/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/cpp_bridge/include"}
+  "IncludeDirectories" -> {wd<>"include"}
   ]
 reset = LibraryFunctionLoad[libhello, "reset", {String}, Integer];
 reset[appPath]
