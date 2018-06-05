@@ -18,10 +18,6 @@ constantzero(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument R
 
 DLLEXPORT
 int
-hello(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
-
-DLLEXPORT
-int
 reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
 
 DLLEXPORT

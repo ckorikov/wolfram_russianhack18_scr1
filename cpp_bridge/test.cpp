@@ -32,20 +32,6 @@ constantzero(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument R
 }
 
 int
-hello(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
-{
-    mint I0;
-    mint I1;
-    mint I2;
-    I0 = MArgument_getInteger (Args[0]);
-    I1 = MArgument_getInteger (Args[1]);
-    // p_proc->step();
-    I2 = 0;
-    MArgument_setInteger (Res, I2);
-    return LIBRARY_NO_ERROR;
-}
-
-int
 reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     int res = LIBRARY_NO_ERROR;
