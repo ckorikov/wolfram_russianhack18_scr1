@@ -119,3 +119,21 @@ get_register(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument R
     MArgument_setInteger(Res, reg);
     return res;
 }
+
+int
+get_register_list(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    int res = LIBRARY_NO_ERROR;
+    MTensor out_MT;
+    const mint out_dim[]={31};
+    mint out_rank=1;
+    int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
+    mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
+
+    for (size_t i = 0; i < 32; i++) {
+        out_cpointer[i]=p_proc->get_register(i);
+    }
+
+    MArgument_setMTensor(Res, out_MT);
+    return res;
+}
