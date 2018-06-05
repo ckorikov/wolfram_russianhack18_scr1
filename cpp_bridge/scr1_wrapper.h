@@ -30,6 +30,7 @@ namespace SCR1
             int read_mem(int address);
             void write_mem(int address, int data);
             int read_dmem_bus_addr();
+            int read_dmem_bus_bytewidth();
     };
 }
 

@@ -179,10 +179,18 @@ read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Re
 }
 
 int
-read_dmem_bus_address(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+read_dmem_bus(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     int res = LIBRARY_NO_ERROR;
-    mint addr = p_proc->read_dmem_bus_addr();
-    MArgument_setInteger(Res, addr);
+    MTensor out_MT;
+    const mint out_dim[]={2};
+    mint out_rank=1;
+    int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
+    mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
+
+    out_cpointer[0] = p_proc->read_dmem_bus_addr();
+    out_cpointer[1] = p_proc->read_dmem_bus_bytewidth();
+
+    MArgument_setMTensor(Res, out_MT);
     return res;
 }

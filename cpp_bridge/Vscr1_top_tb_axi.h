@@ -28,6 +28,7 @@ VL_MODULE(Vscr1_top_tb_axi) {
     VL_OUT8(rvc,0,0);
     VL_OUT8(load,0,0);
     VL_OUT8(store,0,0);
+    VL_OUT8(ls_width,1,0);
     VL_OUT8(exception,0,0);
     VL_OUT8(csr_instr,0,0);
     VL_OUT(pc,31,0);
@@ -97,18 +98,12 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__core_dmem_cmd,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__core_dmem_width,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__axi_imem_req_ack,0,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__axi_imem_req,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__axi_imem_resp,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__axi_dmem_req_ack,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__axi_dmem_req,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__axi_dmem_cmd,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__axi_dmem_width,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__axi_dmem_resp,1,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__tcm_imem_req,0,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__tcm_imem_resp,1,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__tcm_dmem_req,0,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__tcm_dmem_width,1,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__tcm_dmem_resp,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__timer_dmem_req,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__timer_dmem_cmd,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__timer_dmem_resp,1,0);
@@ -133,14 +128,14 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__new_pc_req,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__stop_fetch,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__instret,0,0);
-    };
-    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__ext_irq,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__brkpt_hw,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__ifu2idu_vd,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__ifu2idu_imem_err,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__ifu2idu_err_rvi_hi,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__exu2idu_rdy,0,0);
+    };
+    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__exu2csr_r_req,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__exu2csr_w_req,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__csr2exu_rw_exc,0,0);
@@ -199,14 +194,14 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__ialu_rdy,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__ialu_vd,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__ialu_cmp,0,0);
-    };
-    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__lsu_req,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__lsu_exc,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__lsu_exc_code,3,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__csr_access,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__exc_req,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__exc_code,3,0);
+    };
+    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__wfi_halted,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__wfi_halt_cond,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__wfi_run_start,0,0);
@@ -219,6 +214,7 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__rvc,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__load,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__store,0,0);
+	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__ls_width,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__exception,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__csr_instr,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__i_ialu__DOT__curr_state,1,0);
@@ -265,13 +261,13 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_mcause_up,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_mtval_up,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_mtvec_up,0,0);
-    };
-    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_cycle_up,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_instret_up,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_instret_inc,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_mcounten_up,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_w_exc,0,0);
+    };
+    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__e_exc,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__e_irq,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__e_mret,0,0);
@@ -331,13 +327,13 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_dbga__DOT__dmode_cause_sstep,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_dbga__DOT__dmode_cause_brk,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_dbga__DOT__dmode_cause_brkm_req,0,0);
-    };
-    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_dbga__DOT__enforce_dbg_mode,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_dbga__DOT__enforce_run_mode,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_dbga__DOT__dbgc_timeout_cnt,5,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_tapc__DOT__trst_n_int,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_tapc__DOT__tap_ir_reg,3,0);
+    };
+    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_tapc__DOT__tap_ir_next,3,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_tapc__DOT__tap_ir_shift_reg,3,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_tapc__DOT__tap_state_reg,3,0);
@@ -397,13 +393,13 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__decod_hart_pc_sample_reg_wr,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_state_reg,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_state_next,1,0);
-    };
-    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_state_ready,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_opcode_reg_wr,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_ddr_input_sel,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_ddr_wr,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_dcir_wr,0,0);
+    };
+    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_regblock_wr,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_sampling_wr,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__fsm_except_lock_set,0,0);
@@ -452,10 +448,6 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__hart_if_cmd_err_illeg_dbg_context_reg,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__hart_if_cmd_err_unexp_reset_reg,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__i_dap_head_shift_reg__DOT__shift_reg,3,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_tcm__DOT__imem_req_en,0,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_tcm__DOT__dmem_req_en,0,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_tcm__DOT__dmem_byteen,3,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_tcm__DOT__dmem_rdata_shift_reg,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__timer_en,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__timer_clksrc_rtc,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__control_up,0,0);
@@ -463,21 +455,17 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__mtimelo_up,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__mtimehi_up,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__mtimecmplo_up,0,0);
-    };
-    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__mtimecmphi_up,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__dmem_req_valid,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__rtc_sync,3,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__timeclk_cnt_en,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__time_posedge,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__time_cmp_flag,0,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_imem_router__DOT__fsm,0,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_imem_router__DOT__port_sel_r,0,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_imem_router__DOT__sel_resp,1,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_imem_router__DOT__sel_req_ack,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_dmem_router__DOT__fsm,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_dmem_router__DOT__port_sel,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_dmem_router__DOT__port_sel_r,1,0);
+    };
+    struct {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_dmem_router__DOT__sel_resp,1,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_dmem_router__DOT__sel_req_ack,0,0);
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_imem_axi__DOT__req_status,7,0);
@@ -515,12 +503,9 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG16(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__timeclk_cnt,9,0);
 	VL_SIG(scr1_top_tb_axi__DOT__fuse_mhartid,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__core_imem_addr,31,0);
-	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__axi_imem_addr,31,0);
+	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__axi_imem_rdata,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__axi_dmem_addr,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__axi_dmem_wdata,31,0);
-	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__tcm_imem_rdata,31,0);
-	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__tcm_dmem_addr,31,0);
-	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__tcm_dmem_wdata,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__timer_dmem_addr,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__timer_dmem_wdata,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__timer_dmem_rdata,31,0);
@@ -529,8 +514,6 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__ifu2idu_instr,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__mprf2exu_rs1_data,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__mprf2exu_rs2_data,31,0);
-    };
-    struct {
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__exu2csr_w_data,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__csr2exu_new_pc,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__csr2ipic_wdata,31,0);
@@ -547,6 +530,8 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__ls_addr,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__i_ialu__DOT__sum1_op1,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__i_ialu__DOT__sum1_op2,31,0);
+    };
+    struct {
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__i_ialu__DOT__shft_op1,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__i_ialu__DOT__shft_res,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__i_ialu__DOT__res32_1_reg,31,0);
@@ -595,11 +580,6 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__hart_dcir_reg,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__hart_pcsample_reg,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_dbgc__DOT__i_dap_data_shift_reg__DOT__shift_reg,31,0);
-    };
-    struct {
-	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_tcm__DOT__dmem_writedata,31,0);
-	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_tcm__DOT__dmem_rdata_local,31,0);
-	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_imem_router__DOT__sel_rdata,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_dmem_router__DOT__sel_rdata,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_imem_axi__DOT__rcvd_rdata,31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_dmem_axi__DOT__rcvd_rdata,31,0);
@@ -616,6 +596,8 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG64(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__i_ialu__DOT__mul_res,63,0);
 	VL_SIG64(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_instret,63,0);
 	VL_SIG64(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_instret_new,63,0);
+    };
+    struct {
 	VL_SIG64(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_cycle,63,0);
 	VL_SIG64(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_csr__DOT__csr_cycle_new,63,0);
 	VL_SIG64(scr1_top_tb_axi__DOT__i_top__DOT__i_timer__DOT__mtime_reg,63,0);
@@ -638,8 +620,7 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_brkm__DOT__csr_bpctrlext_reg[2],0,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_brkm__DOT__csr_bpctrlext_in[2],31,0);
 	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_brkm__DOT__csr_bpctrlext_out[2],31,0);
-	VL_SIG(scr1_top_tb_axi__DOT__i_top__DOT__i_tcm__DOT__i_dp_memory__DOT__ram_block[16384],31,0);
-	VL_SIG8(scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[32768],7,0);
+	VL_SIG8(scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[65536],7,0);
     };
     std::string scr1_top_tb_axi__DOT__i_memory_tb__DOT__stuff_file;
     
@@ -791,7 +772,6 @@ VL_MODULE(Vscr1_top_tb_axi) {
 	VL_SIG8(__Vfunc_scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_ipic__DOT__scr1_search_one_16__4__unnamedblk1__DOT__stage1_idx[8],0,0);
 	VL_SIG8(__Vfunc_scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_ipic__DOT__scr1_search_one_16__4__unnamedblk1__DOT__stage2_idx[4],1,0);
 	VL_SIG8(__Vfunc_scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_ipic__DOT__scr1_search_one_16__4__unnamedblk1__DOT__stage3_idx[2],2,0);
-	VL_SIG8(__Vtablechg6[128],1,0);
     };
     static VL_ST_SIG8(__Vtable1_scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_ifu__DOT__q_we[256],1,0);
     static VL_ST_SIG8(__Vtable2_scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_pipe_top__DOT__i_pipe_exu__DOT__i_ialu__DOT__next_state[32],1,0);
@@ -799,8 +779,6 @@ VL_MODULE(Vscr1_top_tb_axi) {
     static VL_ST_SIG8(__Vtable4_scr1_top_tb_axi__DOT__i_top__DOT__core_dmem_cmd[16],0,0);
     static VL_ST_SIG8(__Vtable4_scr1_top_tb_axi__DOT__i_top__DOT__core_dmem_width[16],1,0);
     static VL_ST_SIG8(__Vtable5_scr1_top_tb_axi__DOT__i_top__DOT__i_core_top__DOT__i_tapc__DOT__tap_state_next[32],3,0);
-    static VL_ST_SIG8(__Vtable6_scr1_top_tb_axi__DOT__i_top__DOT__i_imem_router__DOT__fsm[128],0,0);
-    static VL_ST_SIG8(__Vtable6_scr1_top_tb_axi__DOT__i_top__DOT__i_imem_router__DOT__port_sel_r[128],0,0);
     
     // INTERNAL VARIABLES
     // Internals; generally not touched by application code
