@@ -30,3 +30,6 @@ reset = LibraryFunctionLoad[libhello, "reset", {String}, Integer];
 reset["+mem=/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/\
 cpp_bridge/dhrystone.bin"]
 run = LibraryFunctionLoad[libhello, "run", {}, Integer];
+isFinished = LibraryFunctionLoad[libhello, "is_finished", {}, Boolean];
+pc = LibraryFunctionLoad[libhello, "get_pc", {}, Integer];
+nextpc = LibraryFunctionLoad[libhello, "next_pc", {}, Integer];

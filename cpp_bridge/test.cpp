@@ -69,3 +69,43 @@ run(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
     }
     return res;
 }
+
+int
+step(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    int res = LIBRARY_NO_ERROR;
+    try {
+        p_proc->step();
+    } catch (...) {
+        res = LIBRARY_FUNCTION_ERROR;
+    }
+    return res;
+}
+
+int
+is_finished(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    int res = LIBRARY_NO_ERROR;
+    mbool state = p_proc->is_finished();
+    libData->Message("is_finished");
+    MArgument_setBoolean(Res, state);
+    return res;
+}
+
+int
+get_pc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    int res = LIBRARY_NO_ERROR;
+    mint pc = p_proc->get_pc();
+    MArgument_setInteger(Res, pc);
+    return res;
+}
+
+int
+next_pc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    int res = LIBRARY_NO_ERROR;
+    mint pc = p_proc->next_pc();
+    MArgument_setInteger(Res, pc);
+    return res;
+}

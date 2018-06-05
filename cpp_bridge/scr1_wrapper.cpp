@@ -55,4 +55,30 @@ namespace SCR1
             this->step();
         }
     }
+
+    bool processor::is_finished()
+    {
+        return Verilated::gotFinish();
+    }
+
+    int processor::get_pc()
+    {
+        return this->top->pc;
+    }
+
+    int processor::next_pc()
+    {
+        int pc = this->get_pc();
+        while(!Verilated::gotFinish())
+        {
+            this->step();
+            int current_pc = this->get_pc();
+            if (current_pc != pc)
+            {
+                pc = current_pc;
+                break;
+            }
+        }
+        return pc;
+    }
 }
