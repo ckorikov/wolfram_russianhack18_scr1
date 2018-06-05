@@ -169,4 +169,9 @@ namespace SCR1
             this->top->scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[address] = data;
         }
     }
+
+    int processor::read_dmem_bus_addr()
+    {
+        return this->top->ls_addr;
+    }
 }

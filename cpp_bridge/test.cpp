@@ -177,3 +177,12 @@ read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Re
     MArgument_setMTensor(Res, out_MT);
     return res;
 }
+
+int
+read_dmem_bus_address(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    int res = LIBRARY_NO_ERROR;
+    mint addr = p_proc->read_dmem_bus_addr();
+    MArgument_setInteger(Res, addr);
+    return res;
+}

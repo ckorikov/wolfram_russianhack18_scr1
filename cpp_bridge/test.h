@@ -60,6 +60,10 @@ DLLEXPORT
 int
 read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
 
+DLLEXPORT
+int
+read_dmem_bus_address(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
+
 #ifdef __cplusplus
 }
 #endif

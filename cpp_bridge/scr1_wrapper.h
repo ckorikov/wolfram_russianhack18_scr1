@@ -29,6 +29,7 @@ namespace SCR1
             int get_jb_addr_state();
             int read_mem(int address);
             void write_mem(int address, int data);
+            int read_dmem_bus_addr();
     };
 }
 
