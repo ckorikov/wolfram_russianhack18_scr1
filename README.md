@@ -1,2 +1,4 @@
-# wolfram_russianhack18_scr1
-Hackathon at Wolfram Technology Conference 2018 (Russia)
+# Hardware Verification Workflow with SCR1 in Wolfram Mathematica
+**Hackathon at Wolfram Technology Conference 2018 (Russia)**
+
+![SCR1 device](docs/device.png)
