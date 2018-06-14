@@ -23,12 +23,15 @@
 
 
 ## Examples
+### Execution graph (dhrystone)
+<img src="docs/dhrystone.png" width="50%"/>
+
 ### Read registers
 ```mathematica
 Dataset[
  Table[
   {i, BaseForm[#, 16], BaseForm[#, 2]} &@
-   DeviceRead[device, {"get_reg", i}] 
+   DeviceRead[device, {"get_reg", i}]
   ,
   {i, 1, 31}
   ]
@@ -51,3 +54,5 @@ SCR1 is an open-source RISC-V compatible MCU core, designed by Syntacore.
 
 * https://github.com/syntacore/scr1
 * https://syntacore.com
+
+<img src="docs/scr1.png" width="50%"/>
