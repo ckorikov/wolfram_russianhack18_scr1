@@ -10,12 +10,15 @@ Needs["CCompilerDriver`"];
 
 
 DeviceFramework`DeviceClassRegister["SCR1",
+"DriverVersion"->1.0,
 "OpenFunction"->open,
 "CloseFunction"->close,
 "ReadFunction"->read,
+"GetPropertyFunction"->readProp,
+"DeviceIconFunction"->logo,
 "Properties"->{
-	"Registers"->Null,
-	"pc"->Null}
+	"ipc"->Null
+	}
 ]
 
 
@@ -39,6 +42,12 @@ funcGetRegisterList = Null;
 funcGetBranchState = Null;
 funcReadMem = Null;
 funcReadDataBUS = Null;
+
+
+logo[___]:=Import["logo.png"]
+
+
+readProp[dev_,"ipc"]:=funcIPC[]
 
 
 read[{_, h_}, cmd_] := Switch[cmd,
