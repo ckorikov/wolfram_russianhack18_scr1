@@ -82,11 +82,11 @@ fileList =
  "cpp_bridge/scr1_wrapper.cpp",
   "scr1_generated/Vscr1_top_tb_axi.cpp", 
   "scr1_generated/Vscr1_top_tb_axi__ALLsup.cpp", 
-  "scr1_generated/include/verilated.cpp",
-  "scr1_generated/include/verilated_cov.cpp",
-  "scr1_generated/include/verilated_save.cpp", 
-  "scr1_generated/include/verilated_vcd_c.cpp",
-  "scr1_generated/include/verilated_vpi.cpp"
+  "scr1_generated/verilator_system/verilated.cpp",
+  "scr1_generated/verilator_system/verilated_cov.cpp",
+  "scr1_generated/verilator_system/verilated_save.cpp", 
+  "scr1_generated/verilator_system/verilated_vcd_c.cpp",
+  "scr1_generated/verilator_system/verilated_vpi.cpp"
   }
   },
 $libscr1 = CreateLibrary[
@@ -94,7 +94,7 @@ $libscr1 = CreateLibrary[
   "cpp_bridge",
    Language -> "C++",
    "Debug"->True,
-  "IncludeDirectories" -> {"/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/scr1_generated/include/","/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/scr1_generated/"}
+  "IncludeDirectories" -> {"/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/scr1_generated/verilator_system/","/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/scr1_generated/"}
   ];
  funcIPC = LibraryFunctionLoad[$libscr1, "get_pc", {}, Integer];
  funcRESET = LibraryFunctionLoad[$libscr1, "reset", {String}, Integer];
