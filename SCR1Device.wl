@@ -76,25 +76,25 @@ read[{_, h_},cmd_, param1_, param2_] := Switch[cmd,
 open[___] := Module[
 {
 h = CreateUUID[],
-fileList = Map["./cpp_bridge/"<>#&,
+fileList =
  {
- "test.cpp",
-  "Vscr1_top_tb_axi.cpp", 
-  "Vscr1_top_tb_axi__ALLsup.cpp", 
-  "scr1_wrapper.cpp",
-  "include/verilated.cpp",
-  "include/verilated_cov.cpp",
-  "include/verilated_save.cpp", 
-  "include/verilated_vcd_c.cpp",
-  "include/verilated_vpi.cpp"
+ "cpp_bridge/cpp_bridge.cpp",
+ "cpp_bridge/scr1_wrapper.cpp",
+  "scr1_generated/Vscr1_top_tb_axi.cpp", 
+  "scr1_generated/Vscr1_top_tb_axi__ALLsup.cpp", 
+  "scr1_generated/include/verilated.cpp",
+  "scr1_generated/include/verilated_cov.cpp",
+  "scr1_generated/include/verilated_save.cpp", 
+  "scr1_generated/include/verilated_vcd_c.cpp",
+  "scr1_generated/include/verilated_vpi.cpp"
   }
- ]
- },
+  },
 $libscr1 = CreateLibrary[
   fileList,
-  "hello",
+  "cpp_bridge",
    Language -> "C++",
-  "IncludeDirectories" -> {"/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/cpp_bridge/include/"}
+   "Debug"->True,
+  "IncludeDirectories" -> {"/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/scr1_generated/include/","/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/scr1_generated/"}
   ];
  funcIPC = LibraryFunctionLoad[$libscr1, "get_pc", {}, Integer];
  funcRESET = LibraryFunctionLoad[$libscr1, "reset", {String}, Integer];

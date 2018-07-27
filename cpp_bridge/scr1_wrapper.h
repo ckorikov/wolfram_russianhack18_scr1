@@ -33,5 +33,4 @@ namespace SCR1
             int read_dmem_bus_bytewidth();
     };
 }
-
 #endif SCR1_WRAPPER_H

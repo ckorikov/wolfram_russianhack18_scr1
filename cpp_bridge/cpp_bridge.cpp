@@ -1,4 +1,4 @@
-#include "test.h"
+#include "cpp_bridge.h"
 #include "scr1_wrapper.h"
 
 static SCR1::processor* p_proc;
