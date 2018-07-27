@@ -1,0 +1,10 @@
+#C/CPP
+*.o
+
+#Debug directory
+/cpp_bridge_debug
+
+#OS
+.DS_Store
+.Trashes
+Thumbs.db
