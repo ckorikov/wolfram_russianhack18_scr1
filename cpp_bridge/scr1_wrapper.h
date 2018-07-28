@@ -4,33 +4,45 @@
 #include <verilated.h>                      // Defines common routines
 #include "Vscr1_top_tb_axi.h"               // From Verilating "top.v"
 
-#define MAX_ADDR 32768
+#ifndef SCR1_MEM_MAX
+# define SCR1_MEM_MAX 32768
+#endif
+
+#ifndef SCR1_CLK_TICKS
+# define SCR1_CLK_TICKS 10
+#endif
 
 double sc_time_stamp ();
-extern uint64_t main_time;
+extern uint64_t g_sim_time;
 
 namespace SCR1
 {
-    class processor {
-        Vscr1_top_tb_axi *top;
-        public:
-            processor();
-            ~processor();
-            void step();
-            void reset(const char * mem);
-            int get_pc();
-            void run();
-            bool is_finished();
-            int next_pc();
-            int get_register(int num);
-            int get_jump_state();
-            int get_branch_taken_state();
-            int get_branch_not_taken_state();
-            int get_jb_addr_state();
-            int read_mem(int address);
-            void write_mem(int address, int data);
-            int read_dmem_bus_addr();
-            int read_dmem_bus_bytewidth();
+    class Processor {
+        Vscr1_top_tb_axi *scr1;
+    public:
+        Processor();
+        ~Processor();
+        /* Processor main controls and status */
+        void run();
+        void step();
+        void reset();
+        void load(const char * mem);
+        bool is_finished();
+        /* IPC controls and status */
+        int next_ipc();
+        int get_ipc();
+        /* Registers */
+        int get_register(int num);
+        /* Memory */
+        int read_mem(int address);
+        int read_dmem_bus_addr();
+        int read_dmem_bus_bytewidth();
+        void write_mem(int address, int data);
+        /* Branching */
+        int get_jump_state();
+        int get_jb_addr_state();
+        int get_branch_taken_state();
+        int get_branch_not_taken_state();
     };
 }
 #endif //SCR1_WRAPPER_H

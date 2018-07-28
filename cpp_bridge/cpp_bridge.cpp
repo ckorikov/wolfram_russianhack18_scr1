@@ -1,7 +1,7 @@
 #include "cpp_bridge.h"
 #include "scr1_wrapper.h"
 
-static SCR1::processor* p_proc;
+static SCR1::Processor* p_proc;
 
 mint
 WolframLibrary_getVersion()
@@ -13,7 +13,7 @@ DLLEXPORT
 int
 WolframLibrary_initialize(WolframLibraryData libData)
 {
-    p_proc = new SCR1::processor;
+    p_proc = new SCR1::Processor;
     return 0;
 }
 
@@ -37,7 +37,7 @@ reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
     int res = LIBRARY_NO_ERROR;
     const char *string = MArgument_getUTF8String(Args[0]);
     try {
-        p_proc->reset(string);
+        p_proc->load(string);
     } catch (...) {
         res = LIBRARY_FUNCTION_ERROR;
     }
@@ -79,19 +79,19 @@ is_finished(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Re
 }
 
 int
-get_pc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+get_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     int res = LIBRARY_NO_ERROR;
-    mint pc = p_proc->get_pc();
+    mint pc = p_proc->get_ipc();
     MArgument_setInteger(Res, pc);
     return res;
 }
 
 int
-next_pc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+next_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     int res = LIBRARY_NO_ERROR;
-    mint pc = p_proc->next_pc();
+    mint pc = p_proc->next_ipc();
     MArgument_setInteger(Res, pc);
     return res;
 }
@@ -115,11 +115,11 @@ get_register_list(WolframLibraryData libData, mint Argc, MArgument *Args, MArgum
     mint out_rank=1;
     int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
     mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
-
+    
     for (size_t i = 0; i < 32; i++) {
         out_cpointer[i]=p_proc->get_register(i);
     }
-
+    
     MArgument_setMTensor(Res, out_MT);
     return res;
 }
@@ -133,13 +133,13 @@ get_branch_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgume
     mint out_rank=1;
     int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
     mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
-
-    out_cpointer[0] = p_proc->get_pc();
+    
+    out_cpointer[0] = p_proc->get_ipc();
     out_cpointer[1] = p_proc->get_jump_state();
     out_cpointer[2] = p_proc->get_branch_taken_state();
     out_cpointer[3] = p_proc->get_branch_not_taken_state();
     out_cpointer[4] = p_proc->get_jb_addr_state();
-
+    
     MArgument_setMTensor(Res, out_MT);
     return res;
 }
@@ -155,11 +155,11 @@ read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Re
     mint out_rank=1;
     int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
     mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
-
+    
     for (size_t i = 0; i < length; i++) {
         out_cpointer[i]=p_proc->read_mem(addr+i);
     }
-
+    
     MArgument_setMTensor(Res, out_MT);
     return res;
 }
@@ -173,10 +173,10 @@ read_dmem_bus(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument 
     mint out_rank=1;
     int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
     mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
-
+    
     out_cpointer[0] = p_proc->read_dmem_bus_addr();
     out_cpointer[1] = p_proc->read_dmem_bus_bytewidth();
-
+    
     MArgument_setMTensor(Res, out_MT);
     return res;
 }
