@@ -12,13 +12,13 @@
 # define SCR1_CLK_TICKS 10
 #endif
 
-double sc_time_stamp ();
-extern uint64_t g_sim_time;
+#define FILE_SCR1_OUT "src1_output.txt"
 
 namespace SCR1
 {
     class Processor {
         Vscr1_top_tb_axi *scr1;
+        size_t clk;
     public:
         Processor();
         ~Processor();

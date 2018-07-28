@@ -1,31 +1,31 @@
 #include "scr1_wrapper.h"
 
-#include <stdio.h>
-
-uint64_t g_sim_time;             // Current simulation time
+uint64_t g_sim_time; // Current simulation time
 
 // Called by $time in Verilog
-double sc_time_stamp ()
+double sc_time_stamp()
 {
-    return g_sim_time;           // converts to double, to match
+    return static_cast<double>(g_sim_time);
 }
 
 namespace SCR1
 {
-    
     Processor::Processor()
     {
         this->scr1 = new Vscr1_top_tb_axi;
+        std::freopen(FILE_SCR1_OUT, "w", stdout);
     }
     
     Processor::~Processor()
     {
         this->scr1->final();
         delete this->scr1;
+        std::remove(FILE_SCR1_OUT);
     }
     
     void Processor::reset()
     {
+        this->clk=0;
         this->scr1->rst_n=0;
         this->step();
         this->scr1->rst_n=1;
@@ -37,44 +37,38 @@ namespace SCR1
         this->reset();
     }
     
+    bool Processor::is_finished()
+    {
+        return Verilated::gotFinish();
+    }
+    
     void Processor::step()
     {
         this->scr1->clk = 1;
-        for (size_t i = 0; i < SCR1_CLK_TICKS; i++)
+        for(int clk_front=0; clk_front<2; ++clk_front)
         {
-            if(!Verilated::gotFinish())
+            for (size_t tick = 0; tick < SCR1_CLK_TICKS; ++tick)
             {
-                this->scr1->eval();
-                g_sim_time++;
-            } else {
-                break;
+                if(!this->is_finished())
+                {
+                    this->scr1->eval();
+                    ++g_sim_time;
+                } else {
+                    break;
+                }
             }
+            this->scr1->clk = 0;
         }
-        this->scr1->clk = 0;
-        for (size_t i = 0; i < SCR1_CLK_TICKS; i++)
-        {
-            if(!Verilated::gotFinish())
-            {
-                this->scr1->eval();
-                g_sim_time++;
-            } else {
-                break;
-            }
-        }
-        
+        ++this->clk;
+        std::fflush(stdout);
     }
     
     void Processor::run()
     {
-        while(!Verilated::gotFinish())
+        while(!this->is_finished())
         {
             this->step();
         }
-    }
-    
-    bool Processor::is_finished()
-    {
-        return Verilated::gotFinish();
     }
     
     int Processor::get_ipc()
@@ -84,18 +78,18 @@ namespace SCR1
     
     int Processor::next_ipc()
     {
-        int pc = this->get_ipc();
-        while(!Verilated::gotFinish())
+        int ipc = this->get_ipc();
+        while(!this->is_finished())
         {
             this->step();
-            int current_pc = this->get_ipc();
-            if (current_pc != pc)
+            int cur_ipc = this->get_ipc();
+            if (cur_ipc != ipc)
             {
-                pc = current_pc;
+                ipc = cur_ipc;
                 break;
             }
         }
-        return pc;
+        return ipc;
     }
     
     int Processor::get_register(int num)
