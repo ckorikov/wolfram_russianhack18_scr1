@@ -9,7 +9,7 @@
 #endif
 
 #ifndef SCR1_CLK_TICKS
-# define SCR1_CLK_TICKS 10
+# define SCR1_CLK_TICKS 1
 #endif
 
 #define FILE_SCR1_OUT "src1_output.txt"
@@ -18,7 +18,6 @@ namespace SCR1
 {
     class Processor {
         Vscr1_top_tb_axi *scr1;
-        size_t clk;
     public:
         Processor();
         ~Processor();
@@ -28,16 +27,21 @@ namespace SCR1
         void reset();
         void load(const char * mem);
         bool is_finished();
+        uint64_t get_clk();
+        uint64_t get_ticks();
         /* IPC controls and status */
-        int next_ipc();
-        int get_ipc();
+        unsigned int next_ipc();
+        unsigned int get_ipc();
+        unsigned int run_until_ipc(unsigned int to_ipc);
         /* Registers */
-        int get_register(int num);
+        int get_register(unsigned int num);
+        void set_register(unsigned int num, int data);
         /* Memory */
-        int read_mem(int address);
+        int read_mem(unsigned int address);
+        void write_mem(unsigned int address, int data);
+        /* Memory bus */
         int read_dmem_bus_addr();
         int read_dmem_bus_bytewidth();
-        void write_mem(int address, int data);
         /* Branching */
         int get_jump_state();
         int get_jb_addr_state();

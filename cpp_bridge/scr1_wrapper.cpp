@@ -1,6 +1,6 @@
 #include "scr1_wrapper.h"
 
-uint64_t g_sim_time; // Current simulation time
+static uint64_t g_sim_time; // Current simulation time
 
 // Called by $time in Verilog
 double sc_time_stamp()
@@ -15,33 +15,33 @@ namespace SCR1
         this->scr1 = new Vscr1_top_tb_axi;
         std::freopen(FILE_SCR1_OUT, "w", stdout);
     }
-    
+
     Processor::~Processor()
     {
         this->scr1->final();
         delete this->scr1;
         std::remove(FILE_SCR1_OUT);
+        Verilated::gotFinish(false);
     }
-    
+
     void Processor::reset()
     {
-        this->clk=0;
         this->scr1->rst_n=0;
         this->step();
         this->scr1->rst_n=1;
     }
-    
+
     void Processor::load(const char * program)
     {
         Verilated::commandArgs(1, &program);
         this->reset();
     }
-    
+
     bool Processor::is_finished()
     {
         return Verilated::gotFinish();
     }
-    
+
     void Processor::step()
     {
         this->scr1->clk = 1;
@@ -59,10 +59,9 @@ namespace SCR1
             }
             this->scr1->clk = 0;
         }
-        ++this->clk;
         std::fflush(stdout);
     }
-    
+
     void Processor::run()
     {
         while(!this->is_finished())
@@ -70,15 +69,15 @@ namespace SCR1
             this->step();
         }
     }
-    
-    int Processor::get_ipc()
+
+    unsigned int Processor::get_ipc()
     {
         return this->scr1->pc;
     }
-    
-    int Processor::next_ipc()
+
+    unsigned int Processor::next_ipc()
     {
-        int ipc = this->get_ipc();
+        unsigned int ipc = this->get_ipc();
         while(!this->is_finished())
         {
             this->step();
@@ -91,11 +90,37 @@ namespace SCR1
         }
         return ipc;
     }
-    
-    int Processor::get_register(int num)
+
+    unsigned int Processor::run_until_ipc(unsigned int to_ipc)
     {
-        /* Rewrite it! */
+        int ipc = 0;
+        while(!this->is_finished())
+        {
+            this->step();
+            ipc = this->get_ipc();
+            if (ipc == to_ipc)
+            {
+                break;
+            }
+        }
+        return ipc;
+    }
+
+    uint64_t Processor::get_ticks()
+    {
+        return g_sim_time;
+    }
+
+    uint64_t Processor::get_clk()
+    {
+        return this->get_ticks()/SCR1_CLK_TICKS;
+    }
+
+    int Processor::get_register(unsigned int num)
+    {
+        /* Is there a better solution? */
         switch (num) {
+                /* The register gpr_x00 is always zero */
             case 1: return this->scr1->gpr_x01;
             case 2: return this->scr1->gpr_x02;
             case 3: return this->scr1->gpr_x03;
@@ -127,57 +152,92 @@ namespace SCR1
             case 29: return this->scr1->gpr_x29;
             case 30: return this->scr1->gpr_x30;
             case 31: return this->scr1->gpr_x31;
-            default: return 0;
+            default: return -1;
         }
     }
-    
+
+    void Processor::set_register(unsigned int num, int data)
+    {
+        /* Is there a better solution? */
+        switch (num) {
+                /* The register gpr_x00 is always zero */
+            case 1: this->scr1->gpr_x01 = data;
+            case 2: this->scr1->gpr_x02 = data;
+            case 3: this->scr1->gpr_x03 = data;
+            case 4: this->scr1->gpr_x04 = data;
+            case 5: this->scr1->gpr_x05 = data;
+            case 6: this->scr1->gpr_x06 = data;
+            case 7: this->scr1->gpr_x07 = data;
+            case 8: this->scr1->gpr_x08 = data;
+            case 9: this->scr1->gpr_x09 = data;
+            case 10: this->scr1->gpr_x10 = data;
+            case 11: this->scr1->gpr_x11 = data;
+            case 12: this->scr1->gpr_x12 = data;
+            case 13: this->scr1->gpr_x13 = data;
+            case 14: this->scr1->gpr_x14 = data;
+            case 15: this->scr1->gpr_x15 = data;
+            case 16: this->scr1->gpr_x16 = data;
+            case 17: this->scr1->gpr_x17 = data;
+            case 18: this->scr1->gpr_x18 = data;
+            case 19: this->scr1->gpr_x19 = data;
+            case 20: this->scr1->gpr_x20 = data;
+            case 21: this->scr1->gpr_x21 = data;
+            case 22: this->scr1->gpr_x22 = data;
+            case 23: this->scr1->gpr_x23 = data;
+            case 24: this->scr1->gpr_x24 = data;
+            case 25: this->scr1->gpr_x25 = data;
+            case 26: this->scr1->gpr_x26 = data;
+            case 27: this->scr1->gpr_x27 = data;
+            case 28: this->scr1->gpr_x28 = data;
+            case 29: this->scr1->gpr_x29 = data;
+            case 30: this->scr1->gpr_x30 = data;
+            case 31: this->scr1->gpr_x31 = data;
+        }
+    }
+
     int Processor::get_jump_state()
     {
         return this->scr1->jump;
     }
-    
+
     int Processor::get_branch_taken_state()
     {
         return this->scr1->branch_taken;
     }
-    
+
     int Processor::get_branch_not_taken_state()
     {
         return this->scr1->branch_not_taken;
     }
-    
+
     int Processor::get_jb_addr_state()
     {
         return this->scr1->jb_addr;
     }
-    
-    int Processor::read_mem(int address)
+
+    int Processor::read_mem(unsigned int address)
     {
-        if (address >= 0 && address <= SCR1_MEM_MAX)
-        {
-            return this->scr1->scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[address];
-        }
-        else
-        {
-            return 0;
-        }
+        return address > SCR1_MEM_MAX
+        ? -1
+        : this->scr1->scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[address];
     }
-    
-    void Processor::write_mem(int address, int data)
+
+    void Processor::write_mem(unsigned int address, int data)
     {
-        if (address >= 0 && address <= SCR1_MEM_MAX)
+        if (address <= SCR1_MEM_MAX)
         {
             this->scr1->scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[address] = data;
         }
     }
-    
+
     int Processor::read_dmem_bus_addr()
     {
         return this->scr1->ls_addr;
     }
-    
+
     int Processor::read_dmem_bus_bytewidth()
     {
+        /* This is convention */
         switch (this->scr1->ls_width)
         {
             case 0: return 1;
