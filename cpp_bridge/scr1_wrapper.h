@@ -16,11 +16,16 @@
 
 namespace SCR1
 {
+    typedef enum class enum_scr1_state {IDLE, WORK, FINISHED} scr1_state;
+
     class Processor {
         Vscr1_top_tb_axi *scr1;
+        scr1_state state;
     public:
         Processor();
         ~Processor();
+        /* State control */
+        scr1_state get_state();
         /* Processor main controls and status */
         void run();
         void step();

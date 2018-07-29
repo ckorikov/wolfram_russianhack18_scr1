@@ -10,7 +10,7 @@ double sc_time_stamp()
 
 namespace SCR1
 {
-    Processor::Processor()
+    Processor::Processor(): state(scr1_state::IDLE)
     {
         this->scr1 = new Vscr1_top_tb_axi;
         std::freopen(FILE_SCR1_OUT, "w", stdout);
@@ -24,22 +24,31 @@ namespace SCR1
         Verilated::gotFinish(false);
     }
 
+    scr1_state Processor::get_state()
+    {
+        return this->state;
+    }
+
     void Processor::reset()
     {
         this->scr1->rst_n=0;
         this->step();
         this->scr1->rst_n=1;
+        this->state = scr1_state::IDLE;
     }
 
     void Processor::load(const char * program)
     {
         Verilated::commandArgs(1, &program);
         this->reset();
+        this->state = scr1_state::WORK;
     }
 
     bool Processor::is_finished()
     {
-        return Verilated::gotFinish();
+        auto res = Verilated::gotFinish();
+        if (res) this->state = scr1_state::FINISHED;
+        return res;
     }
 
     void Processor::step()
