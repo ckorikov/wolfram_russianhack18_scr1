@@ -28,11 +28,11 @@ namespace SCR1
         scr1_state get_state();
         /* Processor main controls and status */
         void run();
-        void step();
         void reset();
-        void load(const char * mem);
+        void load(const char * program);
+        uint64_t step();
         bool is_finished();
-        uint64_t get_clk();
+        uint64_t get_steps();
         uint64_t get_ticks();
         /* IPC controls and status */
         unsigned int next_ipc();
@@ -42,8 +42,8 @@ namespace SCR1
         int get_register(unsigned int num);
         void set_register(unsigned int num, int data);
         /* Memory */
-        int read_mem(unsigned int address);
-        void write_mem(unsigned int address, int data);
+        int read_mem(const size_t address);
+        void write_mem(const size_t address, const int data);
         /* Memory bus */
         int read_dmem_bus_addr();
         int read_dmem_bus_bytewidth();

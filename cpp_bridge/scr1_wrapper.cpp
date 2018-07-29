@@ -34,14 +34,13 @@ namespace SCR1
         this->scr1->rst_n=0;
         this->step();
         this->scr1->rst_n=1;
-        this->state = scr1_state::IDLE;
+        this->state = scr1_state::WORK;
     }
 
     void Processor::load(const char * program)
     {
         Verilated::commandArgs(1, &program);
         this->reset();
-        this->state = scr1_state::WORK;
     }
 
     bool Processor::is_finished()
@@ -51,7 +50,7 @@ namespace SCR1
         return res;
     }
 
-    void Processor::step()
+    uint64_t Processor::step()
     {
         this->scr1->clk = 1;
         for(int clk_front=0; clk_front<2; ++clk_front)
@@ -69,6 +68,7 @@ namespace SCR1
             this->scr1->clk = 0;
         }
         std::fflush(stdout);
+        return this->get_steps();
     }
 
     void Processor::run()
@@ -120,7 +120,7 @@ namespace SCR1
         return g_sim_time;
     }
 
-    uint64_t Processor::get_clk()
+    uint64_t Processor::get_steps()
     {
         return this->get_ticks()/SCR1_CLK_TICKS;
     }
@@ -224,14 +224,14 @@ namespace SCR1
         return this->scr1->jb_addr;
     }
 
-    int Processor::read_mem(unsigned int address)
+    int Processor::read_mem(const size_t address)
     {
         return address > SCR1_MEM_MAX
         ? -1
         : this->scr1->scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[address];
     }
 
-    void Processor::write_mem(unsigned int address, int data)
+    void Processor::write_mem(const size_t address, const int data)
     {
         if (address <= SCR1_MEM_MAX)
         {

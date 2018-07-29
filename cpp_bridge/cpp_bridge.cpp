@@ -3,180 +3,275 @@
 
 static SCR1::Processor* p_proc;
 
-mint
-WolframLibrary_getVersion()
+/* Wolfram basic library functions */
+
+mint WolframLibrary_getVersion()
 {
     return WolframLibraryVersion;
 }
 
-DLLEXPORT
-int
-WolframLibrary_initialize(WolframLibraryData libData)
+int WolframLibrary_initialize(WolframLibraryData libData)
 {
-    p_proc = new SCR1::Processor;
-    return 0;
+    try
+    {
+        p_proc = new SCR1::Processor;
+    }
+    catch (...)
+    {
+        libData->Message("Cannot create a SCR1 instance");
+        return LIBRARY_MEMORY_ERROR;
+    }
+    return LIBRARY_NO_ERROR;
 }
 
-void
-WolframLibrary_uninitialize(WolframLibraryData libData)
+void WolframLibrary_uninitialize(WolframLibraryData libData)
 {
     delete p_proc;
-    return;
 }
 
-int
-constantzero(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+int constantzero(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     MArgument_setInteger(Res, 0);
     return LIBRARY_NO_ERROR;
 }
 
-int
-reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+/* SCR1 Functionality */
+int scr1_reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
-    int res = LIBRARY_NO_ERROR;
-    const char *string = MArgument_getUTF8String(Args[0]);
-    try {
-        p_proc->load(string);
-    } catch (...) {
-        res = LIBRARY_FUNCTION_ERROR;
+    try
+    {
+        p_proc->reset();
     }
-    return res;
+    catch (...)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    return LIBRARY_NO_ERROR;
 }
 
-int
-run(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+int scr1_run(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
-    int res = LIBRARY_NO_ERROR;
-    try {
+    try
+    {
         p_proc->run();
-    } catch (...) {
-        res = LIBRARY_FUNCTION_ERROR;
     }
-    return res;
-}
-
-int
-step(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
-{
-    int res = LIBRARY_NO_ERROR;
-    try {
-        p_proc->step();
-    } catch (...) {
-        res = LIBRARY_FUNCTION_ERROR;
+    catch (...)
+    {
+        return LIBRARY_FUNCTION_ERROR;
     }
-    return res;
+    return LIBRARY_NO_ERROR;
 }
 
-int
-is_finished(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+int scr1_load(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
-    int res = LIBRARY_NO_ERROR;
-    mbool state = p_proc->is_finished();
-    // libData->Message("is_finished");
-    MArgument_setBoolean(Res, state);
-    return res;
-}
-
-int
-get_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
-{
-    int res = LIBRARY_NO_ERROR;
-    mint pc = p_proc->get_ipc();
-    MArgument_setInteger(Res, pc);
-    return res;
-}
-
-int
-next_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
-{
-    int res = LIBRARY_NO_ERROR;
-    mint pc = p_proc->next_ipc();
-    MArgument_setInteger(Res, pc);
-    return res;
-}
-
-int
-get_register(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
-{
-    int res = LIBRARY_NO_ERROR;
-    int num = MArgument_getInteger (Args[0]);
-    mint reg = p_proc->get_register(num);
-    MArgument_setInteger(Res, reg);
-    return res;
-}
-
-int
-get_register_list(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
-{
-    int res = LIBRARY_NO_ERROR;
-    MTensor out_MT;
-    const mint out_dim[]={31};
-    mint out_rank=1;
-    int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
-    mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
-    
-    for (size_t i = 0; i < 32; i++) {
-        out_cpointer[i]=p_proc->get_register(i);
+    const char *file_name = MArgument_getUTF8String(Args[0]);
+    if (access( file_name, F_OK ) == -1)
+    {
+        libData->Message("Cannot find the program");
+        return LIBRARY_FUNCTION_ERROR;
     }
-    
-    MArgument_setMTensor(Res, out_MT);
-    return res;
-}
-
-int
-get_branch_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
-{
-    int res = LIBRARY_NO_ERROR;
-    MTensor out_MT;
-    const mint out_dim[]={5};
-    mint out_rank=1;
-    int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
-    mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
-    
-    out_cpointer[0] = p_proc->get_ipc();
-    out_cpointer[1] = p_proc->get_jump_state();
-    out_cpointer[2] = p_proc->get_branch_taken_state();
-    out_cpointer[3] = p_proc->get_branch_not_taken_state();
-    out_cpointer[4] = p_proc->get_jb_addr_state();
-    
-    MArgument_setMTensor(Res, out_MT);
-    return res;
-}
-
-int
-read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
-{
-    int res = LIBRARY_NO_ERROR;
-    int addr = MArgument_getInteger (Args[0]);
-    int length = MArgument_getInteger (Args[1]);
-    MTensor out_MT;
-    const mint out_dim[]={length};
-    mint out_rank=1;
-    int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
-    mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
-    
-    for (size_t i = 0; i < length; i++) {
-        out_cpointer[i]=p_proc->read_mem(addr+i);
+    else
+    {
+        try
+        {
+            char path_arg[std::strlen(file_name)+5];
+            std::strcpy(path_arg, "+mem=");
+            std::strcat(path_arg, file_name);
+            p_proc->load(path_arg);
+        }
+        catch (...)
+        {
+            return LIBRARY_FUNCTION_ERROR;
+        }
     }
-    
-    MArgument_setMTensor(Res, out_MT);
-    return res;
+    return LIBRARY_NO_ERROR;
 }
 
-int
-read_dmem_bus(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+int scr1_step(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
-    int res = LIBRARY_NO_ERROR;
-    MTensor out_MT;
-    const mint out_dim[]={2};
-    mint out_rank=1;
-    int err = libData->MTensor_new(MType_Integer, out_rank, out_dim, &out_MT);
-    mint *out_cpointer=libData->MTensor_getIntegerData(out_MT);
+    try
+    {
+        auto step_cnt = p_proc->step();
+        MArgument_setInteger(Res, step_cnt);
+    }
+    catch (...)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    return LIBRARY_NO_ERROR;
+}
+
+int scr1_get_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    MTensor out_tensor_data;
+    const mint out_tensor_rank=1;
+    const mint out_tensor_dim[]={4};
     
-    out_cpointer[0] = p_proc->read_dmem_bus_addr();
-    out_cpointer[1] = p_proc->read_dmem_bus_bytewidth();
+    auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
+    if(err)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    else
+    {
+        try
+        {
+            mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
+            out_cpointer[0] = p_proc->get_state()==SCR1::scr1_state::IDLE     ? 0 :
+            p_proc->get_state()==SCR1::scr1_state::WORK     ? 1 :
+            p_proc->get_state()==SCR1::scr1_state::FINISHED ? 2 :
+            -1;
+            out_cpointer[1] = p_proc->is_finished();
+            out_cpointer[2] = p_proc->get_steps();
+            out_cpointer[3] = p_proc->get_ipc();
+            
+            MArgument_setMTensor(Res, out_tensor_data);
+        }
+        catch (...)
+        {
+            return LIBRARY_FUNCTION_ERROR;
+        }
+    }
+    return LIBRARY_NO_ERROR;
+}
+
+int scr1_next_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    try
+    {
+        auto ipc = p_proc->next_ipc();
+        MArgument_setInteger(Res, ipc);
+    }
+    catch (...)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    return LIBRARY_NO_ERROR;
+}
+
+int scr1_get_register_list(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    MTensor out_tensor_data;
+    const mint out_tensor_rank=1;
+    const mint out_tensor_dim[]={31};
     
-    MArgument_setMTensor(Res, out_MT);
-    return res;
+    auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
+    if(err)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    else
+    {
+        try
+        {
+            mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
+            
+            for (unsigned int i = 0; i < 32; i++) {
+                out_cpointer[i]=p_proc->get_register(i);
+            }
+            
+            MArgument_setMTensor(Res, out_tensor_data);
+        }
+        catch (...)
+        {
+            return LIBRARY_FUNCTION_ERROR;
+        }
+    }
+    return LIBRARY_NO_ERROR;
+}
+
+int scr1_get_branch_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    MTensor out_tensor_data;
+    const mint out_tensor_rank=1;
+    const mint out_tensor_dim[]={5};
+    
+    auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
+    if(err)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    else
+    {
+        try
+        {
+            mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
+            out_cpointer[0] = p_proc->get_ipc();
+            out_cpointer[1] = p_proc->get_jump_state();
+            out_cpointer[2] = p_proc->get_branch_taken_state();
+            out_cpointer[3] = p_proc->get_branch_not_taken_state();
+            out_cpointer[4] = p_proc->get_jb_addr_state();
+            
+            MArgument_setMTensor(Res, out_tensor_data);
+        }
+        catch (...)
+        {
+            return LIBRARY_FUNCTION_ERROR;
+        }
+    }
+    return LIBRARY_NO_ERROR;
+}
+
+int scr1_read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    mint addr   = MArgument_getInteger (Args[0]);
+    mint length = MArgument_getInteger (Args[1]);
+    
+    MTensor out_tensor_data;
+    const mint out_tensor_rank=1;
+    const mint out_tensor_dim[]={length};
+    
+    auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
+    if(err)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    else
+    {
+        try
+        {
+            mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
+            
+            for (size_t i = 0; i < length; i++) {
+                out_cpointer[i]=p_proc->read_mem(addr+i);
+            }
+            
+            MArgument_setMTensor(Res, out_tensor_data);
+        }
+        catch (...)
+        {
+            return LIBRARY_FUNCTION_ERROR;
+        }
+    }
+    return LIBRARY_NO_ERROR;
+}
+
+int scr1_get_dmem_bus_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    MTensor out_tensor_data;
+    const mint out_tensor_rank=1;
+    const mint out_tensor_dim[]={2};
+    
+    auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
+    if(err)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    else
+    {
+        try
+        {
+            mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
+            
+            out_cpointer[0] = p_proc->read_dmem_bus_addr();
+            out_cpointer[1] = p_proc->read_dmem_bus_bytewidth();
+            
+            MArgument_setMTensor(Res, out_tensor_data);
+        }
+        catch (...)
+        {
+            return LIBRARY_FUNCTION_ERROR;
+        }
+    }
+    return LIBRARY_NO_ERROR;
 }
