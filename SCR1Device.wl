@@ -35,6 +35,8 @@ readProp[dev_,"IPC"]:=funcGETSTATE[][[4]];
 readProp[dev_,"Clock"]:=funcGETSTATE[][[3]];
 
 
+exec[{_, h_}, "HARD_RESET"] := funcHARDRESET[];
+exec[{_, h_}, "RESET"] := funcRESET[];
 exec[{_, h_}, "RUN"] := funcRUN[];
 exec[{_, h_}, {"RUN_UNTIL_IPC",ipc_}] := funcRUNUNTIL[ipc];
 exec[{_, h_}, "STEP"] := funcSTEP[];
@@ -43,9 +45,9 @@ exec[{_, h_}, {"LOAD", program_}] := funcLOAD[program];
 
 
 read[{_, h_}, "REGS"] := funcGETREGS[];
-read[{_, h_}, "STATE"] := funcGETSTATE[];
-read[{_, h_}, "BRANCH"] := funcGETBRANCH[];
-read[{_, h_}, "DBUS"] := funcREADDMEMBUS[];
+read[{_, h_}, "STATE"] := Inner[#1->#2&,{"State","Finished?","Clock","IPC"},funcGETSTATE[],Association];
+read[{_, h_}, "BRANCH"] := Inner[#1->#2&,{"IPC","Jump","Branch taken","Branch not taken", "JB addr"},funcGETBRANCH[],Association];
+read[{_, h_}, "DBUS"] := Inner[#1->#2&,{"Address","Bytes"},funcREADDMEMBUS[],Association];
 read[{_, h_}, "MEM", addr_, num_] := funcREADMEM[addr,num];
 
 
@@ -81,6 +83,7 @@ $libscr1 = CreateLibrary[
   "CompileOptions"->"-std=c++11",
   "IncludeDirectories" -> incList
 ];
+funcHARDRESET = LibraryFunctionLoad[$libscr1, "scr1_hard_reset", {}, Integer];
 funcRESET = LibraryFunctionLoad[$libscr1, "scr1_reset", {}, Integer];
 funcLOAD = LibraryFunctionLoad[$libscr1, "scr1_load", {String}, Integer];
 funcRUN = LibraryFunctionLoad[$libscr1, "scr1_run", {}, Integer];

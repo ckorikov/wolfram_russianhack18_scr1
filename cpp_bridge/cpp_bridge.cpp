@@ -36,6 +36,12 @@ int constantzero(WolframLibraryData libData, mint Argc, MArgument *Args, MArgume
 }
 
 /* SCR1 Functionality */
+int scr1_hard_reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    delete p_proc;
+    return WolframLibrary_initialize(libData);
+}
+
 int scr1_reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     try

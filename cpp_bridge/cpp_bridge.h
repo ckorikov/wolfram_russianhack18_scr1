@@ -11,6 +11,7 @@ extern "C"
     DLLEXPORT  int constantzero(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     
     /* SCR1 Functionality */
+    DLLEXPORT int scr1_hard_reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     DLLEXPORT int scr1_reset(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     DLLEXPORT int scr1_load(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     DLLEXPORT int scr1_run(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
