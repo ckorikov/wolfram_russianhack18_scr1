@@ -22,6 +22,7 @@ namespace SCR1
         delete this->scr1;
         std::remove(FILE_SCR1_OUT);
         Verilated::gotFinish(false);
+        g_sim_time = 0;
     }
 
     scr1_state Processor::get_state()
@@ -86,6 +87,7 @@ namespace SCR1
 
     uint32_t Processor::next_ipc()
     {
+        uint32_t guard_clk_cnt = SCR1_GUARD_CLK_MAX;
         uint32_t ipc = this->get_ipc();
         while(!this->is_finished())
         {
@@ -95,6 +97,14 @@ namespace SCR1
             {
                 ipc = cur_ipc;
                 break;
+            }
+            if (guard_clk_cnt==0)
+            {
+                return WRONG_VALUE;
+            }
+            else
+            {
+                --guard_clk_cnt;
             }
         }
         return ipc;
@@ -161,7 +171,7 @@ namespace SCR1
             case 29: return this->scr1->gpr_x29;
             case 30: return this->scr1->gpr_x30;
             case 31: return this->scr1->gpr_x31;
-            default: return -1;
+            default: return WRONG_VALUE;
         }
     }
 
@@ -252,7 +262,7 @@ namespace SCR1
             case 0: return 1;
             case 2: return 2;
             case 3: return 4;
-            default: return 0;
+            default: return WRONG_VALUE;
         }
     }
 }

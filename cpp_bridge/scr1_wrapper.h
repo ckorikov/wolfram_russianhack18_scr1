@@ -12,6 +12,12 @@
 # define SCR1_CLK_TICKS 1
 #endif
 
+#ifndef SCR1_GUARD_CLK_MAX
+# define SCR1_GUARD_CLK_MAX 1000
+#endif
+
+#define WRONG_VALUE 0
+
 #define FILE_SCR1_OUT "src1_output.txt"
 
 namespace SCR1

@@ -71,7 +71,7 @@ int scr1_run(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument R
 int scr1_run_until_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     uint32_t ipc = static_cast<uint32_t>(MArgument_getInteger(Args[0]));
-    
+
     try
     {
         p_proc->run_until_ipc(ipc);
@@ -127,7 +127,7 @@ int scr1_get_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgu
     MTensor out_tensor_data;
     const mint out_tensor_rank=1;
     const mint out_tensor_dim[]={4};
-    
+
     auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
     if(err)
     {
@@ -139,13 +139,13 @@ int scr1_get_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgu
         {
             mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
             out_cpointer[0] = p_proc->get_state()==SCR1::scr1_state::IDLE     ? 0 :
-            p_proc->get_state()==SCR1::scr1_state::WORK     ? 1 :
-            p_proc->get_state()==SCR1::scr1_state::FINISHED ? 2 :
-            -1;
+                              p_proc->get_state()==SCR1::scr1_state::WORK     ? 1 :
+                              p_proc->get_state()==SCR1::scr1_state::FINISHED ? 2 :
+                                                                               -1;
             out_cpointer[1] = p_proc->is_finished();
             out_cpointer[2] = p_proc->get_steps();
             out_cpointer[3] = p_proc->get_ipc();
-            
+
             MArgument_setMTensor(Res, out_tensor_data);
         }
         catch (...)
@@ -175,7 +175,7 @@ int scr1_get_register_list(WolframLibraryData libData, mint Argc, MArgument *Arg
     MTensor out_tensor_data;
     const mint out_tensor_rank=1;
     const mint out_tensor_dim[]={31};
-    
+
     auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
     if(err)
     {
@@ -186,11 +186,11 @@ int scr1_get_register_list(WolframLibraryData libData, mint Argc, MArgument *Arg
         try
         {
             mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
-            
+
             for (unsigned int i = 0; i < 32; i++) {
                 out_cpointer[i]=p_proc->get_register(i);
             }
-            
+
             MArgument_setMTensor(Res, out_tensor_data);
         }
         catch (...)
@@ -206,7 +206,7 @@ int scr1_get_branch_state(WolframLibraryData libData, mint Argc, MArgument *Args
     MTensor out_tensor_data;
     const mint out_tensor_rank=1;
     const mint out_tensor_dim[]={5};
-    
+
     auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
     if(err)
     {
@@ -222,7 +222,7 @@ int scr1_get_branch_state(WolframLibraryData libData, mint Argc, MArgument *Args
             out_cpointer[2] = p_proc->get_branch_taken_state();
             out_cpointer[3] = p_proc->get_branch_not_taken_state();
             out_cpointer[4] = p_proc->get_jb_addr_state();
-            
+
             MArgument_setMTensor(Res, out_tensor_data);
         }
         catch (...)
@@ -237,11 +237,11 @@ int scr1_read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MAr
 {
     uint32_t addr   = static_cast<uint32_t>(MArgument_getInteger (Args[0]));
     uint32_t length = static_cast<uint32_t>(MArgument_getInteger (Args[1]));
-    
+
     MTensor out_tensor_data;
     const mint out_tensor_rank=1;
     const mint out_tensor_dim[]={length};
-    
+
     auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
     if(err)
     {
@@ -252,11 +252,11 @@ int scr1_read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MAr
         try
         {
             mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
-            
+
             for (uint32_t i = 0; i < length; i++) {
                 out_cpointer[i]=p_proc->read_mem(addr+i);
             }
-            
+
             MArgument_setMTensor(Res, out_tensor_data);
         }
         catch (...)
@@ -271,7 +271,7 @@ int scr1_write_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MA
 {
     uint32_t addr = static_cast<uint32_t>(MArgument_getInteger(Args[0]));
     uint32_t data = static_cast<uint32_t>(MArgument_getInteger(Args[1]));
-    
+
     try
     {
         p_proc->write_mem(addr, data);
@@ -287,7 +287,7 @@ int scr1_set_register(WolframLibraryData libData, mint Argc, MArgument *Args, MA
 {
     uint32_t numb = static_cast<uint32_t>(MArgument_getInteger(Args[0]));
     IData data    = static_cast<IData>(MArgument_getInteger(Args[1]));
-    
+
     try
     {
         p_proc->set_register(numb, data);
@@ -304,7 +304,7 @@ int scr1_get_dmem_bus_state(WolframLibraryData libData, mint Argc, MArgument *Ar
     MTensor out_tensor_data;
     const mint out_tensor_rank=1;
     const mint out_tensor_dim[]={2};
-    
+
     auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
     if(err)
     {
@@ -315,10 +315,10 @@ int scr1_get_dmem_bus_state(WolframLibraryData libData, mint Argc, MArgument *Ar
         try
         {
             mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
-            
+
             out_cpointer[0] = p_proc->read_dmem_bus_addr();
             out_cpointer[1] = p_proc->read_dmem_bus_bytewidth();
-            
+
             MArgument_setMTensor(Res, out_tensor_data);
         }
         catch (...)

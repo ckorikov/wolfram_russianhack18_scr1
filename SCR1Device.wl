@@ -45,7 +45,11 @@ exec[{_, h_}, {"LOAD", program_}] := funcLOAD[program];
 
 
 read[{_, h_}, "REGS"] := funcGETREGS[];
-read[{_, h_}, "STATE"] := Inner[#1->#2&,{"State","Finished?","Clock","IPC"},funcGETSTATE[],Association];
+read[{_, h_}, "STATE"] := Inner[#1->#2&,
+{"State","Finished?","Clock","IPC"},
+MapAt[Which[#==0,"IDLE",#==1,"WORK",#==2,"FINISHED"]&,funcGETSTATE[],1],
+Association
+];
 read[{_, h_}, "BRANCH"] := Inner[#1->#2&,{"IPC","Jump","Branch taken","Branch not taken", "JB addr"},funcGETBRANCH[],Association];
 read[{_, h_}, "DBUS"] := Inner[#1->#2&,{"Address","Bytes"},funcREADDMEMBUS[],Association];
 read[{_, h_}, "MEM", addr_, num_] := funcREADMEM[addr,num];
