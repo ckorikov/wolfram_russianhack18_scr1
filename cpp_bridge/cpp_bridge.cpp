@@ -62,6 +62,21 @@ int scr1_run(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument R
     return LIBRARY_NO_ERROR;
 }
 
+int scr1_run_until_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    uint32_t ipc = static_cast<uint32_t>(MArgument_getInteger(Args[0]));
+    
+    try
+    {
+        p_proc->run_until_ipc(ipc);
+    }
+    catch (...)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    return LIBRARY_NO_ERROR;
+}
+
 int scr1_load(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     const char *file_name = MArgument_getUTF8String(Args[0]);
@@ -214,8 +229,8 @@ int scr1_get_branch_state(WolframLibraryData libData, mint Argc, MArgument *Args
 
 int scr1_read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
-    mint addr   = MArgument_getInteger (Args[0]);
-    mint length = MArgument_getInteger (Args[1]);
+    uint32_t addr   = static_cast<uint32_t>(MArgument_getInteger (Args[0]));
+    uint32_t length = static_cast<uint32_t>(MArgument_getInteger (Args[1]));
     
     MTensor out_tensor_data;
     const mint out_tensor_rank=1;
@@ -232,7 +247,7 @@ int scr1_read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MAr
         {
             mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
             
-            for (size_t i = 0; i < length; i++) {
+            for (uint32_t i = 0; i < length; i++) {
                 out_cpointer[i]=p_proc->read_mem(addr+i);
             }
             
@@ -242,6 +257,38 @@ int scr1_read_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MAr
         {
             return LIBRARY_FUNCTION_ERROR;
         }
+    }
+    return LIBRARY_NO_ERROR;
+}
+
+int scr1_write_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    uint32_t addr = static_cast<uint32_t>(MArgument_getInteger(Args[0]));
+    uint32_t data = static_cast<uint32_t>(MArgument_getInteger(Args[1]));
+    
+    try
+    {
+        p_proc->write_mem(addr, data);
+    }
+    catch (...)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    return LIBRARY_NO_ERROR;
+}
+
+int scr1_set_register(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    uint32_t numb = static_cast<uint32_t>(MArgument_getInteger(Args[0]));
+    IData data    = static_cast<IData>(MArgument_getInteger(Args[1]));
+    
+    try
+    {
+        p_proc->set_register(numb, data);
+    }
+    catch (...)
+    {
+        return LIBRARY_FUNCTION_ERROR;
     }
     return LIBRARY_NO_ERROR;
 }

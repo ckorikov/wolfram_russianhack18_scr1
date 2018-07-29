@@ -35,23 +35,23 @@ namespace SCR1
         uint64_t get_steps();
         uint64_t get_ticks();
         /* IPC controls and status */
-        unsigned int next_ipc();
-        unsigned int get_ipc();
-        unsigned int run_until_ipc(unsigned int to_ipc);
+        uint32_t next_ipc();
+        uint32_t get_ipc();
+        uint32_t run_until_ipc(const uint32_t to_ipc);
         /* Registers */
-        int get_register(unsigned int num);
-        void set_register(unsigned int num, int data);
+        uint32_t get_register(const unsigned char num);
+        void set_register(const unsigned char num, const IData data);
         /* Memory */
-        int read_mem(const size_t address);
-        void write_mem(const size_t address, const int data);
+        uint32_t read_mem(const uint32_t address);
+        void write_mem(const uint32_t address, const uint32_t data);
         /* Memory bus */
-        int read_dmem_bus_addr();
-        int read_dmem_bus_bytewidth();
+        uint32_t read_dmem_bus_addr();
+        uint32_t read_dmem_bus_bytewidth();
         /* Branching */
-        int get_jump_state();
-        int get_jb_addr_state();
-        int get_branch_taken_state();
-        int get_branch_not_taken_state();
+        uint32_t get_jump_state();
+        uint32_t get_jb_addr_state();
+        uint32_t get_branch_taken_state();
+        uint32_t get_branch_not_taken_state();
     };
 }
 #endif //SCR1_WRAPPER_H

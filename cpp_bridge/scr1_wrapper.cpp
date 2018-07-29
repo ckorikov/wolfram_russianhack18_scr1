@@ -55,7 +55,7 @@ namespace SCR1
         this->scr1->clk = 1;
         for(int clk_front=0; clk_front<2; ++clk_front)
         {
-            for (size_t tick = 0; tick < SCR1_CLK_TICKS; ++tick)
+            for (uint32_t tick = 0; tick < SCR1_CLK_TICKS; ++tick)
             {
                 if(!this->is_finished())
                 {
@@ -79,18 +79,18 @@ namespace SCR1
         }
     }
 
-    unsigned int Processor::get_ipc()
+    uint32_t Processor::get_ipc()
     {
         return this->scr1->pc;
     }
 
-    unsigned int Processor::next_ipc()
+    uint32_t Processor::next_ipc()
     {
-        unsigned int ipc = this->get_ipc();
+        uint32_t ipc = this->get_ipc();
         while(!this->is_finished())
         {
             this->step();
-            int cur_ipc = this->get_ipc();
+            uint32_t cur_ipc = this->get_ipc();
             if (cur_ipc != ipc)
             {
                 ipc = cur_ipc;
@@ -100,9 +100,9 @@ namespace SCR1
         return ipc;
     }
 
-    unsigned int Processor::run_until_ipc(unsigned int to_ipc)
+    uint32_t Processor::run_until_ipc(const uint32_t to_ipc)
     {
-        int ipc = 0;
+        uint32_t ipc = 0;
         while(!this->is_finished())
         {
             this->step();
@@ -125,7 +125,7 @@ namespace SCR1
         return this->get_ticks()/SCR1_CLK_TICKS;
     }
 
-    int Processor::get_register(unsigned int num)
+    uint32_t Processor::get_register(const unsigned char num)
     {
         /* Is there a better solution? */
         switch (num) {
@@ -165,7 +165,7 @@ namespace SCR1
         }
     }
 
-    void Processor::set_register(unsigned int num, int data)
+    void Processor::set_register(const unsigned char num, const IData data)
     {
         /* Is there a better solution? */
         switch (num) {
@@ -204,34 +204,34 @@ namespace SCR1
         }
     }
 
-    int Processor::get_jump_state()
+    uint32_t Processor::get_jump_state()
     {
         return this->scr1->jump;
     }
 
-    int Processor::get_branch_taken_state()
+    uint32_t Processor::get_branch_taken_state()
     {
         return this->scr1->branch_taken;
     }
 
-    int Processor::get_branch_not_taken_state()
+    uint32_t Processor::get_branch_not_taken_state()
     {
         return this->scr1->branch_not_taken;
     }
 
-    int Processor::get_jb_addr_state()
+    uint32_t Processor::get_jb_addr_state()
     {
         return this->scr1->jb_addr;
     }
 
-    int Processor::read_mem(const size_t address)
+    uint32_t Processor::read_mem(const uint32_t address)
     {
         return address > SCR1_MEM_MAX
         ? -1
         : this->scr1->scr1_top_tb_axi__DOT__i_memory_tb__DOT__memory[address];
     }
 
-    void Processor::write_mem(const size_t address, const int data)
+    void Processor::write_mem(const uint32_t address, const uint32_t data)
     {
         if (address <= SCR1_MEM_MAX)
         {
@@ -239,12 +239,12 @@ namespace SCR1
         }
     }
 
-    int Processor::read_dmem_bus_addr()
+    uint32_t Processor::read_dmem_bus_addr()
     {
         return this->scr1->ls_addr;
     }
 
-    int Processor::read_dmem_bus_bytewidth()
+    uint32_t Processor::read_dmem_bus_bytewidth()
     {
         /* This is convention */
         switch (this->scr1->ls_width)

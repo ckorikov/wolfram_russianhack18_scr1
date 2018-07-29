@@ -1,85 +1,65 @@
 (* ::Package:: *)
 
-BeginPackage["SCR1Device`"]
+BeginPackage["SCR1Device`"];
 
 
-Begin["`Private`"]
+Begin["`Private`"];
 
 
 Needs["CCompilerDriver`"];
 
 
 DeviceFramework`DeviceClassRegister["SCR1",
+"Singleton"->True,
 "DriverVersion"->1.0,
 "OpenFunction"->open,
 "CloseFunction"->close,
 "ReadFunction"->read,
+"WriteFunction"->write,
+"ExecuteFunction"->exec,
 "GetPropertyFunction"->readProp,
 "DeviceIconFunction"->logo,
 "Properties"->{
-	"ipc"->Null
+	"State"->Null,
+	"Clock"->Null,
+	"IPC"->Null
 	}
-]
+];
 
 
-$string="abcde";
+logo[___]:=Import["logo.png"];
 
 
-$positions=<||>;
+readProp[dev_,"State"]:=Which[#==0,"IDLE",#==1,"WORK",#==2,"FINISHED"]&@funcGETSTATE[][[1]];
+readProp[dev_,"IPC"]:=funcGETSTATE[][[4]];
+readProp[dev_,"Clock"]:=funcGETSTATE[][[3]];
 
 
-$libscr1=Null;
+exec[{_, h_}, "RUN"] := funcRUN[];
+exec[{_, h_}, {"RUN_UNTIL_IPC",ipc_}] := funcRUNUNTIL[ipc];
+exec[{_, h_}, "STEP"] := funcSTEP[];
+exec[{_, h_}, "NEXT_IPC"] := funcNEXTIPC[];
+exec[{_, h_}, {"LOAD", program_}] := funcLOAD[program];
 
 
-funcOUT = Null;
-funcIPC = Null;
-funcRESET = Null;
-funcSTEP = Null;
-funcRUN = Null;
-funcIsFinished = Null;
-funcNextPC = Null;
-funcGetRegister = Null;
-funcGetRegisterList = Null;
-funcGetBranchState = Null;
-funcReadMem = Null;
-funcReadDataBUS = Null;
+read[{_, h_}, "REGS"] := funcGETREGS[];
+read[{_, h_}, "STATE"] := funcGETSTATE[];
+read[{_, h_}, "BRANCH"] := funcGETBRANCH[];
+read[{_, h_}, "DBUS"] := funcREADDMEMBUS[];
+read[{_, h_}, "MEM", addr_, num_] := funcREADMEM[addr,num];
 
 
-logo[___]:=Import["logo.png"]
-
-
-readProp[dev_,"ipc"]:=funcIPC[]
-
-
-read[{_, h_}, cmd_] := Switch[cmd,
-"RUN", funcRUN[],
-"STEP", funcSTEP[],
-"NEXT_IPC", funcNEXTIPC[],
-"GET_REGS", funcGETREGS[],
-"GET_STATE", funcGETSTATE[]
-(*"get_branch_state", funcGetBranchState[],
-"get_data_bus", funcReadDataBUS[]*)
-]
-
-
-read[{_, h_},cmd_, param_] := Switch[cmd,
-"LOAD", funcLOAD[param],
-"get_reg", funcGetRegister[param]
-]
-
-
-read[{_, h_},cmd_, param1_, param2_] := Switch[cmd,
-"read_mem", funcReadMem[param1, param2]
-]
+write[{_, h_}, "MEM", addr_, value_] := funcWRITEMEM[addr,value];
+write[{_, h_}, "REG", num_, value_] := funcSETREG[num,value];
 
 
 open[___] := Module[
 {
 h = CreateUUID[],
-fileList =
+ fileList = 
  {
- "cpp_bridge/cpp_bridge.cpp",
- "cpp_bridge/scr1_wrapper.cpp",
+  "cpp_bridge/cpp_bridge.cpp",
+  "cpp_bridge/scr1_wrapper.cpp",
   "scr1_generated/Vscr1_top_tb_axi.cpp", 
   "scr1_generated/Vscr1_top_tb_axi__ALLsup.cpp", 
   "scr1_generated/verilator_system/verilated.cpp",
@@ -87,33 +67,40 @@ fileList =
   "scr1_generated/verilator_system/verilated_save.cpp", 
   "scr1_generated/verilator_system/verilated_vcd_c.cpp",
   "scr1_generated/verilator_system/verilated_vpi.cpp"
-  }
-  },
+ },
+ incList =
+ {
+  NotebookDirectory[]<>"scr1_generated/verilator_system/",
+  NotebookDirectory[]<>"scr1_generated/"
+ }
+},
 $libscr1 = CreateLibrary[
   fileList,
   "cpp_bridge",
-   Language -> "C++",
-   "Debug"->True,
-   "CompileOptions"->"-std=c++11",
-  "IncludeDirectories" -> {"/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/scr1_generated/verilator_system/","/Users/ckorikov/_syntacore/projects/wolfram_russianhack18_scr1/scr1_generated/"}
-  ];
-  funcRESET = LibraryFunctionLoad[$libscr1, "scr1_reset", {}, Integer];
-  funcLOAD = LibraryFunctionLoad[$libscr1, "scr1_load", {String}, Integer];
-  funcRUN = LibraryFunctionLoad[$libscr1, "scr1_run", {}, Integer];
-  funcSTEP = LibraryFunctionLoad[$libscr1, "scr1_step", {}, Integer];
-  funcGETSTATE = LibraryFunctionLoad[$libscr1, "scr1_get_state", {},{Integer,1}];
-  funcGETREGS = LibraryFunctionLoad[$libscr1, "scr1_get_register_list", {},{Integer,1}];
-  funcNEXTIPC = LibraryFunctionLoad[$libscr1, "scr1_next_ipc", {}, Integer];
-  funcGETBRANCH = LibraryFunctionLoad[$libscr1, "scr1_get_branch_state", {},{Integer,1}];
-  funcREADMEM = LibraryFunctionLoad[$libscr1, "scr1_read_memory", {Integer,Integer},{Integer,1}];
-  funcREADDMEMBUS = LibraryFunctionLoad[$libscr1, "scr1_get_dmem_bus_state", {}, {Integer,1}];
- h]
+  Language -> "C++",
+  "CompileOptions"->"-std=c++11",
+  "IncludeDirectories" -> incList
+];
+funcRESET = LibraryFunctionLoad[$libscr1, "scr1_reset", {}, Integer];
+funcLOAD = LibraryFunctionLoad[$libscr1, "scr1_load", {String}, Integer];
+funcRUN = LibraryFunctionLoad[$libscr1, "scr1_run", {}, Integer];
+funcRUNUNITL = LibraryFunctionLoad[$libscr1, "scr1_run_until_ipc", {Integer}, Integer];
+funcSTEP = LibraryFunctionLoad[$libscr1, "scr1_step", {}, Integer];
+funcGETSTATE = LibraryFunctionLoad[$libscr1, "scr1_get_state", {},{Integer,1}];
+funcGETREGS = LibraryFunctionLoad[$libscr1, "scr1_get_register_list", {},{Integer,1}];
+funcNEXTIPC = LibraryFunctionLoad[$libscr1, "scr1_next_ipc", {}, Integer];
+funcGETBRANCH = LibraryFunctionLoad[$libscr1, "scr1_get_branch_state", {},{Integer,1}];
+funcREADMEM = LibraryFunctionLoad[$libscr1, "scr1_read_memory", {Integer,Integer},{Integer,1}];
+funcREADDMEMBUS = LibraryFunctionLoad[$libscr1, "scr1_get_dmem_bus_state", {}, {Integer,1}];
+funcWRITEMEM = LibraryFunctionLoad[$libscr1, "scr1_write_memory", {Integer,Integer}, Integer];
+funcSETREG = LibraryFunctionLoad[$libscr1, "scr1_set_register", {Integer,Integer}, Integer];
+h];
 
 
-close[{_, h_}, ___] := LibraryUnload[$libscr1]
+close[{_, h_}, ___] := LibraryUnload[$libscr1];
 
 
-End[]
+End[];
 
 
-EndPackage[]
+EndPackage[];
