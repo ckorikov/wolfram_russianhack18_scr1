@@ -135,7 +135,7 @@ namespace SCR1
         return this->get_ticks()/SCR1_CLK_TICKS;
     }
 
-    uint32_t Processor::get_register(const unsigned char num)
+    uint32_t Processor::get_register(const uint8_t num)
     {
         /* Is there a better solution? */
         switch (num) {
@@ -175,42 +175,42 @@ namespace SCR1
         }
     }
 
-    void Processor::set_register(const unsigned char num, const IData data)
+    void Processor::set_register(const uint8_t num, const IData data)
     {
         /* Is there a better solution? */
         switch (num) {
-                /* The register gpr_x00 is always zero */
-            case 1: this->scr1->gpr_x01 = data;
-            case 2: this->scr1->gpr_x02 = data;
-            case 3: this->scr1->gpr_x03 = data;
-            case 4: this->scr1->gpr_x04 = data;
-            case 5: this->scr1->gpr_x05 = data;
-            case 6: this->scr1->gpr_x06 = data;
-            case 7: this->scr1->gpr_x07 = data;
-            case 8: this->scr1->gpr_x08 = data;
-            case 9: this->scr1->gpr_x09 = data;
-            case 10: this->scr1->gpr_x10 = data;
-            case 11: this->scr1->gpr_x11 = data;
-            case 12: this->scr1->gpr_x12 = data;
-            case 13: this->scr1->gpr_x13 = data;
-            case 14: this->scr1->gpr_x14 = data;
-            case 15: this->scr1->gpr_x15 = data;
-            case 16: this->scr1->gpr_x16 = data;
-            case 17: this->scr1->gpr_x17 = data;
-            case 18: this->scr1->gpr_x18 = data;
-            case 19: this->scr1->gpr_x19 = data;
-            case 20: this->scr1->gpr_x20 = data;
-            case 21: this->scr1->gpr_x21 = data;
-            case 22: this->scr1->gpr_x22 = data;
-            case 23: this->scr1->gpr_x23 = data;
-            case 24: this->scr1->gpr_x24 = data;
-            case 25: this->scr1->gpr_x25 = data;
-            case 26: this->scr1->gpr_x26 = data;
-            case 27: this->scr1->gpr_x27 = data;
-            case 28: this->scr1->gpr_x28 = data;
-            case 29: this->scr1->gpr_x29 = data;
-            case 30: this->scr1->gpr_x30 = data;
-            case 31: this->scr1->gpr_x31 = data;
+            /* The register gpr_x00 is always zero */
+            case 1: this->scr1->gpr_x01 = data; break;
+            case 2: this->scr1->gpr_x02 = data; break;
+            case 3: this->scr1->gpr_x03 = data; break;
+            case 4: this->scr1->gpr_x04 = data; break;
+            case 5: this->scr1->gpr_x05 = data; break;
+            case 6: this->scr1->gpr_x06 = data; break;
+            case 7: this->scr1->gpr_x07 = data; break;
+            case 8: this->scr1->gpr_x08 = data; break;
+            case 9: this->scr1->gpr_x09 = data; break;
+            case 10: this->scr1->gpr_x10 = data; break;
+            case 11: this->scr1->gpr_x11 = data; break;
+            case 12: this->scr1->gpr_x12 = data; break;
+            case 13: this->scr1->gpr_x13 = data; break;
+            case 14: this->scr1->gpr_x14 = data; break;
+            case 15: this->scr1->gpr_x15 = data; break;
+            case 16: this->scr1->gpr_x16 = data; break;
+            case 17: this->scr1->gpr_x17 = data; break;
+            case 18: this->scr1->gpr_x18 = data; break;
+            case 19: this->scr1->gpr_x19 = data; break;
+            case 20: this->scr1->gpr_x20 = data; break;
+            case 21: this->scr1->gpr_x21 = data; break;
+            case 22: this->scr1->gpr_x22 = data; break;
+            case 23: this->scr1->gpr_x23 = data; break;
+            case 24: this->scr1->gpr_x24 = data; break;
+            case 25: this->scr1->gpr_x25 = data; break;
+            case 26: this->scr1->gpr_x26 = data; break;
+            case 27: this->scr1->gpr_x27 = data; break;
+            case 28: this->scr1->gpr_x28 = data; break;
+            case 29: this->scr1->gpr_x29 = data; break;
+            case 30: this->scr1->gpr_x30 = data; break;
+            case 31: this->scr1->gpr_x31 = data; break;
         }
     }
 

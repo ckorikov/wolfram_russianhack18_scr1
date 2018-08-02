@@ -45,8 +45,8 @@ namespace SCR1
         uint32_t get_ipc();
         uint32_t run_until_ipc(const uint32_t to_ipc);
         /* Registers */
-        uint32_t get_register(const unsigned char num);
-        void set_register(const unsigned char num, const IData data);
+        uint32_t get_register(const uint8_t num);
+        void set_register(const uint8_t num, const IData data);
         /* Memory */
         uint32_t read_mem(const uint32_t address);
         void write_mem(const uint32_t address, const uint32_t data);

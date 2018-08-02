@@ -9,6 +9,9 @@ Begin["`Private`"];
 Needs["CCompilerDriver`"];
 
 
+$libscr1=Null;
+
+
 DeviceFramework`DeviceClassRegister["SCR1",
 "Singleton"->True,
 "DriverVersion"->1.0,
@@ -27,7 +30,7 @@ DeviceFramework`DeviceClassRegister["SCR1",
 ];
 
 
-logo[___]:=Import["logo.png"];
+logo[{ih_,dh_}, ___]:=Import["logo.png"];
 
 
 readProp[dev_,"State"]:=Which[#==0,"IDLE",#==1,"WORK",#==2,"FINISHED"]&@funcGETSTATE[][[1]];
@@ -35,33 +38,51 @@ readProp[dev_,"IPC"]:=funcGETSTATE[][[4]];
 readProp[dev_,"Clock"]:=funcGETSTATE[][[3]];
 
 
-exec[{_, h_}, "HARD_RESET"] := funcHARDRESET[];
-exec[{_, h_}, "RESET"] := funcRESET[];
-exec[{_, h_}, "RUN"] := funcRUN[];
-exec[{_, h_}, {"RUN_UNTIL_IPC",ipc_}] := funcRUNUNTIL[ipc];
-exec[{_, h_}, "STEP"] := funcSTEP[];
-exec[{_, h_}, "NEXT_IPC"] := funcNEXTIPC[];
-exec[{_, h_}, {"LOAD", program_}] := funcLOAD[program];
+exec[{ih_,dh_}, "HARD_RESET"] := funcHARDRESET[];
+exec[{ih_,dh_}, "RESET"] := funcRESET[];
+exec[{ih_,dh_}, "RUN"] := funcRUN[];
+exec[{ih_,dh_}, "RUN_UNTIL_IPC",ipc_] := funcRUNUNITL[ipc];
+exec[{ih_,dh_}, "STEP"] := funcSTEP[];
+exec[{ih_,dh_}, "NEXT_IPC"] := funcNEXTIPC[];
+exec[{ih_,dh_}, "LOAD", program_] := funcLOAD[program];
 
 
-read[{_, h_}, "REGS"] := funcGETREGS[];
-read[{_, h_}, "STATE"] := Inner[#1->#2&,
-{"State","Finished?","Clock","IPC"},
-MapAt[Which[#==0,"IDLE",#==1,"WORK",#==2,"FINISHED"]&,funcGETSTATE[],1],
-Association
-];
-read[{_, h_}, "BRANCH"] := Inner[#1->#2&,{"IPC","Jump","Branch taken","Branch not taken", "JB addr"},funcGETBRANCH[],Association];
-read[{_, h_}, "DBUS"] := Inner[#1->#2&,{"Address","Bytes"},funcREADDMEMBUS[],Association];
-read[{_, h_}, "MEM", addr_, num_] := funcREADMEM[addr,num];
+read[{ih_,dh_}, "REGS"] := funcGETREGS[];
+read[{ih_,dh_}, "STATE"] := 
+Inner[
+	#1->#2&,
+	{"State","Finished","Clock","IPC"}, 
+	MapAt[
+		Which[#==0,"IDLE",#==1,"WORK",#==2,"FINISHED"]&,
+		funcGETSTATE[],
+		1
+	],
+	Association
+	];
+read[{ih_,dh_}, "BRANCH"] := 
+Inner[
+	#1->#2&,
+	{"IPC","Jump","Branch taken","Branch not taken", "JB addr"},
+	funcGETBRANCH[],
+	Association
+	];
+read[{ih_,dh_}, "DBUS"] := 
+Inner[
+	#1->#2&,
+	{"Address","Bytes"},
+	funcREADDMEMBUS[],
+	Association
+	];
+read[{ih_,dh_}, "MEM", addr_, num_] := funcREADMEM[addr,num];
 
 
-write[{_, h_}, "MEM", addr_, value_] := funcWRITEMEM[addr,value];
-write[{_, h_}, "REG", num_, value_] := funcSETREG[num,value];
+write[{ih_,dh_},"MEM", addr_, value_] := funcWRITEMEM[addr,value];
+write[{ih_,dh_},"REGS",num_,value_] := funcSETREG[num,value];
 
 
 open[___] := Module[
 {
-h = CreateUUID[],
+ h = CreateUUID[],
  fileList = 
  {
   "cpp_bridge/cpp_bridge.cpp",
@@ -104,7 +125,7 @@ funcSETREG = LibraryFunctionLoad[$libscr1, "scr1_set_register", {Integer,Integer
 h];
 
 
-close[{_, h_}, ___] := LibraryUnload[$libscr1];
+close[{ih_,dh_}] := LibraryUnload[$libscr1];
 
 
 End[];

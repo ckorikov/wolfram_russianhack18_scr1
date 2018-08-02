@@ -187,8 +187,8 @@ int scr1_get_register_list(WolframLibraryData libData, mint Argc, MArgument *Arg
         {
             mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
 
-            for (unsigned int i = 0; i < 32; i++) {
-                out_cpointer[i]=p_proc->get_register(i);
+            for (unsigned int i = 0; i < 30; i++) {
+                out_cpointer[i]=p_proc->get_register(i+1);
             }
 
             MArgument_setMTensor(Res, out_tensor_data);
@@ -285,9 +285,9 @@ int scr1_write_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MA
 
 int scr1_set_register(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
-    uint32_t numb = static_cast<uint32_t>(MArgument_getInteger(Args[0]));
-    IData data    = static_cast<IData>(MArgument_getInteger(Args[1]));
-
+    uint8_t numb = static_cast<uint8_t>(MArgument_getInteger(Args[0]));
+      IData data = static_cast<IData>(MArgument_getInteger(Args[1]));
+    
     try
     {
         p_proc->set_register(numb, data);
