@@ -13,19 +13,20 @@ $libscr1=Null;
 
 
 DeviceFramework`DeviceClassRegister["SCR1",
-"Singleton"->True,
-"DriverVersion"->1.0,
-"OpenFunction"->open,
-"CloseFunction"->close,
-"ReadFunction"->read,
-"WriteFunction"->write,
-"ExecuteFunction"->exec,
-"GetPropertyFunction"->readProp,
-"DeviceIconFunction"->logo,
-"Properties"->{
-	"State"->Null,
-	"Clock"->Null,
-	"IPC"->Null
+"Singleton" -> True,
+"DriverVersion" -> 1.0,
+"OpenFunction" -> open,
+"CloseFunction" -> close,
+"ReadFunction" -> read,
+"WriteFunction" -> w rite,
+"ExecuteFunction" -> exec,
+"GetPropertyFunction" -> readProp,
+"DeviceIconFunction" -> logo,
+"Properties" -> {
+	"State" -> Null,
+	"Clock" -> Null,
+	"IPC" -> Null, 
+	"MAX MEM" -> Null
 	}
 ];
 
@@ -36,6 +37,7 @@ logo[{ih_,dh_}, ___]:=Import["logo.png"];
 readProp[dev_,"State"]:=Which[#==0,"IDLE",#==1,"WORK",#==2,"FINISHED"]&@funcGETSTATE[][[1]];
 readProp[dev_,"IPC"]:=funcGETSTATE[][[4]];
 readProp[dev_,"Clock"]:=funcGETSTATE[][[3]];
+readProp[dev_,"MAX_MEM"]:=funcGETMAXMEM[];
 
 
 exec[{ih_,dh_}, "HARD_RESET"] := funcHARDRESET[];
@@ -44,6 +46,7 @@ exec[{ih_,dh_}, "RUN"] := funcRUN[];
 exec[{ih_,dh_}, "RUN_UNTIL_IPC",ipc_] := funcRUNUNITL[ipc];
 exec[{ih_,dh_}, "STEP"] := funcSTEP[];
 exec[{ih_,dh_}, "NEXT_IPC"] := funcNEXTIPC[];
+exec[{ih_,dh_}, "TRACE_IPC"] := funcTRACEIPC[];
 exec[{ih_,dh_}, "LOAD", program_] := funcLOAD[program];
 
 
@@ -62,7 +65,7 @@ Inner[
 read[{ih_,dh_}, "BRANCH"] := 
 Inner[
 	#1->#2&,
-	{"IPC","Jump","Branch taken","Branch not taken", "JB addr"},
+	{"IPC","Jump","Branch_taken","Branch_not_taken", "JB_addr"},
 	funcGETBRANCH[],
 	Association
 	];
@@ -117,11 +120,13 @@ funcSTEP = LibraryFunctionLoad[$libscr1, "scr1_step", {}, Integer];
 funcGETSTATE = LibraryFunctionLoad[$libscr1, "scr1_get_state", {},{Integer,1}];
 funcGETREGS = LibraryFunctionLoad[$libscr1, "scr1_get_register_list", {},{Integer,1}];
 funcNEXTIPC = LibraryFunctionLoad[$libscr1, "scr1_next_ipc", {}, Integer];
+funcTRACEIPC = LibraryFunctionLoad[$libscr1, "scr1_trace_ipc", {},{Integer,1}];
 funcGETBRANCH = LibraryFunctionLoad[$libscr1, "scr1_get_branch_state", {},{Integer,1}];
 funcREADMEM = LibraryFunctionLoad[$libscr1, "scr1_read_memory", {Integer,Integer},{Integer,1}];
 funcREADDMEMBUS = LibraryFunctionLoad[$libscr1, "scr1_get_dmem_bus_state", {}, {Integer,1}];
 funcWRITEMEM = LibraryFunctionLoad[$libscr1, "scr1_write_memory", {Integer,Integer}, Integer];
 funcSETREG = LibraryFunctionLoad[$libscr1, "scr1_set_register", {Integer,Integer}, Integer];
+funcGETMAXMEM = LibraryFunctionLoad[$libscr1, "scr1_get_max_memory", {}, Integer];
 h];
 
 
