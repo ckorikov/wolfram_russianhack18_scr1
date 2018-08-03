@@ -16,9 +16,11 @@ extern "C"
     DLLEXPORT int scr1_load(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     DLLEXPORT int scr1_run(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     DLLEXPORT int scr1_run_until_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
+    DLLEXPORT int scr1_trace_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
 
     DLLEXPORT int scr1_step(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     DLLEXPORT int scr1_get_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
+    DLLEXPORT int scr1_get_max_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     DLLEXPORT int scr1_next_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     DLLEXPORT int scr1_get_register_list(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);
     DLLEXPORT int scr1_get_branch_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res);

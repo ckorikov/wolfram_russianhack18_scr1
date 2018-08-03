@@ -3,6 +3,8 @@
 
 static SCR1::Processor* p_proc;
 
+using namespace std;
+
 /* Wolfram basic library functions */
 
 mint WolframLibrary_getVersion()
@@ -83,6 +85,33 @@ int scr1_run_until_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, M
     return LIBRARY_NO_ERROR;
 }
 
+int scr1_trace_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    MTensor out_tensor_data;
+    const mint out_tensor_rank=1;
+    mint out_tensor_dim[1] = {0};
+    try
+    {
+        auto trace = p_proc->trace_ipc();
+        out_tensor_dim[0] = trace.size();
+        
+        auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
+        if(err)
+        {
+            return LIBRARY_FUNCTION_ERROR;
+        }
+        
+        mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
+        copy(trace.begin(),trace.end(),out_cpointer);
+        MArgument_setMTensor(Res, out_tensor_data);
+    }
+    catch (...)
+    {
+        return LIBRARY_FUNCTION_ERROR;
+    }
+    return LIBRARY_NO_ERROR;
+}
+
 int scr1_load(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     const char *file_name = MArgument_getUTF8String(Args[0]);
@@ -95,9 +124,9 @@ int scr1_load(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument 
     {
         try
         {
-            char path_arg[std::strlen(file_name)+5];
-            std::strcpy(path_arg, "+mem=");
-            std::strcat(path_arg, file_name);
+            char path_arg[strlen(file_name)+5];
+            strcpy(path_arg, "+mem=");
+            strcat(path_arg, file_name);
             p_proc->load(path_arg);
         }
         catch (...)
@@ -153,6 +182,12 @@ int scr1_get_state(WolframLibraryData libData, mint Argc, MArgument *Args, MArgu
             return LIBRARY_FUNCTION_ERROR;
         }
     }
+    return LIBRARY_NO_ERROR;
+}
+
+int scr1_get_max_memory(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
+{
+    MArgument_setInteger(Res, SCR1_MEM_MAX);
     return LIBRARY_NO_ERROR;
 }
 

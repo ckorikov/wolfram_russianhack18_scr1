@@ -1,6 +1,7 @@
 #ifndef SCR1_WRAPPER_H
 #define SCR1_WRAPPER_H
 
+#include <vector>
 #include <verilated.h>                      // Defines common routines
 #include "Vscr1_top_tb_axi.h"               // From Verilating "top.v"
 
@@ -22,6 +23,8 @@
 
 namespace SCR1
 {
+    using namespace std;
+
     typedef enum class enum_scr1_state {IDLE, WORK, FINISHED} scr1_state;
 
     class Processor {
@@ -44,6 +47,7 @@ namespace SCR1
         uint32_t next_ipc();
         uint32_t get_ipc();
         uint32_t run_until_ipc(const uint32_t to_ipc);
+        vector<uint32_t> trace_ipc();
         /* Registers */
         uint32_t get_register(const uint8_t num);
         void set_register(const uint8_t num, const IData data);

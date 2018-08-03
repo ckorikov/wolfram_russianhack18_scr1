@@ -13,14 +13,14 @@ namespace SCR1
     Processor::Processor(): state(scr1_state::IDLE)
     {
         this->scr1 = new Vscr1_top_tb_axi;
-        std::freopen(FILE_SCR1_OUT, "w", stdout);
+        freopen(FILE_SCR1_OUT, "w", stdout);
     }
 
     Processor::~Processor()
     {
         this->scr1->final();
         delete this->scr1;
-        std::remove(FILE_SCR1_OUT);
+        remove(FILE_SCR1_OUT);
         Verilated::gotFinish(false);
         g_sim_time = 0;
     }
@@ -68,7 +68,7 @@ namespace SCR1
             }
             this->scr1->clk = 0;
         }
-        std::fflush(stdout);
+        fflush(stdout);
         return this->get_steps();
     }
 
@@ -108,6 +108,17 @@ namespace SCR1
             }
         }
         return ipc;
+    }
+    
+    vector<uint32_t> Processor::trace_ipc()
+    {
+        vector<uint32_t> trace {this->get_ipc()};
+        while(!this->is_finished())
+        {
+            uint32_t ipc = this->next_ipc();
+            trace.push_back(ipc);
+        }
+        return trace;
     }
 
     uint32_t Processor::run_until_ipc(const uint32_t to_ipc)
