@@ -23,6 +23,7 @@ An SCR1 symbolic object has properties and three groups of methods — read, wri
 | "Clock"            | The clock contains the number of ticks of a clock signal from simulation start.                         |
 | "IPC"              | The IPC (instruction pointer counter) shows an address of a currently executed instruction.             |
 | "MAX_MEM"          | MAX_MEM is a size of memory in bytes.                                                                   |
+
 These properties are read-only and can be accessed by the name of the property as follows.
 ```mathematica
 device["MAX_MEM"]
@@ -64,32 +65,110 @@ DeviceExecute[device, "CMD"]
 | "RUN_UNTIL_IPC"    | Make steps until a specific IPC value.                                                                  |
 | "TRACE_IPC"        | Execute "RUN" command and return a list of IPC values.                                                  |
 
-<!-- ## Examples
-### Execution graph (dhrystone)
-<img src="docs/dhrystone.png" width="50%"/>
+## Basic examples
+### Read data about SCR1
+These are examples of reading commands output.
 
-### Read registers
-```mathematica
-Dataset[
- Table[
-  {i, BaseForm[#, 16], BaseForm[#, 2]} &@
-   DeviceRead[device, {"get_reg", i}]
-  ,
-  {i, 1, 31}
-  ]
- ]
-```
+<img src="docs/state.png" width="50%"/>
+Here, "Finished" is a flag which is 1 if SCR1 reaches the end of the program
+otherwise is zero. Other output values are the same as symbolic object
+properties.
+
+<img src="docs/branch.png" width="50%"/>
+Structures like if–then–else create branches in code execution flow. The
+"BRANCH" command returns information about the current branching state. "Jump",
+"Branch_taken", "Branch_not_taken" are flags. They are 1 if the instruction is
+jump or a branch has detected, and it has taken or not taken, respectively.
+"JB_addr" is an address of the next instruction if jump or branch has occurred.
+
+<img src="docs/dbus.png" width="50%"/>
+Data and instructions of programs are located in memory. A processor fetches
+them through a memory bus. "DBUS" returns an address of memory cell and size of
+requested data in bytes.
+
 <img src="docs/registers.png" width="50%"/>
+Any computations on the processor involve registers. We can read the values of
+them. This is an example of reading values of the register in binary and
+hexadecimal forms.
 
-### Read memory
-```mathematica
-MatrixPlot[
-  BlockMap[# &, Map[# &, DeviceRead[device, {"read_mem", 0, 32*1024}]],128],
-  ColorFunction -> "TemperatureMap"
-]
-```
-<img src="docs/memory.png" width="50%"/> -->
+<img src="docs/memory.png" width="50%"/>
+Also, we can read the content of the memory. The first argument is an address of
+the cell. The second is the number of cells.
 
+### Write data about SCR1
+<img src="docs/write_mem.png" width="50%"/>
+<img src="docs/write_regs.png" width="50%"/>
+
+### Executions on SCR1
+There are several functions which start processor working. The first is "STEP".
+This function produces one clock of the simulator and returns the number of
+clocks. This function works until the end of the program. After, reset SCR1. We
+can use the “NEXT_IPC” function if we would like to run SCR1 until the next
+instruction occurs. The function returns a value of new IPC. Additionally, SCR1
+may be run till a particular IPC value with “RUN_UNTIL_IPC” command. If we
+would like to launch SCR till the end of the program, we can use "RUN" function.
+And If the program prints something to display, it is redirected to
+src1_output.txt file.
+
+<img src="docs/output.png" width="50%"/>
+
+
+## Additional examples
+
+### Memory maps of programs
+In this example, we show a grid of memory maps for programs from scr1_programs
+directory. A memory map is a matrix of memory cells where each element is
+highlighted depending on the value of the cell.
+
+<img src="docs/memory_maps.png" width="100%"/>
+
+### Execution graph of programs
+We can visualise the trace of program execution. We used a directed graph whose
+vertices are instructions which are placed in order how they were executed. We
+can see that using the graph it is easy to find jumps in programs.
+
+<img src="docs/execution_graph_xor.png" width="50%"/>
+
+### Call graph
+There are assembler dumps in scr1_programs directory. We use this dumps to map
+instructions to the names of functions. In this example, we parse assembler
+files, find ranges of addresses and use them for mapping.
+
+<img src="docs/call_graph_dhrystone.png" width="50%"/>
+
+### Transactions to memory
+This example shows how to trace data manually with Wolfram Mathematica. Also, we
+calculate a list of frequent addresses which is accessed by SCR1 for a
+particular program (dhrystone).
+
+<img src="docs/dbus_top_dhrystone.png" width="50%"/>
+
+### Develop new devices: branch predictor
+Our solution provides loads of data about microcontroller. Engineers may use
+these data to design or optimise modules. For instance, we can get information
+about branching of SCR1 and use this data for developing a branch predictor
+module.
+
+The purpose of the branch predictor is to improve the flow in the instruction
+pipeline. Branch predictors play a critical role in achieving high performance
+in many modern pipelined processors.
+
+Here we use machine learning methods, a neural network, to build a predictor.
+
+<img src="docs/nn_training.png" width="50%"/>
+
+<img src="docs/nn_classifier.png" width="50%"/>
+
+## How it works
+The driver encapsulates lower-level interactions with the SCR1. We cannot use
+SystemVerilog in Wolfram Mathematica directly. That is why we converted the SCR1
+code to C++ code by Verilator software
+(https://www.veripool.org/wiki/verilator). This program is an open-source
+Verilog / System Verilog simulator. We wrapped generated C++ code with functions
+to communicate with Wolfram Mathematica through Wolfram LibraryLink. The full
+scheme of the project is below.
+
+<img src="docs/scheme.png" width="50%"/>
 
 ## SCR1
 SCR1 is an open-source RISC-V compatible MCU core, designed by Syntacore.
