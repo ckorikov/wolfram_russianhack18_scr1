@@ -10,7 +10,7 @@ A chip design workflow is a complicated multistage process. At the design stage,
 In the project, we used SCR1 as an example of an RTL code because SCR1 is an open-source microcontroller core which is a RISC-V compatible processor. RISC-V is computer architecture which is open too. The source files of SCR1 can be found at the link http://github.com/syntacore/scr1. We present a solution where we can substitute SCR1 with any other RTL design. So our project is extensible, and we may say that we built a workflow involving Wolfram Mathematica. The project aims to demonstrate a potential application for Wolfram Mathematica to the semiconductor industry.
 
 
-<img src="docs/device.png" width="50%"/>
+<img src="docs/device.png" width="40%"/>
 
 ##What it can
 The Wolfram Device Framework creates symbolic objects that represent external devices. In our case, this is the SCR1 processor. It is a frontend of our system.  A description of the backend is in the next section.
@@ -69,35 +69,35 @@ DeviceExecute[device, "CMD"]
 ### Read data about SCR1
 These are examples of reading commands output.
 
-<img src="docs/state.png" width="50%"/>
+<img src="docs/state.png" width="40%"/>
 Here, "Finished" is a flag which is 1 if SCR1 reaches the end of the program
 otherwise is zero. Other output values are the same as symbolic object
 properties.
 
-<img src="docs/branch.png" width="50%"/>
+<img src="docs/branch.png" width="40%"/>
 Structures like if–then–else create branches in code execution flow. The
 "BRANCH" command returns information about the current branching state. "Jump",
 "Branch_taken", "Branch_not_taken" are flags. They are 1 if the instruction is
 jump or a branch has detected, and it has taken or not taken, respectively.
 "JB_addr" is an address of the next instruction if jump or branch has occurred.
 
-<img src="docs/dbus.png" width="50%"/>
+<img src="docs/dbus.png" width="40%"/>
 Data and instructions of programs are located in memory. A processor fetches
 them through a memory bus. "DBUS" returns an address of memory cell and size of
 requested data in bytes.
 
-<img src="docs/registers.png" width="50%"/>
+<img src="docs/registers.png" width="60%"/>
 Any computations on the processor involve registers. We can read the values of
 them. This is an example of reading values of the register in binary and
 hexadecimal forms.
 
-<img src="docs/memory.png" width="50%"/>
+<img src="docs/memory.png" width="80%"/>
 Also, we can read the content of the memory. The first argument is an address of
 the cell. The second is the number of cells.
 
 ### Write data about SCR1
 <img src="docs/write_mem.png" width="50%"/>
-<img src="docs/write_regs.png" width="50%"/>
+<img src="docs/write_regs.png" width="80%"/>
 
 ### Executions on SCR1
 There are several functions which start processor working. The first is "STEP".
@@ -141,7 +141,7 @@ This example shows how to trace data manually with Wolfram Mathematica. Also, we
 calculate a list of frequent addresses which is accessed by SCR1 for a
 particular program (dhrystone).
 
-<img src="docs/dbus_top_dhrystone.png" width="50%"/>
+<img src="docs/dbus_top_dhrystone.png" width="30%"/>
 
 ### Develop new devices: branch predictor
 Our solution provides loads of data about microcontroller. Engineers may use
