@@ -86,17 +86,17 @@ Data and instructions of programs are located in memory. A processor fetches
 them through a memory bus. "DBUS" returns an address of memory cell and size of
 requested data in bytes.
 
-<img src="docs/registers.png" width="60%"/>
+<img src="docs/registers.png" width="70%"/>
 Any computations on the processor involve registers. We can read the values of
 them. This is an example of reading values of the register in binary and
 hexadecimal forms.
 
-<img src="docs/memory.png" width="80%"/>
+<img src="docs/memory.png" width="100%"/>
 Also, we can read the content of the memory. The first argument is an address of
 the cell. The second is the number of cells.
 
 ### Write data about SCR1
-<img src="docs/write_mem.png" width="50%"/>
+<img src="docs/write_mem.png" width="40%"/>
 <img src="docs/write_regs.png" width="80%"/>
 
 ### Executions on SCR1
@@ -110,7 +110,7 @@ would like to launch SCR till the end of the program, we can use "RUN" function.
 And If the program prints something to display, it is redirected to
 src1_output.txt file.
 
-<img src="docs/output.png" width="50%"/>
+<img src="docs/output.png" width="70%"/>
 
 
 ## Additional examples
@@ -141,7 +141,7 @@ This example shows how to trace data manually with Wolfram Mathematica. Also, we
 calculate a list of frequent addresses which is accessed by SCR1 for a
 particular program (dhrystone).
 
-<img src="docs/dbus_top_dhrystone.png" width="30%"/>
+<img src="docs/dbus_top_dhrystone.png" width="20%"/>
 
 ### Develop new devices: branch predictor
 Our solution provides loads of data about microcontroller. Engineers may use
