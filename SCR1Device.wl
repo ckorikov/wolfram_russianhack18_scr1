@@ -18,7 +18,7 @@ DeviceFramework`DeviceClassRegister["SCR1",
 "OpenFunction" -> open,
 "CloseFunction" -> close,
 "ReadFunction" -> read,
-"WriteFunction" -> w rite,
+"WriteFunction" -> write,
 "ExecuteFunction" -> exec,
 "GetPropertyFunction" -> readProp,
 "DeviceIconFunction" -> logo,
@@ -26,7 +26,7 @@ DeviceFramework`DeviceClassRegister["SCR1",
 	"State" -> Null,
 	"Clock" -> Null,
 	"IPC" -> Null, 
-	"MAX MEM" -> Null
+	"MAX_MEM" -> Null
 	}
 ];
 
