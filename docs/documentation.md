@@ -102,7 +102,7 @@ SCR1 until the next instruction occurs. The function returns a value of new IPC.
 Additionally, SCR1 may be run until a particular IPC value is encountered with
 `RUN_UNTIL_IPC` command. If we would like to launch SCR1 until the end of the
 program, we can use `RUN` function. If the program prints something to display,
-it is redirected to src1_output.txt file. 
+it is redirected to src1_output.txt file.
 
 <img src="output.png" width="70%"/>
 
@@ -131,7 +131,7 @@ files, find ranges of addresses and use them for mapping.
 ### Transactions to memory
 This example shows how to trace data manually with Wolfram Mathematica. Also, we
 calculate a list of frequent addresses which is accessed by SCR1 for a
-particular program (dhrystone). 
+particular program (dhrystone21). 
 
 <img src="dbus_top_dhrystone.png" width="20%"/>
 

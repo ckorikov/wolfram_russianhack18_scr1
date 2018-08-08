@@ -23,7 +23,7 @@ found at http://github.com/syntacore/scr1. We present a solution where we can
 substitute SCR1 with any other RTL design. So our project is extensible, and we
 may say that we built a workflow involving Wolfram Mathematica. The project aims
 to demonstrate a potential application for Wolfram Mathematica to the
-semiconductor industry. 
+semiconductor industry.
 
 
 
@@ -47,7 +47,7 @@ The driver encapsulates lower-level interactions with the SCR1. We cannot use
 SystemVerilog in Wolfram Mathematica directly. That is why we converted the SCR1
 code to C++ code by Verilator software
 (https://www.veripool.org/wiki/verilator). This program is an open-source
-Verilog / System Verilog simulator. We wrapped generated C++ code with functions
+Verilog/SystemVerilog simulator. We wrapped generated C++ code with functions
 to communicate with Wolfram Mathematica through Wolfram LibraryLink. The full
 scheme of the project is below.
 

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[   1861690,      32910]
-NotebookOptionsPosition[   1850432,      32723]
-NotebookOutlinePosition[   1850788,      32739]
-CellTagsIndexPosition[   1850745,      32736]
+NotebookDataLength[   1873983,      33159]
+NotebookOptionsPosition[   1862600,      32970]
+NotebookOutlinePosition[   1862983,      32987]
+CellTagsIndexPosition[   1862940,      32984]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -34,24 +34,25 @@ Cell["The project", "Section",
 a8e69cd500ab"],
 
 Cell[TextData[{
- "We connected Wolfram Mathematica with SCR1 microcontroller.  For this \
+ "We connected Wolfram Mathematica with SCR1 microcontroller core.  For this \
 purpose, we developed a driver for SCR1 based on Wolfram Device Framework. In \
-our project SCR1 is not a hardware device but RTL code of processor in \
-SystemVerilog.\n\nA chip design workflow is a complicated multistage process. \
-At the design stage, engineers describe their solutions in abstractions at \
-the register-transfer level (RTL) using RTL languages such as SystemVerilog. \
-At the verification stage, they prove that the design is corrected and this \
-is the most complex phase of development. Wolfram Mathematica can help in \
-verification providing comprehensive analytical and visualisation features.\n\
-\nIn the project, we used SCR1 as an example of an RTL code because SCR1 is \
-an open-source microcontroller core which is a RISC-V compatible processor. \
-RISC-V is computer architecture which is open too. The source files of SCR1 \
-can be found at the link http://github.com/syntacore/scr1. We present a \
-solution where we can substitute SCR1 with any other RTL design. So our \
-project is extensible, and we may say that we built a workflow involving \
-Wolfram Mathematica. The project aims to demonstrate a potential application \
-for Wolfram Mathematica to the semiconductor industry. \n\nAll codes posted \
-on GitHub: https://github.com/ckorikov/wolfram_russianhack18_scr1\n\n",
+our project SCR1 is not a hardware device but RTL code of processor written \
+in SystemVerilog.\n\nA chip design workflow is a complicated multistage \
+process. At the design stage, engineers describe their solutions in \
+abstractions at the register-transfer level (RTL) using RTL languages such as \
+SystemVerilog. At the verification stage, they have to prove that the design \
+is correct and this is the most complex phase of development. Wolfram \
+Mathematica can help in verification providing comprehensive analytical and \
+visualisation features.\n\nIn the project, we used SCR1 as an example of an \
+RTL code because SCR1 is an open-source microcontroller core which is a \
+RISC-V compatible processor. RISC-V is computer architecture which is open \
+too. The source files of SCR1 can be found at \
+http://github.com/syntacore/scr1. We present a solution where we can \
+substitute SCR1 with any other RTL design. So our project is extensible, and \
+we may say that we built a workflow involving Wolfram Mathematica. The \
+project aims to demonstrate a potential application for Wolfram Mathematica \
+to the semiconductor industry. \n\nAll code is posted on GitHub: \
+https://github.com/ckorikov/wolfram_russianhack18_scr1\n\n",
  Cell[BoxData[
   GraphicsBox[
    TagBox[RasterBox[CompressedData["
@@ -690,30 +691,32 @@ KJHo+vXr9+/f53ovUCgUCoVCoVCoUdX/ASpLLJw=
   "df4e09b7-5af5-4380-b0fe-3ad99a46ba8b"]
 }], "Text",
  CellChangeTimes->{{3.74221225490233*^9, 3.742212405209511*^9}, {
-  3.742212587891507*^9, 3.742212655773381*^9}, {3.742212705721612*^9, 
-  3.742212830288333*^9}, {3.742212981437007*^9, 3.7422131539962482`*^9}, {
-  3.74240196527838*^9, 3.7424019718609123`*^9}, {3.742406350779415*^9, 
-  3.742406365853265*^9}, {3.742406405508526*^9, 3.7424064472016487`*^9}, {
-  3.742406494479459*^9, 
-  3.742406540859757*^9}},ExpressionUUID->"5c006520-4c11-4d25-b0ba-\
-d024e260238e"]
+   3.742212587891507*^9, 3.742212655773381*^9}, {3.742212705721612*^9, 
+   3.742212830288333*^9}, {3.742212981437007*^9, 3.7422131539962482`*^9}, {
+   3.74240196527838*^9, 3.7424019718609123`*^9}, {3.742406350779415*^9, 
+   3.742406365853265*^9}, {3.742406405508526*^9, 3.7424064472016487`*^9}, {
+   3.742406494479459*^9, 3.742406540859757*^9}, 3.7427038319660883`*^9},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"5c006520-4c11-4d25-b0ba-d024e260238e"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["What it can", "Section",
- CellChangeTimes->{{3.74240653051709*^9, 
-  3.7424065318803864`*^9}},ExpressionUUID->"6a40ef43-c775-46ed-8e0a-\
+Cell["What it can do", "Section",
+ CellChangeTimes->{{3.74240653051709*^9, 3.7424065318803864`*^9}, {
+  3.742703902904482*^9, 
+  3.7427039044872103`*^9}},ExpressionUUID->"6a40ef43-c775-46ed-8e0a-\
 9e05f6470a48"],
 
 Cell["\<\
-The Wolfram Device Framework creates symbolic objects that represent external \
-devices. In our case, this is the SCR1 processor. It is a frontend of our \
-system.  A description of the backend is in the next section.\
+The Wolfram Device Framework creates symbolic objects that represents \
+external devices. In our case, this is the SCR1 processor. It is a frontend \
+of our system.  A description of the backend is in the next section.\
 \>", "Text",
- CellChangeTimes->{{3.742406587051998*^9, 
-  3.742406588324813*^9}},ExpressionUUID->"f74446c2-d2ec-4422-a323-\
-33d8aa5d0f53"],
+ CellChangeTimes->{{3.742406587051998*^9, 3.742406588324813*^9}, {
+  3.742703913519788*^9, 3.7427039147428007`*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"f74446c2-d2ec-4422-a323-33d8aa5d0f53"],
 
 Cell[CellGroupData[{
 
@@ -730,16 +733,15 @@ Cell[BoxData[{
  InitializationCell->True,
  CellChangeTimes->{{3.737193390494355*^9, 3.737193442700655*^9}, {
   3.741707418321744*^9, 3.741707423194973*^9}, {3.742406615861355*^9, 
-  3.742406616109408*^9}},
- CellLabel->"In[72]:=",ExpressionUUID->"75e1c8f7-226d-40f9-8213-2f12283a6e9a"],
+  3.742406616109408*^9}, {3.742705042430861*^9, 3.742705044332554*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"75e1c8f7-226d-40f9-8213-2f12283a6e9a"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{
    TagBox["DeviceObject",
     "SummaryHead"], "[", 
-   DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready"}, 
-    
+   DynamicModuleBox[{Typeset`open$$ = True, Typeset`embedState$$ = "Ready"}, 
     TemplateBox[{PaneSelectorBox[{False -> GridBox[{{
             PaneBox[
              ButtonBox[
@@ -751,9 +753,8 @@ Cell[BoxData[
               Automatic, Method -> "Preemptive"], 
              Alignment -> {Center, Center}, ImageSize -> 
              Dynamic[{
-               Automatic, 
-                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
-                 Magnification])}]], 
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
             GraphicsBox[
              RasterBox[CompressedData["
 1:eJztnQl8VfWVx21dih2nUhlboWOrtbUzttWOo47dprXWWtupttRWWx3rhtSN
@@ -917,8 +918,8 @@ G7rF5KxfVKTX9RIh9DTa42unQK2TPW2J4VkvHLasVNeT3K4rHEsgT6VfmRok
                     "Connected", "Not connected"}, 
                     Devices`DeviceAPI`DeviceDump`d$$ = 
                     DeviceObject[{"SCR1", 1}], 
-                    Devices`DeviceAPI`DeviceDump`ind$$ = 2, 
-                    Devices`DeviceAPI`DeviceDump`indr$$ = 2}, 
+                    Devices`DeviceAPI`DeviceDump`ind$$ = 1, 
+                    Devices`DeviceAPI`DeviceDump`indr$$ = 1}, 
                    DynamicBox[
                     ToBoxes[Devices`DeviceAPI`DeviceDump`ind$$ = If[
                     DeviceOpenQ[Devices`DeviceAPI`DeviceDump`d$$], 1, 2]; 
@@ -935,7 +936,7 @@ G7rF5KxfVKTX9RIh9DTa42unQK2TPW2J4VkvHLasVNeT3K4rHEsgT6VfmRok
                     Part[
                     Devices`DeviceAPI`DeviceDump`opacities$$, 
                     Devices`DeviceAPI`DeviceDump`indr$$]], StandardForm], 
-                    ImageSizeCache -> {85., {5., 9.}}], 
+                    ImageSizeCache -> {67., {5., 9.}}], 
                    DynamicModuleValues :> {}], "SummaryItem"]}], 
                "\[SpanFromLeft]"}}, AutoDelete -> False, 
              BaseStyle -> {
@@ -956,14 +957,14 @@ G7rF5KxfVKTX9RIh9DTa42unQK2TPW2J4VkvHLasVNeT3K4rHEsgT6VfmRok
              ButtonBox[
               DynamicBox[
                FEPrivate`FrontEndResource[
-               "FEBitmaps", "SquareMinusIconMedium"]], Appearance -> None, 
+               "FEBitmaps", "SquareMinusIconMedium"], 
+               ImageSizeCache -> {12., {0., 12.}}], Appearance -> None, 
               ButtonFunction :> (Typeset`open$$ = False), Evaluator -> 
               Automatic, Method -> "Preemptive"], 
              Alignment -> {Center, Center}, ImageSize -> 
              Dynamic[{
-               Automatic, 
-                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
-                 Magnification])}]], 
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
             GraphicsBox[
              RasterBox[CompressedData["
 1:eJztnQl8VfWVx21dih2nUhlboWOrtbUzttWOo47dprXWWtupttRWWx3rhtSN
@@ -1127,8 +1128,8 @@ G7rF5KxfVKTX9RIh9DTa42unQK2TPW2J4VkvHLasVNeT3K4rHEsgT6VfmRok
                     "Connected", "Not connected"}, 
                     Devices`DeviceAPI`DeviceDump`d$$ = 
                     DeviceObject[{"SCR1", 1}], 
-                    Devices`DeviceAPI`DeviceDump`ind$$, 
-                    Devices`DeviceAPI`DeviceDump`indr$$}, 
+                    Devices`DeviceAPI`DeviceDump`ind$$ = 1, 
+                    Devices`DeviceAPI`DeviceDump`indr$$ = 1}, 
                    DynamicBox[
                     ToBoxes[Devices`DeviceAPI`DeviceDump`ind$$ = If[
                     DeviceOpenQ[Devices`DeviceAPI`DeviceDump`d$$], 1, 2]; 
@@ -1144,7 +1145,8 @@ G7rF5KxfVKTX9RIh9DTa42unQK2TPW2J4VkvHLasVNeT3K4rHEsgT6VfmRok
                     Devices`DeviceAPI`DeviceDump`ind$$]}], 
                     Part[
                     Devices`DeviceAPI`DeviceDump`opacities$$, 
-                    Devices`DeviceAPI`DeviceDump`indr$$]], StandardForm]], 
+                    Devices`DeviceAPI`DeviceDump`indr$$]], StandardForm], 
+                    ImageSizeCache -> {67., {5., 9.}}], 
                    DynamicModuleValues :> {}], "SummaryItem"]}], 
                "\[SpanFromLeft]"}, {
                TagBox[
@@ -1154,9 +1156,10 @@ G7rF5KxfVKTX9RIh9DTa42unQK2TPW2J4VkvHLasVNeT3K4rHEsgT6VfmRok
                     Opacity[1], 
                     Opacity[0.2]}, Devices`DeviceAPI`DeviceDump`d$$ = 
                   DeviceObject[{"SCR1", 1}], 
-                  Devices`DeviceAPI`DeviceDump`props$$, 
-                  Devices`DeviceAPI`DeviceDump`vals$$, 
-                  Devices`DeviceAPI`DeviceDump`reg$$}, 
+                  Devices`DeviceAPI`DeviceDump`props$$ = {
+                   "Clock", "IPC", "MAX_MEM", "State"}, 
+                  Devices`DeviceAPI`DeviceDump`vals$$ = {0, 0, 32768, "IDLE"},
+                   Devices`DeviceAPI`DeviceDump`reg$$ = True}, 
                  DynamicBox[
                   ToBoxes[
                   Devices`DeviceAPI`DeviceDump`reg$$ = 
@@ -1181,7 +1184,8 @@ G7rF5KxfVKTX9RIh9DTa42unQK2TPW2J4VkvHLasVNeT3K4rHEsgT6VfmRok
                     StringJoin["      ", 
                     ToString[#], ": "], #2}]& , {
                     Devices`DeviceAPI`DeviceDump`props$$, 
-                    Devices`DeviceAPI`DeviceDump`vals$$}]]], StandardForm]], 
+                    Devices`DeviceAPI`DeviceDump`vals$$}]]], StandardForm], 
+                  ImageSizeCache -> {106., {31., 36.}}], 
                  DynamicModuleValues :> {}], "SummaryItem"], 
                "\[SpanFromLeft]"}}, AutoDelete -> False, 
              BaseStyle -> {
@@ -1206,34 +1210,37 @@ G7rF5KxfVKTX9RIh9DTa42unQK2TPW2J4VkvHLasVNeT3K4rHEsgT6VfmRok
   Selectable->False]], "Output",
  CellChangeTimes->{{3.7424073722927933`*^9, 3.742407372728135*^9}, 
    3.742447223246056*^9, {3.742447533910777*^9, 3.742447534190802*^9}, 
-   3.7424476645180397`*^9, 3.742454613659154*^9},
- CellLabel->"Out[74]=",ExpressionUUID->"e6416e7c-a8df-403a-a626-a08c19feb4e2"]
+   3.7424476645180397`*^9, 3.742454613659154*^9, {3.742705132376645*^9, 
+   3.742705132785508*^9}},
+ CellLabel->"Out[6]=",ExpressionUUID->"01f1a33a-7391-4cbf-bf8c-2ed20d6c3e63"]
 }, Open  ]],
 
 Cell[TextData[{
- " An SCR1 symbolic object has properties and three groups of methods \
+ "An SCR1 symbolic object has properties and three groups of methods \
 \[LongDash] read, write and execute. In our project, users can interact with \
-general purpose registers and memory of the SCR1. Also, we provided access to \
-some wires for this demonstration such as memory data bus and branching logic \
-in the processor pipeline. Examples are below.\n  \n",
+general purpose registers and memory of the SCR1. For this demonstration we \
+additionally provided access to some wires such as memory data bus and \
+branching logic in the processor pipeline. Examples are below.\n  \n",
  StyleBox["Properties",
   FontWeight->"Bold"],
- ". There  are four properties of the processor :\n\[LongDash] State,\n\
-\[LongDash] Clock,\n\[LongDash] IPC (instruction pointer counter),\n\
-\[LongDash] MAX_MEM (maximal memory).\n  The state reflects a state of the \
-processor and can have the following values : IDLE, WORK and FINISHED. This \
-property is WORK after reset. When a program reaches the end, the state comes \
-FINISHED. The clock contains the number of ticks of a clock signal from \
-simulation start. The IPC show a value of IPC register. This value is an \
-address of a currently executed instruction. MAX_MEM is a size of memory in \
-bytes.  These properties are read - only and can be accessed by the name of \
-the property as follows."
+ ". There  are 4 properties of the SCR1 symbolic object:\n\[LongDash] State,\n\
+\[LongDash] Clock,\n\[LongDash] IPC (instruction program counter),\n\
+\[LongDash] MAX_MEM (maximal memory).\nThe state property reflects a state of \
+the processor and can have the following values: IDLE, WORK and FINISHED. \
+This property is WORK after reset. When a program completes, the state \
+transitions to FINISHED. The clock contains the number of ticks of a clock \
+signal from simulation start. The IPC shows a value of IPC register. This \
+value is an address of a currently executed instruction. MAX_MEM is a size of \
+memory in bytes.  These properties are read-only and can be accessed by the \
+name of the property as follows."
 }], "Text",
  CellChangeTimes->{{3.742406542996251*^9, 3.74240654879904*^9}, 
    3.742406585382668*^9, {3.742406623163191*^9, 3.7424066590891542`*^9}, {
    3.742407490707631*^9, 3.7424075436513777`*^9}, {3.742407780235721*^9, 
-   3.742407795452273*^9}},ExpressionUUID->"ac7a151b-ed5d-4b9d-b8ca-\
-802b0671a6a9"],
+   3.742407795452273*^9}, {3.742703927376006*^9, 3.742703947258452*^9}, {
+   3.74270427058105*^9, 3.74270427159671*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"ac7a151b-ed5d-4b9d-b8ca-802b0671a6a9"],
 
 Cell[CellGroupData[{
 
@@ -1251,36 +1258,41 @@ Cell[BoxData["32768"], "Output",
 Cell[TextData[{
  StyleBox["Reading methods",
   FontWeight->"Bold"],
- ". The general format of these commands is DeviceRead[device, \"CMD\"]. \
-Instead of \"CMD\", use one of the following commands.\n\[LongDash] STATE : \
-read the state of SCR1 (State, Finished, Clock, IPC).\n\[LongDash] REGS : \
-read the list of registers values (from 1 to 32).\n\[LongDash] MEM : read the \
-list of bytes from memory.\n\[LongDash] BRANCH : read the state of branching \
-logic (IPC, Jump, Branch_taken, Branch_not _taken,  JB_addr).\n\[LongDash] \
-DBUS : read memory data bus (Address, Bytes).\n      \n",
+ ". The general format of these commands is DeviceRead[device, \
+\[OpenCurlyDoubleQuote]CMD\[CloseCurlyDoubleQuote]]. Instead of \
+\[OpenCurlyDoubleQuote]CMD\[CloseCurlyDoubleQuote], use one of the following \
+commands.\n\[LongDash] STATE: read the state of SCR1 (State, Finished, Clock, \
+IPC).\n\[LongDash] REGS: read the list of registers values (from 1 to 32).\n\
+\[LongDash] MEM: read the list of bytes from memory.\n\[LongDash] BRANCH: \
+read the state of branching logic (IPC, Jump, Branch_taken, Branch_not_taken, \
+ JB_addr).\n\[LongDash] DBUS: read memory data bus (Address, Bytes).\n      \n\
+",
  StyleBox["Writing methods",
   FontWeight->"Bold"],
- ". The general format of these commands is DeviceWrite[device, \"CMD\"]. \
-Instead of \"CMD\", use one of the following commands.\n\[LongDash] REGS : \
-modify a value of a register.\n\[LongDash] MEM : modify a value of a memory \
-cell.\n   \n",
+ ". The general format of these commands is DeviceWrite[device, \
+\[OpenCurlyDoubleQuote]CMD\[CloseCurlyDoubleQuote]]. Instead of \
+\[OpenCurlyDoubleQuote]CMD\[CloseCurlyDoubleQuote], use one of the following \
+commands.\n\[LongDash] REGS: modify a value of a register.\n\[LongDash] MEM: \
+modify a value of a memory cell.\n   \n",
  StyleBox["Execution methods.",
   FontWeight->"Bold"],
- " The general format of these commands is DeviceExecute[device, \"CMD\"]. \
-Instead of \"CMD\", use one of the following commands.\n\[LongDash] RESET : \
-reset the processor.\n\[LongDash] HARD_RESET: reset the processor and \
-internal counters of the simulator (such as simulation time and clock \
-counter).\n\[LongDash] LOAD : load a program to memory and reset the \
-processor.\n\[LongDash] STEP : perform one tick of the clock signal.\n\
-\[LongDash] RUN : do steps until the end of the program.\n\[LongDash] \
-RUN_UNTIL _IPC : do steps until a specific IPC value.\n\[LongDash] TRACE_IPC: \
-execute \[OpenCurlyDoubleQuote]RUN\[CloseCurlyDoubleQuote] command and return \
-a list of IPC values."
+ " The general format of these commands is DeviceExecute[device, \
+\[OpenCurlyDoubleQuote]CMD\[CloseCurlyDoubleQuote]]. Instead of \
+\[OpenCurlyDoubleQuote]CMD\[CloseCurlyDoubleQuote], use one of the following \
+commands.\n\[LongDash] RESET: reset the processor.\n\[LongDash] HARD_RESET: \
+reset the processor and internal counters of the simulator (such as \
+simulation time and clock counter).\n\[LongDash] LOAD: load a program to \
+memory and reset the processor.\n\[LongDash] STEP: perform one tick of the \
+clock signal.\n\[LongDash] RUN: make steps until the end of the program.\n\
+\[LongDash] RUN_UNTIL_IPC: make steps until a specific IPC value.\n\
+\[LongDash] TRACE_IPC: execute \[OpenCurlyDoubleQuote]RUN\
+\[CloseCurlyDoubleQuote] command and return a list of IPC values."
 }], "Text",
  CellChangeTimes->{{3.7424077866649733`*^9, 3.742407834631731*^9}, {
-   3.7424080449794407`*^9, 3.742408054950406*^9}, 
-   3.742408228774629*^9},ExpressionUUID->"23fe947f-6a70-4ea9-9edc-\
-d6af62f609ba"],
+   3.7424080449794407`*^9, 3.742408054950406*^9}, 3.742408228774629*^9, 
+   3.742703958998774*^9, {3.7427042359399347`*^9, 3.742704315810336*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"23fe947f-6a70-4ea9-9edc-d6af62f609ba"],
 
 Cell[CellGroupData[{
 
@@ -1300,9 +1312,10 @@ Cell["\<\
 To load a program execute the following command. An argument is a path to the \
 program file.\
 \>", "Text",
- CellChangeTimes->{{3.742408059862474*^9, 
-  3.742408066688775*^9}},ExpressionUUID->"a8b134bd-cf6c-4970-8368-\
-c7c73359b4fb"],
+ CellChangeTimes->{{3.742408059862474*^9, 3.742408066688775*^9}, 
+   3.742704345465465*^9},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"a8b134bd-cf6c-4970-8368-c7c73359b4fb"],
 
 Cell[BoxData[
  RowBox[{
@@ -1313,9 +1326,12 @@ Cell[BoxData[
    "\[IndentingNewLine]", "]"}], ";"}]], "Input",
  CellLabel->"In[14]:=",ExpressionUUID->"fe1dfb0a-6175-400f-85c3-c28755f8700e"],
 
-Cell["To reset processor use \"RESET\" and \"HARD_RESET\" commands.", "Text",
- CellChangeTimes->{{3.742408542685892*^9, 
-  3.742408558917177*^9}},ExpressionUUID->"476a2622-6ea5-4c80-96cc-\
+Cell["To reset processor use \[OpenCurlyDoubleQuote]RESET\
+\[CloseCurlyDoubleQuote] and \[OpenCurlyDoubleQuote]HARD_RESET\
+\[CloseCurlyDoubleQuote] commands. ", "Text",
+ CellChangeTimes->{{3.742408542685892*^9, 3.742408558917177*^9}, 
+   3.7427043863702993`*^9, {3.7427044737334833`*^9, 
+   3.742704477563135*^9}},ExpressionUUID->"476a2622-6ea5-4c80-96cc-\
 d87d23bce549"],
 
 Cell[BoxData[
@@ -1327,8 +1343,8 @@ Cell[BoxData[
  CellLabel->"In[13]:=",ExpressionUUID->"5ceb0330-3471-4bbd-b241-827a3aca2174"],
 
 Cell["Hard reset is soft reset + simulator cleanup.", "Text",
- CellChangeTimes->{{3.74240848244167*^9, 
-  3.742408514147552*^9}},ExpressionUUID->"f6ee5b2b-97f6-4dbf-a61b-\
+ CellChangeTimes->{{3.74240848244167*^9, 3.742408514147552*^9}, 
+   3.742704480082424*^9},ExpressionUUID->"f6ee5b2b-97f6-4dbf-a61b-\
 98f48a65f6e9"],
 
 Cell[BoxData[
@@ -1349,8 +1365,8 @@ Cell["2. Read data about SCR1", "Subsubsection",
 7369455290f1"],
 
 Cell["These are examples of reading commands output.", "Text",
- CellChangeTimes->{{3.742446103498776*^9, 
-  3.742446104901779*^9}},ExpressionUUID->"e42d1b6d-eb65-455a-825d-\
+ CellChangeTimes->{{3.742446103498776*^9, 3.742446104901779*^9}, 
+   3.7427044882825623`*^9},ExpressionUUID->"e42d1b6d-eb65-455a-825d-\
 858c7d902006"],
 
 Cell[CellGroupData[{
@@ -1697,13 +1713,14 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell["\<\
-Here, \"Finished\" is a flag which is 1 if SCR1 reaches the end of the \
-program otherwise is 0. Other output values are the same as symbolic object \
-properties.\
+Here, \[OpenCurlyDoubleQuote]Finished\[CloseCurlyDoubleQuote] is a flag which \
+is 1 if SCR1 reaches the end of the program otherwise is 0. Other output \
+values are the same as symbolic object properties.\
 \>", "Text",
- CellChangeTimes->{{3.7424461110384398`*^9, 
-  3.742446142091544*^9}},ExpressionUUID->"c3bb3c9f-9437-4141-9a60-\
-5442e2c36b26"],
+ CellChangeTimes->{{3.7424461110384398`*^9, 3.742446142091544*^9}, 
+   3.7427045037603283`*^9},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"c3bb3c9f-9437-4141-9a60-5442e2c36b26"],
 
 Cell[CellGroupData[{
 
@@ -2035,15 +2052,20 @@ Cell[BoxData[
 
 Cell["\<\
 Structures like if\[Dash]then\[Dash]else create branches in code execution \
-flow.The \"BRANCH\" command returns information about the current branching \
-state.\"Jump\", \"Branch_taken\", \"Branch_not_taken\" are flags. They are 1 \
-if the instruction is jump or a branch has detected, and it has taken or not \
-taken, respectively.\"JB_addr\" is an address of the next instruction if jump \
-or branch has occurred.\
+flow. The \[OpenCurlyDoubleQuote]BRANCH\[CloseCurlyDoubleQuote] command \
+returns information about the current branching state. \
+\[OpenCurlyDoubleQuote]Jump\[CloseCurlyDoubleQuote], \
+\[OpenCurlyDoubleQuote]Branch_taken\[CloseCurlyDoubleQuote], \
+\[OpenCurlyDoubleQuote]Branch_not_taken\[CloseCurlyDoubleQuote] are flags. \
+They are 1 if the instruction is jump or a branch has detected, and it has \
+taken or not taken, respectively. \[OpenCurlyDoubleQuote]JB_addr\
+\[CloseCurlyDoubleQuote] is an address of the next instruction if jump or \
+branch has occurred.\
 \>", "Text",
- CellChangeTimes->{{3.74244609169007*^9, 
-  3.742446133871698*^9}},ExpressionUUID->"d3dc76d8-8a1f-4bb0-93c0-\
-edd49e9e48a3"],
+ CellChangeTimes->{{3.74244609169007*^9, 3.742446133871698*^9}, 
+   3.7427045154272842`*^9},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"d3dc76d8-8a1f-4bb0-93c0-edd49e9e48a3"],
 
 Cell[CellGroupData[{
 
@@ -2278,13 +2300,14 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell["\<\
-Data and instructions of programs are located in memory.A processor fetches \
-them through a memory bus.\"DBUS\" returns an address of memory cell and size \
-of requested data in bytes.\
+Data and program instructions are located in memory. A processor fetches them \
+through a memory bus. \[OpenCurlyDoubleQuote]DBUS\[CloseCurlyDoubleQuote] \
+returns an address of memory cell and size of requested data in bytes.\
 \>", "Text",
- CellChangeTimes->{{3.742446473774599*^9, 
-  3.742446474817947*^9}},ExpressionUUID->"d6ffd9b6-a47f-4c43-8160-\
-0b36abf5d19a"],
+ CellChangeTimes->{{3.742446473774599*^9, 3.742446474817947*^9}, 
+   3.7427045264667177`*^9},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"d6ffd9b6-a47f-4c43-8160-0b36abf5d19a"],
 
 Cell[CellGroupData[{
 
@@ -3696,13 +3719,14 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell["\<\
-Any computations on the processor involve registers. We can read the values \
-of them. This is an example of reading values of the register in binary and \
+Any computations on the processor involve registers. We can read their \
+values. This is an example of reading values of the register in binary and \
 hexadecimal forms.\
 \>", "Text",
- CellChangeTimes->{{3.742446493621078*^9, 
-  3.742446524699655*^9}},ExpressionUUID->"dfc6b85e-8bb0-481e-9024-\
-7895715459ea"],
+ CellChangeTimes->{{3.742446493621078*^9, 3.742446524699655*^9}, {
+  3.74270453707893*^9, 3.74270453850034*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"dfc6b85e-8bb0-481e-9024-7895715459ea"],
 
 Cell[CellGroupData[{
 
@@ -4131,7 +4155,15 @@ Cell[BoxData[
    3.7424499689329033`*^9},
  CellLabel->
   "Out[17]//BaseForm=",ExpressionUUID->"443203ce-f111-45f3-96c5-d672595d8fa0"]
-}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+Also, we can read the contents of the memory.The first argument is an address \
+of the cell.The second is the number of cells.\
+\>", "Text",
+ CellChangeTimes->{{3.742704559420197*^9, 3.742704560818368*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"15750df6-da4c-4671-8653-33f5bffdbeb5"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4179,12 +4211,13 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell["\<\
-The first argument is an address of the memory cell.The second one is the \
+The first argument is an address of the memory cell. The second one is the \
 value.\
 \>", "Text",
- CellChangeTimes->{{3.742447859318182*^9, 
-  3.7424478607315493`*^9}},ExpressionUUID->"88dfd27a-4df9-4067-9666-\
-ed83737d9291"],
+ CellChangeTimes->{{3.742447859318182*^9, 3.7424478607315493`*^9}, 
+   3.742704576551186*^9},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"88dfd27a-4df9-4067-9666-ed83737d9291"],
 
 Cell[CellGroupData[{
 
@@ -4222,10 +4255,11 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell["\<\
-The first argument is a register index.The second one is the value.\
+The first argument is a register index. The second one is the value.\
 \>", "Text",
- CellChangeTimes->{{3.742447949807699*^9, 
-  3.742447950854457*^9}},ExpressionUUID->"c7f6d824-287d-4a21-a197-\
+ CellChangeTimes->{{3.742447949807699*^9, 3.742447950854457*^9}, {
+  3.742704590321072*^9, 
+  3.7427045916048517`*^9}},ExpressionUUID->"c7f6d824-287d-4a21-a197-\
 a062ce48d057"]
 }, Open  ]],
 
@@ -4240,14 +4274,15 @@ Cell["4. Execute commands on SCR1", "Subsubsection",
 773b20001142"],
 
 Cell["\<\
- There are several functions which start processor working. The first is \
+There are several functions which start the program flow. The first is \
 \[OpenCurlyDoubleQuote]STEP\[CloseCurlyDoubleQuote]. This function produces \
 one clock of the simulator and returns the number of clocks. This function \
-works until the end of the program.\
+works until the end of the program. After that, the core needs to be reset.\
 \>", "Text",
  CellChangeTimes->{{3.742229967391027*^9, 3.7422301447784357`*^9}, 
-   3.742448217782443*^9},ExpressionUUID->"c4c1afa1-cc77-4a9b-9533-\
-9ffb46abe11b"],
+   3.742448217782443*^9, {3.742704605798683*^9, 3.742704641105886*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"c4c1afa1-cc77-4a9b-9533-9ffb46abe11b"],
 
 Cell[CellGroupData[{
 
@@ -4270,13 +4305,14 @@ Cell[BoxData["8"], "Output",
 }, Open  ]],
 
 Cell["\<\
-We can use the following function if we would like to run SCR1 until the next \
-instruction occurs. The function returns a value of new IPC.\
+We can use the \[OpenCurlyDoubleQuote]NEXT_IPC\[CloseCurlyDoubleQuote] \
+function if we would like to run SCR1 until the next instruction occurs. The \
+function returns a value of new IPC. \
 \>", "Text",
  CellChangeTimes->{{3.74223017063702*^9, 3.742230359260934*^9}, 
-   3.742448442240099*^9, 
-   3.742448580753734*^9},ExpressionUUID->"9e03e94d-617d-449f-ae36-\
-333667f58c33"],
+   3.742448442240099*^9, 3.742448580753734*^9, 3.742704657223299*^9},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"9e03e94d-617d-449f-ae36-333667f58c33"],
 
 Cell[CellGroupData[{
 
@@ -4297,10 +4333,14 @@ Cell[BoxData["516"], "Output",
  CellLabel->"Out[64]=",ExpressionUUID->"77980c81-ad62-40b7-a3f9-695795428036"]
 }, Open  ]],
 
-Cell["Additionally, SCR1 may be run till a particular IPC value.", "Text",
- CellChangeTimes->{{3.7422303670740423`*^9, 
-  3.7422304018379917`*^9}},ExpressionUUID->"a5faae4c-5dfc-4cd8-b0ad-\
-635093cd4f0e"],
+Cell["\<\
+Additionally, SCR1 may be run until a particular IPC value is encountered \
+with \[OpenCurlyDoubleQuote]RUN_UNTIL_IPC\[CloseCurlyDoubleQuote] command.\
+\>", "Text",
+ CellChangeTimes->{{3.7422303670740423`*^9, 3.7422304018379917`*^9}, 
+   3.742704686636087*^9},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"a5faae4c-5dfc-4cd8-b0ad-635093cd4f0e"],
 
 Cell[CellGroupData[{
 
@@ -4323,11 +4363,12 @@ Cell[BoxData["0"], "Output",
 }, Open  ]],
 
 Cell["\<\
-If we would like to launch SCR till the end of the program, use \
+If we would like to launch SCR1 till the end of the program, we can use \
 \[OpenCurlyDoubleQuote]RUN\[CloseCurlyDoubleQuote] function.\
 \>", "Text",
  CellChangeTimes->{{3.742230574809572*^9, 3.742230615773982*^9}, 
-   3.7424485181231318`*^9},ExpressionUUID->"029d3860-2877-496b-b35a-\
+   3.7424485181231318`*^9, 
+   3.742704699104744*^9},ExpressionUUID->"029d3860-2877-496b-b35a-\
 d9587c1a2229"],
 
 Cell[BoxData[
@@ -4339,12 +4380,12 @@ Cell[BoxData[
  CellLabel->"In[22]:=",ExpressionUUID->"3341374b-9861-4dab-aded-6dfcb5b8b84a"],
 
 Cell["\<\
-If the program prints something to display, this data is redirected to \
+If the program prints something to display, it is redirected to \
 src1_output.txt file. \
 \>", "Text",
  CellChangeTimes->{{3.7422306211441803`*^9, 3.742230717497451*^9}, {
-  3.7424486796955833`*^9, 
-  3.74244868545455*^9}},ExpressionUUID->"58a762cc-308a-478c-9841-\
+  3.7424486796955833`*^9, 3.74244868545455*^9}, {3.7427047073020983`*^9, 
+  3.74270470854318*^9}},ExpressionUUID->"58a762cc-308a-478c-9841-\
 1e386e1c563a"],
 
 Cell[CellGroupData[{
@@ -4413,12 +4454,13 @@ Cell["1. Memory maps of programs", "Subsubsection",
 
 Cell["\<\
 In this example, we show a grid of memory maps for programs from \
-scr1_programs directory.A memory map is a matrix of memory cells where each \
-element is highlighted depending on the value of the cell.\
+scr1_programs directory. A memory map is a matrix of memory cells where each \
+element is highlighted depending on the value of the cell. \
 \>", "Text",
- CellChangeTimes->{{3.742450987580989*^9, 
-  3.742450988651124*^9}},ExpressionUUID->"b7f9c59d-1383-44f5-ac36-\
-b12555fa2959"],
+ CellChangeTimes->{{3.742450987580989*^9, 3.742450988651124*^9}, 
+   3.7427047256057262`*^9},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"b7f9c59d-1383-44f5-ac36-b12555fa2959"],
 
 Cell[BoxData[
  RowBox[{
@@ -24737,7 +24779,7 @@ Xx7sDK97O2D94P5+R/75g3XJ/3/7v/ltxJ/+AwgBHF0=\
  CellChangeTimes->{{3.742450690818789*^9, 
   3.742450691456688*^9}},ExpressionUUID->"948459cf-3c1c-49a0-b95e-\
 4d707af4cbcc"]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -24754,8 +24796,9 @@ executed. We can see that using the graph it is easy to find jumps in \
 programs.\
 \>", "Text",
  CellChangeTimes->{{3.742451801717784*^9, 3.742451802921547*^9}, 
-   3.742451836289812*^9},ExpressionUUID->"090eee5e-780f-4d30-92c4-\
-ff62c0f1ced2"],
+   3.742451836289812*^9, {3.742704739639407*^9, 3.742704740679324*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"090eee5e-780f-4d30-92c4-ff62c0f1ced2"],
 
 Cell[BoxData[{
  RowBox[{
@@ -27440,8 +27483,9 @@ map instructions to the names of functions. In this example, we parse \
 assembler files, find ranges of addresses and use them for mapping.\
 \>", "Text",
  CellChangeTimes->{{3.742454651078801*^9, 3.7424546740755796`*^9}, 
-   3.742454738324264*^9},ExpressionUUID->"0793edb9-f372-4354-b62d-\
-51fb23054be5"],
+   3.742454738324264*^9, {3.7427047528245277`*^9, 3.742704753771164*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"0793edb9-f372-4354-b62d-51fb23054be5"],
 
 Cell[BoxData[{
  RowBox[{
@@ -27467,7 +27511,7 @@ Cell[BoxData[{
   3.742292549755237*^9}, {3.742302059707883*^9, 3.7423020601076*^9}, {
   3.74230234310427*^9, 3.742302348727586*^9}, {3.7424546915598927`*^9, 
   3.7424546917676067`*^9}},
- CellLabel->"In[80]:=",ExpressionUUID->"cbbb8c44-f74e-4515-9196-8d896bb72819"],
+ CellLabel->"In[7]:=",ExpressionUUID->"cbbb8c44-f74e-4515-9196-8d896bb72819"],
 
 Cell[BoxData[{
  RowBox[{
@@ -27570,19 +27614,15 @@ Cell[BoxData[{
      ",", "colorLabels"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"getColor", "[", "b_", "]"}], ":=", 
+   RowBox[{"getColor", "[", "name_", "]"}], ":=", 
    RowBox[{
     RowBox[{"SelectFirst", "[", 
      RowBox[{"colorLabels", ",", 
       RowBox[{
        RowBox[{
-        RowBox[{
-         RowBox[{"#", "[", 
-          RowBox[{"[", "2", "]"}], "]"}], "\[LessEqual]", "b"}], "  ", "&&", 
-        " ", 
-        RowBox[{"b", " ", "\[LessEqual]", "  ", 
-         RowBox[{"#", "[", 
-          RowBox[{"[", "3", "]"}], "]"}]}]}], "&"}]}], "]"}], "[", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "name"}], "&"}]}], "]"}],
+     "[", 
     RowBox[{"[", "4", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -27628,18 +27668,31 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{
        RowBox[{
-        RowBox[{"#", "[", 
-         RowBox[{"[", "1", "]"}], "]"}], "\[Rule]", " ", 
-        RowBox[{"#", "[", 
-         RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", "gNodes", ",", "2", 
-      ",", "1"}], "]"}]}]}], ";"}]}], "Input",
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", 
+          RowBox[{"Background", "\[Rule]", 
+           RowBox[{"getColor", "[", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "]"}]}]}], "]"}], "\[Rule]", " ", 
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ",", 
+          RowBox[{"Background", "\[Rule]", 
+           RowBox[{"getColor", "[", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "2", "]"}], "]"}], "]"}]}]}], "]"}]}], "&"}], ",", 
+      "gNodes", ",", "2", ",", "1"}], "]"}]}]}], ";"}]}], "Input",
  CellChangeTimes->{{3.737475872178911*^9, 3.737475877323884*^9}, {
    3.737475970741289*^9, 3.737475983324868*^9}, {3.7379592970246363`*^9, 
    3.7379592973119297`*^9}, {3.7422742840413637`*^9, 
    3.7422743018272877`*^9}, {3.742284607969308*^9, 3.7422846437699003`*^9}, {
    3.742301326046741*^9, 3.7423013262944927`*^9}, 3.742301403876199*^9, {
-   3.7424546987384157`*^9, 3.742454728373467*^9}},
- CellLabel->"In[83]:=",ExpressionUUID->"6649ff40-2815-4246-bed7-abe7acd67425"],
+   3.7424546987384157`*^9, 3.742454728373467*^9}, {3.74270548849899*^9, 
+   3.742705522201048*^9}, {3.7427056406241198`*^9, 3.7427056903010063`*^9}},
+ CellLabel->"In[44]:=",ExpressionUUID->"6649ff40-2815-4246-bed7-abe7acd67425"],
 
 Cell[CellGroupData[{
 
@@ -27651,21 +27704,69 @@ Cell[BoxData[
  CellChangeTimes->{{3.742303103895604*^9, 3.7423031179118223`*^9}, {
   3.742303157100891*^9, 3.74230320695338*^9}, {3.742303267361627*^9, 
   3.742303317690917*^9}, {3.7423033801429768`*^9, 3.742303393964525*^9}},
- CellLabel->"In[92]:=",ExpressionUUID->"eee9b3d0-32ee-49b4-a163-ded7961c5bd7"],
+ CellLabel->"In[53]:=",ExpressionUUID->"eee9b3d0-32ee-49b4-a163-ded7961c5bd7"],
 
 Cell[BoxData[
  GraphicsBox[
   NamespaceBox["NetworkGraphics",
    DynamicModuleBox[{Typeset`graph = HoldComplete[
      Graph[{
-      "__ascii_mbtowc", "strcmp", "Func_1.constprop.1", "main", 
-       "vprintfmt.constprop.4", "handle_trap", "printf_putch", 
-       "machine_trap_entry", "_start", "__moddi3", "__udivdi3", "putchar", 
-       "sc_printf", "trap_entry", "__umoddi3"}, {{{1, 2}, {3, 4}, {3, 5}, {6, 
-       7}, {8, 9}, {4, 1}, {4, 7}, {4, 9}, {4, 5}, {10, 11}, {7, 3}, {7, 5}, {
-       12, 4}, {13, 3}, {13, 4}, {9, 12}, {9, 14}, {2, 4}, {11, 15}, {11, 
-       5}, {15, 5}, {5, 6}, {5, 10}, {5, 13}, {5, 11}}, Null}, {
-      GraphLayout -> "CircularEmbedding", VertexLabels -> {Automatic}}]]}, 
+       Text[
+       "__ascii_mbtowc", Background -> 
+        RGBColor[0.886745152542373, 0.5591349322033898, 0.5457713389830509]], 
+       
+       Text[
+       "strcmp", Background -> 
+        RGBColor[0.8977764915254238, 0.5865927118644069, 0.5343413220338983]], 
+       Text[
+       "Func_1.constprop.1", Background -> 
+        RGBColor[0.5275049830508475, 0.6088884406779661, 0.8406035084745763]], 
+       Text[
+       "main", Background -> 
+        RGBColor[0.633272372881356, 0.4916090847457627, 0.7577947627118644]], 
+       
+       Text[
+       "vprintfmt.constprop.4", Background -> 
+        RGBColor[0.5549382033898306, 0.5763247118644068, 0.8190418983050848]], 
+       Text[
+       "handle_trap", Background -> 
+        RGBColor[
+         0.47217428813559326`, 0.667326406779661, 0.8802867966101695]], 
+       Text[
+       "printf_putch", Background -> 
+        RGBColor[0.5000717627118644, 0.6414521694915254, 0.8621651186440679]], 
+       Text[
+       "machine_trap_entry", Background -> 
+        RGBColor[0.388267593220339, 0.7418616610169492, 0.9330641694915254]], 
+       
+       Text[
+       "_start", Background -> 
+        RGBColor[
+         0.41623649152542375`, 0.7170165762711864, 0.9154717118644068]], 
+       Text[
+       "__moddi3", Background -> 
+        RGBColor[0.9247025084745762, 0.6752922881355932, 0.5047076779661017]], 
+       Text[
+       "__udivdi3", Background -> 
+        RGBColor[0.9311219152542373, 0.7027218644067796, 0.4977374576271187]], 
+       Text[
+       "putchar", Background -> 
+        RGBColor[0.6091437288135594, 0.5133598474576271, 0.7764916271186441]], 
+       Text[
+       "sc_printf", Background -> 
+        RGBColor[0.5823714237288136, 0.5437609830508474, 0.7974802881355932]], 
+       Text[
+       "trap_entry", Background -> 
+        RGBColor[0.4442053898305085, 0.6921714915254237, 0.8978792542372881]], 
+       Text[
+       "__umoddi3", Background -> 
+        RGBColor[
+         0.9353048813559321, 0.7282816101694916, 0.4933114406779661]]}, {{{1, 
+       2}, {3, 4}, {3, 5}, {6, 7}, {8, 9}, {4, 1}, {4, 7}, {4, 9}, {4, 5}, {
+       10, 11}, {7, 3}, {7, 5}, {12, 4}, {13, 3}, {13, 4}, {9, 12}, {9, 14}, {
+       2, 4}, {11, 15}, {11, 5}, {15, 5}, {5, 6}, {5, 10}, {5, 13}, {5, 11}}, 
+       Null}, {GraphLayout -> "CircularEmbedding", 
+       VertexLabels -> {Automatic}}]]}, 
     TagBox[GraphicsGroupBox[{
        {Hue[0.6, 0.7, 0.5], Opacity[0.7], Arrowheads[Medium], 
         ArrowBox[{{-0.40673664307580076`, 
@@ -27732,90 +27833,227 @@ Cell[BoxData[
        {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[
         0.7]}], {
          DiskBox[{-0.40673664307580076, 0.9135454576426012}, 
-          0.02252250508849482], 
-         InsetBox["\<\"__ascii_mbtowc\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"__ascii_mbtowc\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.886745152542373, 0.5591349322033898, 0.5457713389830509],
+            ExpressionUUID->"a9e02c97-d128-447a-bf2d-867e2d025e35"],
+           Text[
+           "__ascii_mbtowc", Background -> 
+            RGBColor[
+             0.886745152542373, 0.5591349322033898, 0.5457713389830509]]], 
           Offset[{2, 2}, {-0.38421413798730597, 0.936067962731096}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{-0.7431448254773947, 0.6691306063588587}, 
-          0.02252250508849482], 
-         InsetBox["\<\"strcmp\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"strcmp\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.8977764915254238, 0.5865927118644069, 0.5343413220338983],
+            ExpressionUUID->"75425208-88ad-40b1-9173-99f12171a179"],
+           Text[
+           "strcmp", Background -> 
+            RGBColor[
+             0.8977764915254238, 0.5865927118644069, 0.5343413220338983]]], 
           Offset[{2, 2}, {-0.7206223203888998, 0.6916531114473535}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{-0.9510565162951538, 0.30901699437494834}, 
-          0.02252250508849482], 
-         InsetBox["\<\"Func_1.constprop.1\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"Func_1.constprop.1\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.5275049830508475, 0.6088884406779661, 0.8406035084745763],
+            ExpressionUUID->"70d1406f-ecf8-4329-94f7-4bb5d23d9a5c"],
+           Text[
+           "Func_1.constprop.1", Background -> 
+            RGBColor[
+             0.5275049830508475, 0.6088884406779661, 0.8406035084745763]]], 
           Offset[{2, 2}, {-0.9285340112066589, 0.3315394994634432}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{-0.9945218953682733, -0.10452846326765261}, 
-          0.02252250508849482], 
-         InsetBox["\<\"main\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"main\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.633272372881356, 0.4916090847457627, 0.7577947627118644],
+            ExpressionUUID->"6785899c-6b6e-42ba-a586-408db3e3dc2a"],
+           Text[
+           "main", Background -> 
+            RGBColor[
+             0.633272372881356, 0.4916090847457627, 0.7577947627118644]]], 
           Offset[{2, 2}, {-0.9719993902797784, -0.08200595817915779}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{-0.8660254037844384, -0.4999999999999994}, 
-          0.02252250508849482], 
-         InsetBox["\<\"vprintfmt.constprop.4\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"vprintfmt.constprop.4\"\>", TextForm]], "InlineText",
+            
+            
+            Background->RGBColor[
+             0.5549382033898306, 0.5763247118644068, 0.8190418983050848],
+            ExpressionUUID->"96f19630-c304-4070-8697-91071057466a"],
+           Text[
+           "vprintfmt.constprop.4", Background -> 
+            RGBColor[
+             0.5549382033898306, 0.5763247118644068, 0.8190418983050848]]], 
           Offset[{2, 2}, {-0.8435028986959435, -0.4774774949115046}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{-0.5877852522924728, -0.8090169943749468}, 
-          0.02252250508849482], 
-         InsetBox["\<\"handle_trap\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"handle_trap\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.47217428813559326`, 0.667326406779661, 0.8802867966101695],
+            ExpressionUUID->"c4bbe88c-660e-4ba3-97f7-ddecbbcc04b0"],
+           Text[
+           "handle_trap", Background -> 
+            RGBColor[
+             0.47217428813559326`, 0.667326406779661, 0.8802867966101695]]], 
           Offset[{2, 2}, {-0.565262747203978, -0.7864944892864519}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{-0.20791169081775882, -0.9781476007338054}, 
-          0.02252250508849482], 
-         InsetBox["\<\"printf_putch\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"printf_putch\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.5000717627118644, 0.6414521694915254, 0.8621651186440679],
+            ExpressionUUID->"ec8a9675-a33c-477d-a320-9b04e5d994ec"],
+           Text[
+           "printf_putch", Background -> 
+            RGBColor[
+             0.5000717627118644, 0.6414521694915254, 0.8621651186440679]]], 
           Offset[{2, 2}, {-0.185389185729264, -0.9556250956453105}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{0.20791169081775956, -0.9781476007338058}, 
-          0.02252250508849482], 
-         InsetBox["\<\"machine_trap_entry\"\>", Offset[{2, 2}, {0.23043419590625439, -0.955625095645311}]
-          , ImageScaled[{0, 0}],
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"machine_trap_entry\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.388267593220339, 0.7418616610169492, 0.9330641694915254],
+            ExpressionUUID->"cd712fb3-2b8a-41e2-a880-559755367e62"],
+           Text[
+           "machine_trap_entry", Background -> 
+            RGBColor[
+             0.388267593220339, 0.7418616610169492, 0.9330641694915254]]], 
+          Offset[{2, 2}, {0.23043419590625439, -0.955625095645311}], 
+          ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{0.5877852522924734, -0.8090169943749481}, 
-          0.02252250508849482], 
-         InsetBox["\<\"_start\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"_start\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.41623649152542375`, 0.7170165762711864, 0.9154717118644068],
+            ExpressionUUID->"c0a466d8-cf4b-4db1-88d8-3642a1bd1fa3"],
+           Text[
+           "_start", Background -> 
+            RGBColor[
+             0.41623649152542375`, 0.7170165762711864, 0.9154717118644068]]], 
           Offset[{2, 2}, {0.6103077573809682, -0.7864944892864533}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{0.8660254037844389, -0.5000000000000012}, 
-          0.02252250508849482], 
-         InsetBox["\<\"__moddi3\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"__moddi3\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.9247025084745762, 0.6752922881355932, 0.5047076779661017],
+            ExpressionUUID->"7ab17984-000c-4cbb-b6ec-f197a6f275d2"],
+           Text[
+           "__moddi3", Background -> 
+            RGBColor[
+             0.9247025084745762, 0.6752922881355932, 0.5047076779661017]]], 
           Offset[{2, 2}, {0.8885479088729338, -0.4774774949115064}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{0.9945218953682734, -0.1045284632676543}, 
-          0.02252250508849482], 
-         InsetBox["\<\"__udivdi3\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"__udivdi3\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.9311219152542373, 0.7027218644067796, 0.4977374576271187],
+            ExpressionUUID->"e8f810e0-7c2d-4555-aece-5f6fbc023c75"],
+           Text[
+           "__udivdi3", Background -> 
+            RGBColor[
+             0.9311219152542373, 0.7027218644067796, 0.4977374576271187]]], 
           Offset[{2, 2}, {1.0170444004567682, -0.08200595817915948}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{0.9510565162951536, 0.3090169943749455}, 
-          0.02252250508849482], 
-         InsetBox["\<\"putchar\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"putchar\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.6091437288135594, 0.5133598474576271, 0.7764916271186441],
+            ExpressionUUID->"c46ef6ac-f8ef-4c0f-964d-8ee31eed21d2"],
+           Text[
+           "putchar", Background -> 
+            RGBColor[
+             0.6091437288135594, 0.5133598474576271, 0.7764916271186441]]], 
           Offset[{2, 2}, {0.9735790213836485, 0.3315394994634403}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{0.743144825477394, 0.6691306063588571}, 
-          0.02252250508849482], 
-         InsetBox["\<\"sc_printf\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"sc_printf\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.5823714237288136, 0.5437609830508474, 0.7974802881355932],
+            ExpressionUUID->"12c576c0-9e72-418d-ae1c-c2a17817d473"],
+           Text[
+           "sc_printf", Background -> 
+            RGBColor[
+             0.5823714237288136, 0.5437609830508474, 0.7974802881355932]]], 
           Offset[{2, 2}, {0.7656673305658889, 0.691653111447352}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
          DiskBox[{0.4067366430758001, 0.9135454576426005}, 
-          0.02252250508849482], 
-         InsetBox["\<\"trap_entry\"\>", 
+          0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"trap_entry\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.4442053898305085, 0.6921714915254237, 0.8978792542372881],
+            ExpressionUUID->"bcc677cd-c8de-4af5-ad60-7cf3ffa7e993"],
+           Text[
+           "trap_entry", Background -> 
+            RGBColor[
+             0.4442053898305085, 0.6921714915254237, 0.8978792542372881]]], 
           Offset[{2, 2}, {0.4292591481642949, 0.9360679627310954}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}, {
-         DiskBox[{1.8369701987210297*^-16, 1.}, 0.02252250508849482], 
-         InsetBox["\<\"__umoddi3\"\>", 
+         DiskBox[{1.8369701987210297*^-16, 1.}, 0.02252250508849482], InsetBox[
+          InterpretationBox[Cell[BoxData[
+            FormBox["\<\"__umoddi3\"\>", TextForm]], "InlineText",
+            
+            Background->RGBColor[
+             0.9353048813559321, 0.7282816101694916, 0.4933114406779661],
+            ExpressionUUID->"763e1ae7-8e78-4d45-9943-6782369efb05"],
+           Text[
+           "__umoddi3", Background -> 
+            RGBColor[
+             0.9353048813559321, 0.7282816101694916, 0.4933114406779661]]], 
           Offset[{2, 2}, {0.022522505088495005, 1.0225225050884947}], 
           ImageScaled[{0, 0}],
           BaseStyle->"Graphics"]}}}],
@@ -27825,8 +28063,9 @@ Cell[BoxData[
    "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
   FormatType->TraditionalForm,
   FrameTicks->None]], "Output",
- CellChangeTimes->{3.742454757981881*^9},
- CellLabel->"Out[92]=",ExpressionUUID->"14e68534-6745-4ccc-8278-ce01142b6c81"]
+ CellChangeTimes->{3.742454757981881*^9, 3.74270551094182*^9, 
+  3.742705702692377*^9},
+ CellLabel->"Out[53]=",ExpressionUUID->"86178a51-d13e-4c09-be66-17663058cf19"]
 }, Open  ]]
 }, Open  ]],
 
@@ -27839,13 +28078,14 @@ Cell["4. Transactions to memory", "Subsubsection",
 067e5db9cc9e"],
 
 Cell["\<\
-This example shows how to trace data manually with Wolfram Mathematica.Also, \
+This example shows how to trace data manually with Wolfram Mathematica. Also, \
 we calculate a list of frequent addresses which is accessed by SCR1 for a \
-particular program (dhrystone).\
+particular program (dhrystone21). \
 \>", "Text",
- CellChangeTimes->{{3.742454806571147*^9, 
-  3.742454808998476*^9}},ExpressionUUID->"c0099bf5-f178-4bfd-a7ba-\
-3a7a1ff63534"],
+ CellChangeTimes->{{3.742454806571147*^9, 3.742454808998476*^9}, 
+   3.7427047659236097`*^9, {3.742705740026207*^9, 3.742705746920177*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"c0099bf5-f178-4bfd-a7ba-3a7a1ff63534"],
 
 Cell[BoxData[{
  RowBox[{
@@ -28095,17 +28335,22 @@ Cell["5. Develop new devices: branch predictor", "Subsubsection",
 c89058b01208"],
 
 Cell["\<\
-Our solution provides loads of data about microcontroller.Engineers may use \
-these data to design or optimise modules.For instance, we can get information \
-about branching of SCR1 and use this data for developing a branch predictor \
-module.The purpose of the branch predictor is to improve the flow in the \
-instruction pipeline.Branch predictors play a critical role in achieving high \
-performance in many modern pipelined processors.Here we use machine learning \
-methods, a neural network, to build a predictor.\
+Our solution provides loads of data about the core. Engineers can use these \
+data to design or optimise modules. For instance, we can get information \
+about branching of SCR1 and use this data for developing \
+a\[NonBreakingSpace]branch predictor module.
+
+The purpose of the branch predictor is to improve the flow in the instruction \
+pipeline. Branch predictors play a critical role in achieving high \
+performance in many modern pipelined processors.
+
+Here we use machine learning methods, a neural network, to build a predictor.
+\
 \>", "Text",
- CellChangeTimes->{{3.742457018924512*^9, 
-  3.742457020211115*^9}},ExpressionUUID->"56631a4a-1cb2-45f8-9799-\
-764210a93a56"],
+ CellChangeTimes->{{3.742457018924512*^9, 3.742457020211115*^9}, {
+  3.742704783558928*^9, 3.742704790589109*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"56631a4a-1cb2-45f8-9799-764210a93a56"],
 
 Cell[CellGroupData[{
 
@@ -31680,17 +31925,18 @@ Cell["How it works", "Section",
 8f035ea3c373"],
 
 Cell["\<\
-The driver encapsulates lower - level interactions with the SCR1.We cannot \
-use SystemVerilog in Wolfram Mathematica directly.That is why we converted \
-the SCR1 code to C++ code by Verilator software (https : // \
-www.veripool.org/wiki/verilator).This program is an open - source \
-Verilog/System Verilog simulator.We wrapped generated C++ code with functions \
-to communicate with Wolfram Mathematica through Wolfram LibraryLink.The full \
+The driver encapsulates lower-level interactions with the SCR1. We cannot use \
+SystemVerilog in Wolfram Mathematica directly. That is why we converted the \
+SCR1 code to C++ code by Verilator software \
+(https://www.veripool.org/wiki/verilator). This program is an open-source  \
+Verilog/SystemVerilog simulator. We wrapped generated C++ code with functions \
+to communicate with Wolfram Mathematica through Wolfram LibraryLink. The full \
 scheme of the project is below.\
 \>", "Text",
- CellChangeTimes->{{3.742444546889619*^9, 
-  3.742444548857437*^9}},ExpressionUUID->"36e67b2b-fb5e-4e18-a2de-\
-19467421a542"],
+ CellChangeTimes->{{3.742444546889619*^9, 3.742444548857437*^9}, 
+   3.742704810341774*^9, {3.742705795109977*^9, 3.742705797798718*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"36e67b2b-fb5e-4e18-a2de-19467421a542"],
 
 Cell[CellGroupData[{
 
@@ -32701,28 +32947,30 @@ Cell["Conclusions", "Section",
 7d1d33e629b0"],
 
 Cell["\<\
-For 24 hours our team built a prototype of hardware verification workflow \
-with SCR1 microcontroller.We implemented :
- \[LongDash]device driver for the SCR1 processor based on Wolfram Device \
+Over the course of 24 hours our team built a prototype of hardware \
+verification workflow with SCR1 microcontroller. We implemented:
+\[LongDash] device driver for the SCR1 processor based on Wolfram Device \
 Framework;
-\[LongDash]C++ bridge between Wolfram Mathematica and generated C++ by \
+\[LongDash] C++ bridge between Wolfram Mathematica and generated C++ by \
 Verilator;
-\[LongDash]examples of using this system for verification programs, hardware \
+\[LongDash] examples of using this system for verification programs, hardware \
 and design branch predictor.
 
-Our verification solution provides register and memory access and step - by - \
-step debugger (clock or instruction modes).To build a powerful hardware \
-debugger it needs to add a feature of making dumps of arbitrary signals for \
-any RTL design.The last is a potential topic for future work.\
+Our verification solution provides register and memory access and \
+step-by-step debugger (clock or instruction modes). To build a powerful \
+hardware debugger it needs to add a feature of making dumps of arbitrary \
+signals for any RTL design. The last is a potential topic for future work.\
 \>", "Text",
- CellChangeTimes->{{3.742458897590639*^9, 
-  3.742458905960672*^9}},ExpressionUUID->"0db7aec8-7888-412f-a710-\
-a0a4873134a6"]
+ CellChangeTimes->{{3.742458897590639*^9, 3.742458905960672*^9}, {
+  3.74270482369438*^9, 3.742704825660103*^9}},
+ TextAlignment->Left,
+ TextJustification->1.,ExpressionUUID->"0db7aec8-7888-412f-a710-a0a4873134a6"]
 }, Open  ]]
 }, Open  ]]
 },
+WindowToolbars->"EditBar",
 WindowSize->{Full, Full},
-WindowMargins->{{Automatic, 94}, {25, Automatic}},
+WindowMargins->{{Automatic, 149}, {Automatic, 0}},
 FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 7, \
 2018)",
 StyleDefinitions->"Default.nb"
@@ -32742,174 +32990,175 @@ Cell[CellGroupData[{
 Cell[580, 22, 232, 4, 98, "Title",ExpressionUUID->"06c7e292-9ceb-4e64-b669-2e08baca2aef"],
 Cell[CellGroupData[{
 Cell[837, 30, 156, 3, 67, "Section",ExpressionUUID->"dcfb9192-d2de-4545-bb92-a8e69cd500ab"],
-Cell[996, 35, 40271, 663, 641, "Text",ExpressionUUID->"5c006520-4c11-4d25-b0ba-d024e260238e"]
+Cell[996, 35, 40355, 664, 641, "Text",ExpressionUUID->"5c006520-4c11-4d25-b0ba-d024e260238e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[41304, 703, 157, 3, 67, "Section",ExpressionUUID->"6a40ef43-c775-46ed-8e0a-9e05f6470a48"],
-Cell[41464, 708, 367, 7, 58, "Text",ExpressionUUID->"f74446c2-d2ec-4422-a323-33d8aa5d0f53"],
+Cell[41388, 704, 211, 4, 67, "Section",ExpressionUUID->"6a40ef43-c775-46ed-8e0a-9e05f6470a48"],
+Cell[41602, 710, 460, 8, 58, "Text",ExpressionUUID->"f74446c2-d2ec-4422-a323-33d8aa5d0f53"],
 Cell[CellGroupData[{
-Cell[41856, 719, 609, 14, 89, "Input",ExpressionUUID->"75e1c8f7-226d-40f9-8213-2f12283a6e9a",
+Cell[42087, 722, 654, 14, 89, "Input",ExpressionUUID->"75e1c8f7-226d-40f9-8213-2f12283a6e9a",
  InitializationCell->True],
-Cell[42468, 735, 25876, 474, 66, "Output",ExpressionUUID->"e6416e7c-a8df-403a-a626-a08c19feb4e2"]
+Cell[42744, 738, 26142, 476, 137, "Output",ExpressionUUID->"01f1a33a-7391-4cbf-bf8c-2ed20d6c3e63"]
 }, Open  ]],
-Cell[68359, 1212, 1447, 23, 265, "Text",ExpressionUUID->"ac7a151b-ed5d-4b9d-b8ca-802b0671a6a9"],
+Cell[68901, 1217, 1606, 25, 265, "Text",ExpressionUUID->"ac7a151b-ed5d-4b9d-b8ca-802b0671a6a9"],
 Cell[CellGroupData[{
-Cell[69831, 1239, 217, 3, 30, "Input",ExpressionUUID->"12971b68-d8ab-42e0-a62f-ad0b471b3dd6"],
-Cell[70051, 1244, 205, 3, 34, "Output",ExpressionUUID->"45c9f2ff-5946-4db1-b285-e0d6de50bdf8"]
+Cell[70532, 1246, 217, 3, 30, "Input",ExpressionUUID->"12971b68-d8ab-42e0-a62f-ad0b471b3dd6"],
+Cell[70752, 1251, 205, 3, 34, "Output",ExpressionUUID->"45c9f2ff-5946-4db1-b285-e0d6de50bdf8"]
 }, Open  ]],
-Cell[70271, 1250, 1855, 32, 449, "Text",ExpressionUUID->"23fe947f-6a70-4ea9-9edc-d6af62f609ba"],
+Cell[70972, 1257, 2225, 37, 449, "Text",ExpressionUUID->"23fe947f-6a70-4ea9-9edc-d6af62f609ba"],
 Cell[CellGroupData[{
-Cell[72151, 1286, 164, 3, 54, "Subsection",ExpressionUUID->"ca2905b5-98ef-4499-902f-4ab34e19e417"],
+Cell[73222, 1298, 164, 3, 54, "Subsection",ExpressionUUID->"ca2905b5-98ef-4499-902f-4ab34e19e417"],
 Cell[CellGroupData[{
-Cell[72340, 1293, 219, 3, 45, "Subsubsection",ExpressionUUID->"91d021f1-19c2-40a2-9ecb-cd20f8baa5af"],
-Cell[72562, 1298, 243, 6, 35, "Text",ExpressionUUID->"a8b134bd-cf6c-4970-8368-c7c73359b4fb"],
-Cell[72808, 1306, 333, 7, 94, "Input",ExpressionUUID->"fe1dfb0a-6175-400f-85c3-c28755f8700e"],
-Cell[73144, 1315, 203, 3, 35, "Text",ExpressionUUID->"476a2622-6ea5-4c80-96cc-d87d23bce549"],
-Cell[73350, 1320, 319, 6, 30, "Input",ExpressionUUID->"5ceb0330-3471-4bbd-b241-827a3aca2174"],
-Cell[73672, 1328, 186, 3, 35, "Text",ExpressionUUID->"f6ee5b2b-97f6-4dbf-a61b-98f48a65f6e9"],
-Cell[73861, 1333, 275, 5, 30, "Input",ExpressionUUID->"4ec2d072-9ae4-4955-beb7-46e4e716d053"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[74173, 1343, 326, 5, 45, "Subsubsection",ExpressionUUID->"ebc108b6-5d82-47ce-877c-7369455290f1"],
-Cell[74502, 1350, 188, 3, 35, "Text",ExpressionUUID->"e42d1b6d-eb65-455a-825d-858c7d902006"],
-Cell[CellGroupData[{
-Cell[74715, 1357, 380, 7, 30, "Input",ExpressionUUID->"2032b68e-5e8a-44cf-b1d6-3f0f87624271"],
-Cell[75098, 1366, 16731, 329, 135, "Output",ExpressionUUID->"ebd9b99c-d730-44af-b80b-41ff21100c18"]
-}, Open  ]],
-Cell[91844, 1698, 314, 7, 35, "Text",ExpressionUUID->"c3bb3c9f-9437-4141-9a60-5442e2c36b26"],
-Cell[CellGroupData[{
-Cell[92183, 1709, 213, 4, 30, "Input",ExpressionUUID->"41433310-dfe9-4f85-bbd2-0688e13949e9"],
-Cell[92399, 1715, 16696, 317, 161, "Output",ExpressionUUID->"b21749dd-ee1f-47e4-be68-3a697ace0332"]
-}, Open  ]],
-Cell[109110, 2035, 565, 10, 81, "Text",ExpressionUUID->"d3dc76d8-8a1f-4bb0-93c0-edd49e9e48a3"],
-Cell[CellGroupData[{
-Cell[109700, 2049, 211, 4, 30, "Input",ExpressionUUID->"3ddf7106-c433-44b2-b5a6-629573633ca1"],
-Cell[109914, 2055, 11985, 221, 85, "Output",ExpressionUUID->"eed43cbd-7585-4505-9620-7bb7ff048e88"]
-}, Open  ]],
-Cell[121914, 2279, 335, 7, 58, "Text",ExpressionUUID->"d6ffd9b6-a47f-4c43-8160-0b36abf5d19a"],
-Cell[CellGroupData[{
-Cell[122274, 2290, 756, 19, 94, "Input",ExpressionUUID->"5fc192ee-96fc-4ce2-bf9c-43e84f11b1cb"],
-Cell[123033, 2311, 67080, 1383, 563, "Output",ExpressionUUID->"115c6d57-7c8b-4d1e-b9bc-9347f2343a1a"]
-}, Open  ]],
-Cell[190128, 3697, 324, 7, 35, "Text",ExpressionUUID->"dfc6b85e-8bb0-481e-9024-7895715459ea"],
-Cell[CellGroupData[{
-Cell[190477, 3708, 466, 12, 30, "Input",ExpressionUUID->"c3172479-5858-4329-8487-5e59a1eef1e9"],
-Cell[190946, 3722, 11123, 410, 109, "Output",ExpressionUUID->"443203ce-f111-45f3-96c5-d672595d8fa0"]
-}, Open  ]]
+Cell[73411, 1305, 219, 3, 45, "Subsubsection",ExpressionUUID->"91d021f1-19c2-40a2-9ecb-cd20f8baa5af"],
+Cell[73633, 1310, 310, 7, 35, "Text",ExpressionUUID->"a8b134bd-cf6c-4970-8368-c7c73359b4fb"],
+Cell[73946, 1319, 333, 7, 94, "Input",ExpressionUUID->"fe1dfb0a-6175-400f-85c3-c28755f8700e"],
+Cell[74282, 1328, 371, 6, 35, "Text",ExpressionUUID->"476a2622-6ea5-4c80-96cc-d87d23bce549"],
+Cell[74656, 1336, 319, 6, 30, "Input",ExpressionUUID->"5ceb0330-3471-4bbd-b241-827a3aca2174"],
+Cell[74978, 1344, 209, 3, 35, "Text",ExpressionUUID->"f6ee5b2b-97f6-4dbf-a61b-98f48a65f6e9"],
+Cell[75190, 1349, 275, 5, 30, "Input",ExpressionUUID->"4ec2d072-9ae4-4955-beb7-46e4e716d053"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[202118, 4138, 322, 5, 45, "Subsubsection",ExpressionUUID->"592063fe-acf4-4fd4-bcf3-cf98508dceb0"],
-Cell[202443, 4145, 185, 3, 35, "Text",ExpressionUUID->"c8f36feb-03be-4bbb-978b-0273820f7b99"],
+Cell[75502, 1359, 326, 5, 45, "Subsubsection",ExpressionUUID->"ebc108b6-5d82-47ce-877c-7369455290f1"],
+Cell[75831, 1366, 213, 3, 35, "Text",ExpressionUUID->"e42d1b6d-eb65-455a-825d-858c7d902006"],
 Cell[CellGroupData[{
-Cell[202653, 4152, 896, 19, 52, "Input",ExpressionUUID->"1970ea75-6b2a-4a0d-bf31-57d3fbeab795"],
-Cell[203552, 4173, 224, 4, 34, "Output",ExpressionUUID->"e4fdc355-6fa6-48db-8e28-ca7764fcc092"]
+Cell[76069, 1373, 380, 7, 30, "Input",ExpressionUUID->"2032b68e-5e8a-44cf-b1d6-3f0f87624271"],
+Cell[76452, 1382, 16731, 329, 135, "Output",ExpressionUUID->"ebd9b99c-d730-44af-b80b-41ff21100c18"]
 }, Open  ]],
-Cell[203791, 4180, 234, 6, 35, "Text",ExpressionUUID->"88dfd27a-4df9-4067-9666-ed83737d9291"],
+Cell[93198, 1714, 426, 8, 35, "Text",ExpressionUUID->"c3bb3c9f-9437-4141-9a60-5442e2c36b26"],
 Cell[CellGroupData[{
-Cell[204050, 4190, 1067, 19, 52, "Input",ExpressionUUID->"05b5ffa8-dc72-4d4b-b8e0-ed8502b32a3c"],
-Cell[205120, 4211, 528, 9, 34, "Output",ExpressionUUID->"c7f48ba1-1337-43f0-89cd-4a95364e6e99"]
+Cell[93649, 1726, 213, 4, 30, "Input",ExpressionUUID->"41433310-dfe9-4f85-bbd2-0688e13949e9"],
+Cell[93865, 1732, 16696, 317, 161, "Output",ExpressionUUID->"b21749dd-ee1f-47e4-be68-3a697ace0332"]
 }, Open  ]],
-Cell[205663, 4223, 217, 5, 35, "Text",ExpressionUUID->"c7f6d824-287d-4a21-a197-a062ce48d057"]
+Cell[110576, 2052, 860, 15, 81, "Text",ExpressionUUID->"d3dc76d8-8a1f-4bb0-93c0-edd49e9e48a3"],
+Cell[CellGroupData[{
+Cell[111461, 2071, 211, 4, 30, "Input",ExpressionUUID->"3ddf7106-c433-44b2-b5a6-629573633ca1"],
+Cell[111675, 2077, 11985, 221, 85, "Output",ExpressionUUID->"eed43cbd-7585-4505-9620-7bb7ff048e88"]
 }, Open  ]],
+Cell[123675, 2301, 445, 8, 35, "Text",ExpressionUUID->"d6ffd9b6-a47f-4c43-8160-0b36abf5d19a"],
 Cell[CellGroupData[{
-Cell[205917, 4233, 425, 6, 45, "Subsubsection",ExpressionUUID->"6375eb7a-e56e-440a-b31d-773b20001142"],
-Cell[206345, 4241, 440, 8, 58, "Text",ExpressionUUID->"c4c1afa1-cc77-4a9b-9533-9ffb46abe11b"],
-Cell[CellGroupData[{
-Cell[206810, 4253, 302, 5, 30, "Input",ExpressionUUID->"52b35238-3b4b-40ee-86ed-02d7d2f4db5c"],
-Cell[207115, 4260, 610, 8, 34, "Output",ExpressionUUID->"a2471620-5ac8-4e0c-bded-52957e26278a"]
+Cell[124145, 2313, 756, 19, 94, "Input",ExpressionUUID->"5fc192ee-96fc-4ce2-bf9c-43e84f11b1cb"],
+Cell[124904, 2334, 67080, 1383, 563, "Output",ExpressionUUID->"115c6d57-7c8b-4d1e-b9bc-9347f2343a1a"]
 }, Open  ]],
-Cell[207740, 4271, 338, 7, 35, "Text",ExpressionUUID->"9e03e94d-617d-449f-ae36-333667f58c33"],
+Cell[191999, 3720, 406, 8, 35, "Text",ExpressionUUID->"dfc6b85e-8bb0-481e-9024-7895715459ea"],
 Cell[CellGroupData[{
-Cell[208103, 4282, 282, 5, 30, "Input",ExpressionUUID->"31c84ab4-42a6-443e-8f15-120e3f88fccc"],
-Cell[208388, 4289, 445, 7, 34, "Output",ExpressionUUID->"77980c81-ad62-40b7-a3f9-695795428036"]
+Cell[192430, 3732, 466, 12, 30, "Input",ExpressionUUID->"c3172479-5858-4329-8487-5e59a1eef1e9"],
+Cell[192899, 3746, 11123, 410, 109, "Output",ExpressionUUID->"443203ce-f111-45f3-96c5-d672595d8fa0"]
 }, Open  ]],
-Cell[208848, 4299, 204, 3, 35, "Text",ExpressionUUID->"a5faae4c-5dfc-4cd8-b0ad-635093cd4f0e"],
-Cell[CellGroupData[{
-Cell[209077, 4306, 476, 8, 30, "Input",ExpressionUUID->"56f9eae2-737f-4e58-b6d4-c674538b0a4a"],
-Cell[209556, 4316, 368, 5, 34, "Output",ExpressionUUID->"ca84fff0-20f4-41d6-bafe-6b5d76618e26"]
-}, Open  ]],
-Cell[209939, 4324, 301, 6, 35, "Text",ExpressionUUID->"029d3860-2877-496b-b35a-d9587c1a2229"],
-Cell[210243, 4332, 293, 6, 30, "Input",ExpressionUUID->"3341374b-9861-4dab-aded-6dfcb5b8b84a"],
-Cell[210539, 4340, 297, 7, 35, "Text",ExpressionUUID->"58a762cc-308a-478c-9841-1e386e1c563a"],
-Cell[CellGroupData[{
-Cell[210861, 4351, 305, 5, 30, "Input",ExpressionUUID->"290cf1a5-fbb0-48a9-8c86-44e913765577"],
-Cell[211169, 4358, 2622, 35, 1348, "Output",ExpressionUUID->"85f82f11-748c-46ef-bf20-b36443c4e3c4"]
-}, Open  ]]
-}, Open  ]]
+Cell[204037, 4159, 317, 6, 35, "Text",ExpressionUUID->"15750df6-da4c-4671-8653-33f5bffdbeb5"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[213852, 4400, 215, 4, 54, "Subsection",ExpressionUUID->"04a9c7b7-db78-4d1a-895b-89b6af99f229"],
+Cell[204391, 4170, 322, 5, 45, "Subsubsection",ExpressionUUID->"592063fe-acf4-4fd4-bcf3-cf98508dceb0"],
+Cell[204716, 4177, 185, 3, 35, "Text",ExpressionUUID->"c8f36feb-03be-4bbb-978b-0273820f7b99"],
 Cell[CellGroupData[{
-Cell[214092, 4408, 178, 3, 45, "Subsubsection",ExpressionUUID->"6b842a74-a7a7-4caa-8023-778e40d722ec"],
-Cell[214273, 4413, 353, 7, 58, "Text",ExpressionUUID->"b7f9c59d-1383-44f5-ac36-b12555fa2959"],
-Cell[214629, 4422, 1820, 39, 199, "Input",ExpressionUUID->"33e201c9-c25d-40f6-af7f-1dcdaf7c73c5"],
-Cell[216452, 4463, 713, 15, 30, "Input",ExpressionUUID->"8f1215d6-902a-4ebc-914c-e5ddc2a79be6"],
-Cell[217168, 4480, 1216789, 20258, 2896, "Input",ExpressionUUID->"948459cf-3c1c-49a0-b95e-4d707af4cbcc"]
-}, Closed]],
+Cell[204926, 4184, 896, 19, 52, "Input",ExpressionUUID->"1970ea75-6b2a-4a0d-bf31-57d3fbeab795"],
+Cell[205825, 4205, 224, 4, 34, "Output",ExpressionUUID->"e4fdc355-6fa6-48db-8e28-ca7764fcc092"]
+}, Open  ]],
+Cell[206064, 4212, 302, 7, 35, "Text",ExpressionUUID->"88dfd27a-4df9-4067-9666-ed83737d9291"],
 Cell[CellGroupData[{
-Cell[1433994, 24743, 231, 4, 37, "Subsubsection",ExpressionUUID->"d16a691f-f9db-4b8e-87f4-da73bc71e2c1"],
-Cell[1434228, 24749, 404, 8, 58, "Text",ExpressionUUID->"090eee5e-780f-4d30-92c4-ff62c0f1ced2"],
-Cell[1434635, 24759, 935, 20, 136, "Input",ExpressionUUID->"8b2ca2af-b720-477f-bd51-c3167fa0172c"],
-Cell[CellGroupData[{
-Cell[1435595, 24783, 1645, 36, 220, "Input",ExpressionUUID->"3e86f0bd-a92e-4aed-9ba9-e5d498479836"],
-Cell[1437243, 24821, 156126, 2603, 358, 36872, 647, "CachedBoxData", "BoxData", "Output",ExpressionUUID->"375528ec-19ad-4b66-bceb-a7fdb664150c"]
-}, Open  ]]
+Cell[206391, 4223, 1067, 19, 52, "Input",ExpressionUUID->"05b5ffa8-dc72-4d4b-b8e0-ed8502b32a3c"],
+Cell[207461, 4244, 528, 9, 34, "Output",ExpressionUUID->"c7f48ba1-1337-43f0-89cd-4a95364e6e99"]
+}, Open  ]],
+Cell[208004, 4256, 269, 6, 35, "Text",ExpressionUUID->"c7f6d824-287d-4a21-a197-a062ce48d057"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1593418, 27430, 211, 4, 45, "Subsubsection",ExpressionUUID->"3876f5c9-25c0-4da5-a5e7-a8c8985a20f1"],
-Cell[1593632, 27436, 391, 7, 58, "Text",ExpressionUUID->"0793edb9-f372-4354-b62d-51fb23054be5"],
-Cell[1594026, 27445, 1236, 24, 136, "Input",ExpressionUUID->"cbbb8c44-f74e-4515-9196-8d896bb72819"],
-Cell[1595265, 27471, 5884, 170, 283, "Input",ExpressionUUID->"6649ff40-2815-4246-bed7-abe7acd67425"],
+Cell[208310, 4267, 425, 6, 45, "Subsubsection",ExpressionUUID->"6375eb7a-e56e-440a-b31d-773b20001142"],
+Cell[208738, 4275, 568, 9, 58, "Text",ExpressionUUID->"c4c1afa1-cc77-4a9b-9533-9ffb46abe11b"],
 Cell[CellGroupData[{
-Cell[1601174, 27645, 500, 8, 30, "Input",ExpressionUUID->"eee9b3d0-32ee-49b4-a163-ded7961c5bd7"],
-Cell[1601677, 27655, 8966, 173, 346, "Output",ExpressionUUID->"14e68534-6745-4ccc-8278-ce01142b6c81"]
-}, Open  ]]
+Cell[209331, 4288, 302, 5, 30, "Input",ExpressionUUID->"52b35238-3b4b-40ee-86ed-02d7d2f4db5c"],
+Cell[209636, 4295, 610, 8, 34, "Output",ExpressionUUID->"a2471620-5ac8-4e0c-bded-52957e26278a"]
 }, Open  ]],
+Cell[210261, 4306, 449, 8, 35, "Text",ExpressionUUID->"9e03e94d-617d-449f-ae36-333667f58c33"],
 Cell[CellGroupData[{
-Cell[1610692, 27834, 227, 4, 45, "Subsubsection",ExpressionUUID->"6158d572-0e98-473f-9398-067e5db9cc9e"],
-Cell[1610922, 27840, 336, 7, 58, "Text",ExpressionUUID->"c0099bf5-f178-4bfd-a7ba-3a7a1ff63534"],
-Cell[1611261, 27849, 2410, 59, 262, "Input",ExpressionUUID->"c3a90192-39da-4935-aefe-aac7af6fbab7"],
-Cell[CellGroupData[{
-Cell[1613696, 27912, 976, 24, 30, "Input",ExpressionUUID->"cd7c9368-1a21-421b-a2e2-fe5e5e863db7"],
-Cell[1614675, 27938, 3634, 147, 375, "Output",ExpressionUUID->"52647885-98ab-430b-87b3-d5abe9c86fc1"]
-}, Open  ]]
+Cell[210735, 4318, 282, 5, 30, "Input",ExpressionUUID->"31c84ab4-42a6-443e-8f15-120e3f88fccc"],
+Cell[211020, 4325, 445, 7, 34, "Output",ExpressionUUID->"77980c81-ad62-40b7-a3f9-695795428036"]
 }, Open  ]],
+Cell[211480, 4335, 371, 7, 35, "Text",ExpressionUUID->"a5faae4c-5dfc-4cd8-b0ad-635093cd4f0e"],
 Cell[CellGroupData[{
-Cell[1618358, 28091, 214, 3, 45, "Subsubsection",ExpressionUUID->"570991bf-cb18-427b-a0e3-c89058b01208"],
-Cell[1618575, 28096, 668, 11, 81, "Text",ExpressionUUID->"56631a4a-1cb2-45f8-9799-764210a93a56"],
-Cell[CellGroupData[{
-Cell[1619268, 28111, 2466, 57, 346, "Input",ExpressionUUID->"0ef67f49-3952-47c4-b6f2-b1c4a6d22929"],
-Cell[1621737, 28170, 78159, 1616, 585, "Output",ExpressionUUID->"2d239ae9-a83c-49b1-8dad-fd75c3d26bd1"]
+Cell[211876, 4346, 476, 8, 30, "Input",ExpressionUUID->"56f9eae2-737f-4e58-b6d4-c674538b0a4a"],
+Cell[212355, 4356, 368, 5, 34, "Output",ExpressionUUID->"ca84fff0-20f4-41d6-bafe-6b5d76618e26"]
 }, Open  ]],
-Cell[1699911, 29789, 1562, 42, 157, "Input",ExpressionUUID->"c416dd2e-d275-4209-bf49-eb32573964aa"],
+Cell[212738, 4364, 335, 7, 35, "Text",ExpressionUUID->"029d3860-2877-496b-b35a-d9587c1a2229"],
+Cell[213076, 4373, 293, 6, 30, "Input",ExpressionUUID->"3341374b-9861-4dab-aded-6dfcb5b8b84a"],
+Cell[213372, 4381, 337, 7, 35, "Text",ExpressionUUID->"58a762cc-308a-478c-9841-1e386e1c563a"],
 Cell[CellGroupData[{
-Cell[1701498, 29835, 408, 10, 73, "Input",ExpressionUUID->"036beae9-b106-404f-b767-0adcf38a392b"],
-Cell[1701909, 29847, 23576, 481, 75, "Output",ExpressionUUID->"abccf63f-bc0e-44e9-9e55-5c60df834401"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1725522, 30333, 271, 6, 30, "Input",ExpressionUUID->"1b5533be-2689-48da-b841-ab0ae7a8932a"],
-Cell[1725796, 30341, 24067, 491, 76, "Output",ExpressionUUID->"0a3961e1-e8b7-41aa-b793-92a8fb042539"]
-}, Open  ]],
-Cell[1749878, 30835, 1177, 30, 94, "Input",ExpressionUUID->"05603785-849a-463a-b115-9029d354c834"],
-Cell[CellGroupData[{
-Cell[1751080, 30869, 372, 7, 52, "Input",ExpressionUUID->"c1a4c76c-45d6-47bd-8205-3fc0774a4691"],
-Cell[1751455, 30878, 29206, 536, 90, "Output",ExpressionUUID->"a9ec91e9-31e8-4e32-a835-723c545889ee"],
-Cell[1780664, 31416, 9542, 252, 326, "Output",ExpressionUUID->"810d009d-900d-4446-834b-18e2a1dcae23"]
-}, Open  ]]
+Cell[213734, 4392, 305, 5, 30, "Input",ExpressionUUID->"290cf1a5-fbb0-48a9-8c86-44e913765577"],
+Cell[214042, 4399, 2622, 35, 1348, "Output",ExpressionUUID->"85f82f11-748c-46ef-bf20-b36443c4e3c4"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1790279, 31676, 157, 3, 67, "Section",ExpressionUUID->"86b4f8c6-5ca1-4f30-b7ba-8f035ea3c373"],
-Cell[1790439, 31681, 624, 11, 81, "Text",ExpressionUUID->"36e67b2b-fb5e-4e18-a2de-19467421a542"],
+Cell[216725, 4441, 215, 4, 54, "Subsection",ExpressionUUID->"04a9c7b7-db78-4d1a-895b-89b6af99f229"],
 Cell[CellGroupData[{
-Cell[1791088, 31696, 32999, 557, 308, "Input",ExpressionUUID->"bc1904b3-8eca-4408-8f08-98acaacc87ae"],
-Cell[1824090, 32255, 25264, 436, 446, "Output",ExpressionUUID->"1378bbd4-b0e5-4a6d-9f85-eaa0a283ae53"]
+Cell[216965, 4449, 178, 3, 45, "Subsubsection",ExpressionUUID->"6b842a74-a7a7-4caa-8023-778e40d722ec"],
+Cell[217146, 4454, 424, 8, 58, "Text",ExpressionUUID->"b7f9c59d-1383-44f5-ac36-b12555fa2959"],
+Cell[217573, 4464, 1820, 39, 199, "Input",ExpressionUUID->"33e201c9-c25d-40f6-af7f-1dcdaf7c73c5"],
+Cell[219396, 4505, 713, 15, 30, "Input",ExpressionUUID->"8f1215d6-902a-4ebc-914c-e5ddc2a79be6"],
+Cell[220112, 4522, 1216789, 20258, 2896, "Input",ExpressionUUID->"948459cf-3c1c-49a0-b95e-4d707af4cbcc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1436938, 24785, 231, 4, 45, "Subsubsection",ExpressionUUID->"d16a691f-f9db-4b8e-87f4-da73bc71e2c1"],
+Cell[1437172, 24791, 494, 9, 58, "Text",ExpressionUUID->"090eee5e-780f-4d30-92c4-ff62c0f1ced2"],
+Cell[1437669, 24802, 935, 20, 136, "Input",ExpressionUUID->"8b2ca2af-b720-477f-bd51-c3167fa0172c"],
+Cell[CellGroupData[{
+Cell[1438629, 24826, 1645, 36, 220, "Input",ExpressionUUID->"3e86f0bd-a92e-4aed-9ba9-e5d498479836"],
+Cell[1440277, 24864, 156126, 2603, 358, 36872, 647, "CachedBoxData", "BoxData", "Output",ExpressionUUID->"375528ec-19ad-4b66-bceb-a7fdb664150c"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1596452, 27473, 211, 4, 45, "Subsubsection",ExpressionUUID->"3876f5c9-25c0-4da5-a5e7-a8c8985a20f1"],
+Cell[1596666, 27479, 483, 8, 58, "Text",ExpressionUUID->"0793edb9-f372-4354-b62d-51fb23054be5"],
+Cell[1597152, 27489, 1235, 24, 136, "Input",ExpressionUUID->"cbbb8c44-f74e-4515-9196-8d896bb72819"],
+Cell[1598390, 27515, 6287, 179, 283, "Input",ExpressionUUID->"6649ff40-2815-4246-bed7-abe7acd67425"],
+Cell[CellGroupData[{
+Cell[1604702, 27698, 500, 8, 30, "Input",ExpressionUUID->"eee9b3d0-32ee-49b4-a163-ded7961c5bd7"],
+Cell[1605205, 27708, 17165, 359, 348, "Output",ExpressionUUID->"86178a51-d13e-4c09-be66-17663058cf19"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1622419, 28073, 227, 4, 45, "Subsubsection",ExpressionUUID->"6158d572-0e98-473f-9398-067e5db9cc9e"],
+Cell[1622649, 28079, 455, 8, 58, "Text",ExpressionUUID->"c0099bf5-f178-4bfd-a7ba-3a7a1ff63534"],
+Cell[1623107, 28089, 2410, 59, 262, "Input",ExpressionUUID->"c3a90192-39da-4935-aefe-aac7af6fbab7"],
+Cell[CellGroupData[{
+Cell[1625542, 28152, 976, 24, 30, "Input",ExpressionUUID->"cd7c9368-1a21-421b-a2e2-fe5e5e863db7"],
+Cell[1626521, 28178, 3634, 147, 375, "Output",ExpressionUUID->"52647885-98ab-430b-87b3-d5abe9c86fc1"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1630204, 28331, 214, 3, 45, "Subsubsection",ExpressionUUID->"570991bf-cb18-427b-a0e3-c89058b01208"],
+Cell[1630421, 28336, 775, 16, 196, "Text",ExpressionUUID->"56631a4a-1cb2-45f8-9799-764210a93a56"],
+Cell[CellGroupData[{
+Cell[1631221, 28356, 2466, 57, 346, "Input",ExpressionUUID->"0ef67f49-3952-47c4-b6f2-b1c4a6d22929"],
+Cell[1633690, 28415, 78159, 1616, 585, "Output",ExpressionUUID->"2d239ae9-a83c-49b1-8dad-fd75c3d26bd1"]
+}, Open  ]],
+Cell[1711864, 30034, 1562, 42, 157, "Input",ExpressionUUID->"c416dd2e-d275-4209-bf49-eb32573964aa"],
+Cell[CellGroupData[{
+Cell[1713451, 30080, 408, 10, 73, "Input",ExpressionUUID->"036beae9-b106-404f-b767-0adcf38a392b"],
+Cell[1713862, 30092, 23576, 481, 75, "Output",ExpressionUUID->"abccf63f-bc0e-44e9-9e55-5c60df834401"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1737475, 30578, 271, 6, 30, "Input",ExpressionUUID->"1b5533be-2689-48da-b841-ab0ae7a8932a"],
+Cell[1737749, 30586, 24067, 491, 76, "Output",ExpressionUUID->"0a3961e1-e8b7-41aa-b793-92a8fb042539"]
+}, Open  ]],
+Cell[1761831, 31080, 1177, 30, 94, "Input",ExpressionUUID->"05603785-849a-463a-b115-9029d354c834"],
+Cell[CellGroupData[{
+Cell[1763033, 31114, 372, 7, 52, "Input",ExpressionUUID->"c1a4c76c-45d6-47bd-8205-3fc0774a4691"],
+Cell[1763408, 31123, 29206, 536, 90, "Output",ExpressionUUID->"a9ec91e9-31e8-4e32-a835-723c545889ee"],
+Cell[1792617, 31661, 9542, 252, 326, "Output",ExpressionUUID->"810d009d-900d-4446-834b-18e2a1dcae23"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1802232, 31921, 157, 3, 67, "Section",ExpressionUUID->"86b4f8c6-5ca1-4f30-b7ba-8f035ea3c373"],
+Cell[1802392, 31926, 735, 12, 81, "Text",ExpressionUUID->"36e67b2b-fb5e-4e18-a2de-19467421a542"],
+Cell[CellGroupData[{
+Cell[1803152, 31942, 32999, 557, 308, "Input",ExpressionUUID->"bc1904b3-8eca-4408-8f08-98acaacc87ae"],
+Cell[1836154, 32501, 25264, 436, 446, "Output",ExpressionUUID->"1378bbd4-b0e5-4a6d-9f85-eaa0a283ae53"]
 }, {2}]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1849400, 32697, 160, 3, 67, "Section",ExpressionUUID->"cf4fd451-7c6a-4fea-b8e7-7d1d33e629b0"],
-Cell[1849563, 32702, 841, 17, 173, "Text",ExpressionUUID->"0db7aec8-7888-412f-a710-a0a4873134a6"]
+Cell[1861464, 32943, 160, 3, 67, "Section",ExpressionUUID->"cf4fd451-7c6a-4fea-b8e7-7d1d33e629b0"],
+Cell[1861627, 32948, 945, 18, 173, "Text",ExpressionUUID->"0db7aec8-7888-412f-a710-a0a4873134a6"]
 }, Open  ]]
 }, Open  ]]
 }
