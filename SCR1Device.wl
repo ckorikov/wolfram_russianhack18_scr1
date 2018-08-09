@@ -108,8 +108,9 @@ $libscr1 = CreateLibrary[
   fileList,
   "cpp_bridge",
   Language -> "C++",
-  "CompileOptions"->"-std=c++11",
   "IncludeDirectories" -> incList
+  (*This generates a build command. Check an output if the library does not be built.*)
+  (*,"ShellCommandFunction" -> Print*)
 ];
 funcHARDRESET = LibraryFunctionLoad[$libscr1, "scr1_hard_reset", {}, Integer];
 funcRESET = LibraryFunctionLoad[$libscr1, "scr1_reset", {}, Integer];

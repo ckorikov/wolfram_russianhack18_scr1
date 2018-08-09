@@ -109,10 +109,11 @@ namespace SCR1
         }
         return ipc;
     }
-    
+
     vector<uint32_t> Processor::trace_ipc()
     {
-        vector<uint32_t> trace {this->get_ipc()};
+        vector<uint32_t> trace;
+        trace.push_back(this->get_ipc());
         while(!this->is_finished())
         {
             uint32_t ipc = this->next_ipc();

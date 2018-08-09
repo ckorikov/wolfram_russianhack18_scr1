@@ -1,5 +1,6 @@
 #include "cpp_bridge.h"
 #include "scr1_wrapper.h"
+#include <fstream>
 
 static SCR1::Processor* p_proc;
 
@@ -94,13 +95,13 @@ int scr1_trace_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgu
     {
         auto trace = p_proc->trace_ipc();
         out_tensor_dim[0] = trace.size();
-        
+
         auto err = libData->MTensor_new(MType_Integer, out_tensor_rank, out_tensor_dim, &out_tensor_data);
         if(err)
         {
             return LIBRARY_FUNCTION_ERROR;
         }
-        
+
         mint *out_cpointer=libData->MTensor_getIntegerData(out_tensor_data);
         copy(trace.begin(),trace.end(),out_cpointer);
         MArgument_setMTensor(Res, out_tensor_data);
@@ -115,7 +116,8 @@ int scr1_trace_ipc(WolframLibraryData libData, mint Argc, MArgument *Args, MArgu
 int scr1_load(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument Res)
 {
     const char *file_name = MArgument_getUTF8String(Args[0]);
-    if (access( file_name, F_OK ) == -1)
+    ifstream program_file(file_name);
+    if (!program_file.good())
     {
         libData->Message("Cannot find the program");
         return LIBRARY_FUNCTION_ERROR;
@@ -124,10 +126,8 @@ int scr1_load(WolframLibraryData libData, mint Argc, MArgument *Args, MArgument 
     {
         try
         {
-            char path_arg[strlen(file_name)+5];
-            strcpy(path_arg, "+mem=");
-            strcat(path_arg, file_name);
-            p_proc->load(path_arg);
+            auto const path_arg = string("+mem=") + file_name;
+            p_proc->load(path_arg.c_str());
         }
         catch (...)
         {
@@ -322,7 +322,7 @@ int scr1_set_register(WolframLibraryData libData, mint Argc, MArgument *Args, MA
 {
     uint8_t numb = static_cast<uint8_t>(MArgument_getInteger(Args[0]));
       IData data = static_cast<IData>(MArgument_getInteger(Args[1]));
-    
+
     try
     {
         p_proc->set_register(numb, data);
